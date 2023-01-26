@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e5e2dbd51cea26e48bf4164b414fbed2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Pridi
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 23e20fea57ac3f0499ab8a1a5d6f32ff, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 2effb474d69022645b4f09c6b0de6014
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - FC Ekaluck
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: dc50d2f065295b643921c4a13b154f00, type: 3}
+  - {fileID: 12800000, guid: 661a81664ff402345962fe4b22f26e6d, type: 3}
+  - {fileID: 12800000, guid: 85270cdd0d6a7bc4bb3b6b092bd0e2e7, type: 3}
+  - {fileID: 12800000, guid: 34b16ba7b03f5cd4293f3c194bd1f929, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
