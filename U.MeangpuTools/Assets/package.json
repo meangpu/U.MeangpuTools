@@ -1,0 +1,28 @@
+{
+  "name": "com.meangpu.tools",
+  "version": "0.0.1",
+  "unity": "2021.3",
+  "displayName": "MeangpuTools",
+  "description": "Meangpu tools for starter unity project have script that \n- auto create project folder",
+  "type": "template",
+  "author": {
+    "name": "meangpu"
+  },
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "samples": [
+    {
+      "displayName": "Buttons Example",
+      "path": "Samples~/ButtonsExample"
+    },
+    {
+      "displayName": "Custom Editor Buttons Example",
+      "path": "Samples~/CustomEditorButtonsExample"
+    },
+    {
+      "displayName": "Scriptable Object Example",
+      "path": "Samples~/ScriptableObjectExample"
+    }
+  ]
+}
