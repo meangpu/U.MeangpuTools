@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.IO;
@@ -31,14 +32,28 @@ namespace meangpu
             }
         }
 
-        [MenuItem("MeangpuTools/Setup/Load New Manifest")]
-        static async void LoadNewManifest()
+        static async void LoadNewManifest(string packageID)
         {
-            // https://gist.githubusercontent.com/meangpu/25cefd54ac38510850b5174a6026b64e/raw/
-            var url = GetGistUrl("25cefd54ac38510850b5174a6026b64e");
+            var url = GetGistUrl(packageID);
             var contents = await GetContents(url);
             ReplacePackageFile(contents);
         }
+
+        [MenuItem("MeangpuTools/Setup/Load MINIMAL Manifest")]
+        static async void LoadMinimalPackage()
+        {
+            // https://gist.githubusercontent.com/meangpu/6c2d6c6292a3f36de0e445acd2535698/raw/
+            LoadNewManifest("6c2d6c6292a3f36de0e445acd2535698"); // minimal package
+        }
+
+        [MenuItem("MeangpuTools/Setup/Load VR Manifest")]
+        static async void LoadVRPackage()
+        {
+            // https://gist.githubusercontent.com/meangpu/25cefd54ac38510850b5174a6026b64e/raw/
+            LoadNewManifest("25cefd54ac38510850b5174a6026b64e"); // vr package
+        }
+
+
 
         static string GetGistUrl(string id, string user = "meangpu") => $"https://gist.githubusercontent.com/{user}/{id}/raw/";
 
@@ -52,7 +67,7 @@ namespace meangpu
 
         static void ReplacePackageFile(string contents)
         {
-            var existing = Path.Combine(Application.dataPath, "../Packages/manifest.json");
+            var existing = Path.Combine(dataPath, "../Packages/manifest.json");
             File.WriteAllText(existing, contents);
             UnityEditor.PackageManager.Client.Resolve();
         }
