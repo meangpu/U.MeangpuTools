@@ -6,9 +6,24 @@
   "description": "Meangpu tools for starter unity project have script that \n- auto create project folder",
   "type": "template",
   "author": {
-    "name": "meangpu"
+    "name": "meangpu",
+    "url": "https://github.com/meangpu"
   },
   "dependencies": {
     "com.unity.textmeshpro": "3.0.6"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "ColorSet",
+      "path": "Samples~/ColorSet"
+    },
+    {
+      "displayName": "Presets",
+      "path": "Samples~/Presets"
+    },
+    {
+      "displayName": "VersionScene",
+      "path": "Samples~/VersionScene"
+    }
+  ]
 }
