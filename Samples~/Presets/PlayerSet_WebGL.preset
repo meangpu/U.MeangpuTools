@@ -6,7 +6,7 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WebbuildPlayerSetting
+  m_Name: PlayerSet_WebGL
   m_TargetType:
     m_NativeTypeID: 129
     m_ManagedTypePPtr: {fileID: 0}
@@ -803,7 +803,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: AndroidMinSdkVersion
-    value: 29
+    value: 23
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: AndroidTargetSdkVersion
@@ -1272,7 +1272,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[0].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[0].m_Width
     value: 192
@@ -1296,7 +1296,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[1].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[1].m_Width
     value: 144
@@ -1320,7 +1320,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[2].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[2].m_Width
     value: 96
@@ -1344,7 +1344,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[3].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[3].m_Width
     value: 72
@@ -1368,7 +1368,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[4].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[4].m_Width
     value: 48
@@ -1392,7 +1392,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[5].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[5].m_Width
     value: 36
@@ -1416,7 +1416,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[6].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[6].m_Width
     value: 192
@@ -1440,7 +1440,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[7].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[7].m_Width
     value: 144
@@ -1464,7 +1464,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[8].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[8].m_Width
     value: 96
@@ -1488,7 +1488,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[9].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[9].m_Width
     value: 72
@@ -1512,7 +1512,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[10].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[10].m_Width
     value: 48
@@ -1536,7 +1536,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[11].m_Textures.Array.data[0]
     value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
+    objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[11].m_Width
     value: 36
@@ -1555,16 +1555,8 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[12].m_Textures.Array.size
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[12].m_Textures.Array.data[0]
-    value: 
-    objectReference: {fileID: 2800000, guid: c0207be97156d0f40bb56783199abe05, type: 3}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[12].m_Textures.Array.data[1]
-    value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[12].m_Width
     value: 432
@@ -1583,16 +1575,8 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[13].m_Textures.Array.size
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[13].m_Textures.Array.data[0]
-    value: 
-    objectReference: {fileID: 2800000, guid: c0207be97156d0f40bb56783199abe05, type: 3}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[13].m_Textures.Array.data[1]
-    value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[13].m_Width
     value: 324
@@ -1611,16 +1595,8 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[14].m_Textures.Array.size
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[14].m_Textures.Array.data[0]
-    value: 
-    objectReference: {fileID: 2800000, guid: c0207be97156d0f40bb56783199abe05, type: 3}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[14].m_Textures.Array.data[1]
-    value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[14].m_Width
     value: 216
@@ -1639,16 +1615,8 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[15].m_Textures.Array.size
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[15].m_Textures.Array.data[0]
-    value: 
-    objectReference: {fileID: 2800000, guid: c0207be97156d0f40bb56783199abe05, type: 3}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[15].m_Textures.Array.data[1]
-    value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[15].m_Width
     value: 162
@@ -1667,16 +1635,8 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[16].m_Textures.Array.size
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[16].m_Textures.Array.data[0]
-    value: 
-    objectReference: {fileID: 2800000, guid: c0207be97156d0f40bb56783199abe05, type: 3}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[16].m_Textures.Array.data[1]
-    value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[16].m_Width
     value: 108
@@ -1695,16 +1655,8 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[17].m_Textures.Array.size
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[17].m_Textures.Array.data[0]
-    value: 
-    objectReference: {fileID: 2800000, guid: c0207be97156d0f40bb56783199abe05, type: 3}
-  - target: {fileID: 0}
-    propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[17].m_Textures.Array.data[1]
-    value: 
-    objectReference: {fileID: 2800000, guid: a319af234df964b40baf9eefbaae600c, type: 3}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetPlatformIcons.Array.data[0].m_Icons.Array.data[17].m_Width
     value: 81
@@ -3487,4 +3439,17 @@ Preset:
     objectReference: {fileID: 0}
   m_ExcludedProperties:
   - bundleVersion
+  - companyName
   - productName
+  - m_BuildTargetIcons
+  - defaultCursor
+  - m_BuildTargetPlatformIcons
+  - m_VirtualRealitySplashScreen
+  - m_SplashScreenLogos
+  - splashScreenBackgroundSourceLandscape
+  - androidSplashScreen
+  - m_SplashScreenOverlayOpacity
+  - m_SplashScreenBackgroundColor
+  - blurSplashScreenBackground
+  - m_ShowUnitySplashScreen
+  - AndroidBundleVersionCode
