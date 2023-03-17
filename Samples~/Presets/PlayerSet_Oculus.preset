@@ -6,7 +6,7 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerSet_Oculus
+  m_Name: OculusBuildSetting
   m_TargetType:
     m_NativeTypeID: 129
     m_ManagedTypePPtr: {fileID: 0}
@@ -802,7 +802,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: AndroidMinSdkVersion
-    value: 23
+    value: 29
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: AndroidTargetSdkVersion
@@ -1143,7 +1143,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: androidSplashScreen
     value: 
-    objectReference: {fileID: 0}
+    objectReference: {fileID: 2800000, guid: 4d8f54063baef4442a5553d1a9c70021, type: 3}
   - target: {fileID: 0}
     propertyPath: AndroidKeystoreName
     value: D:/Github/unity/KeyStore/HorseProj.keystore
