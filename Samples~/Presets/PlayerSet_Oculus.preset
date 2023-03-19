@@ -3505,3 +3505,5 @@ Preset:
   - androidSplashScreen
   - AndroidKeystoreName
   - AndroidBundleVersionCode
+  - androidUseCustomKeystore
+  - overrideDefaultApplicationIdentifier

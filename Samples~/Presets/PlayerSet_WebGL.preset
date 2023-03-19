@@ -663,8 +663,7 @@ Preset:
   - target: {fileID: 0}
     propertyPath: preloadedAssets.Array.data[20]
     value: 
-    objectReference: {fileID: 3833449293474911622, guid: f19213643ecdce14d83d2a8c849e0308,
-      type: 2}
+    objectReference: {fileID: 3833449293474911622, guid: f19213643ecdce14d83d2a8c849e0308, type: 2}
   - target: {fileID: 0}
     propertyPath: preloadedAssets.Array.data[21]
     value: 
@@ -3453,3 +3452,6 @@ Preset:
   - blurSplashScreenBackground
   - m_ShowUnitySplashScreen
   - AndroidBundleVersionCode
+  - overrideDefaultApplicationIdentifier
+  - androidUseCustomKeystore
+  - AndroidKeystoreName
