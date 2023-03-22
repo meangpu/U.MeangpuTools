@@ -40,14 +40,14 @@ namespace meangpu
         }
 
         [MenuItem("MeangpuTools/Setup/Load MINIMAL Manifest")]
-        static async void LoadMinimalPackage()
+        static void LoadMinimalPackage()
         {
             // https://gist.githubusercontent.com/meangpu/6c2d6c6292a3f36de0e445acd2535698/raw/
             LoadNewManifest("6c2d6c6292a3f36de0e445acd2535698"); // minimal package
         }
 
         [MenuItem("MeangpuTools/Setup/Load VR Manifest")]
-        static async void LoadVRPackage()
+        static void LoadVRPackage()
         {
             // https://gist.githubusercontent.com/meangpu/25cefd54ac38510850b5174a6026b64e/raw/
             LoadNewManifest("25cefd54ac38510850b5174a6026b64e"); // vr package
