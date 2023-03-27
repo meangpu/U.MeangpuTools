@@ -1,6 +1,9 @@
 using UnityEngine;
 using EasyButtons;
 
+#if UNITY_EDITOR
+[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshFilter))]
 public class MeshCombiner : MonoBehaviour
 {
 
@@ -19,6 +22,7 @@ public class MeshCombiner : MonoBehaviour
         Debug.Log($"{name} is combining {_filters.Length} meshes");
 
         Mesh _finalMesh = new Mesh();
+        _finalMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
         CombineInstance[] _combiners = new CombineInstance[_filters.Length];
 
@@ -42,7 +46,12 @@ public class MeshCombiner : MonoBehaviour
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
+
+        // save asset to asset folder
+        UnityEditor.AssetDatabase.CreateAsset(_finalMesh, $"Assets/{name}-{UnityEditor.GUID.Generate()}.mesh");
+        UnityEditor.AssetDatabase.SaveAssets();
     }
 
 
 }
+#endif
