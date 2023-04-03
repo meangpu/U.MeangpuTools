@@ -10,7 +10,9 @@
     "url": "https://github.com/meangpu"
   },
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.6"
+    "com.unity.textmeshpro": "3.0.6",
+    "com.madsbangh.easybuttons": "https://github.com/madsbangh/EasyButtons.git#upm",
+    "com.unity.editorcoroutines": "1.0.0"
   },
   "samples": [
     {
