@@ -3,8 +3,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    // FindObjectOfType<AudioManager>().Play("soundName");
-    // AudioManager.instance.Play(playName);
+    // AudioManager.instance?.Play(playName);
 
     [SerializeField] Sound[] _sounds;
     public static AudioManager instance;
