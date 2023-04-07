@@ -70,6 +70,14 @@ public class AudioManager : MonoBehaviour
         soundObj.source.Play();
     }
 
+    public void PlayRandomPitchMoreSwing(string name, float min = 0.5f, float max = 2.5f, float volume = 0)
+    {
+        Sound soundObj = FindSound(name);
+        if (volume != 0) soundObj.source.volume = volume;
+        soundObj.source.pitch = UnityEngine.Random.Range(min, max);
+        soundObj.source.Play();
+    }
+
     public void PlayOneRandomPitch(string name, float min = 0.7f, float max = 1.5f, float volume = 0)
     {
         Sound soundObj = FindSound(name);
