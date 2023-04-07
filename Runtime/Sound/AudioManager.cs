@@ -62,7 +62,7 @@ public class AudioManager : MonoBehaviour
         soundObj.source.PlayOneShot(soundObj.clip);
     }
 
-    public void PlayRandomPitch(string name, float min = 0.1f, float max = 3f, float volume = 0)
+    public void PlayRandomPitch(string name, float min = 0.7f, float max = 1.5f, float volume = 0)
     {
         Sound soundObj = FindSound(name);
         if (volume != 0) soundObj.source.volume = volume;
@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
         soundObj.source.Play();
     }
 
-    public void PlayOneRandomPitch(string name, float min = 0.1f, float max = 3f, float volume = 0)
+    public void PlayOneRandomPitch(string name, float min = 0.7f, float max = 1.5f, float volume = 0)
     {
         Sound soundObj = FindSound(name);
         if (volume != 0) soundObj.source.volume = volume;
