@@ -36,5 +36,17 @@ namespace meangpu
                 Debug.Log(PlayerSettings.bundleVersion);
             }
         }
+
+        [MenuItem("MeangpuTools/Setup/Set Game Version")]
+        public static void SetFirstTimeFormat()
+        {
+            Debug.Log("Perform first time version set");
+            string date = DateTime.Now.ToString("d-MMM-yyy");
+            string time = DateTime.Now.ToString("t");
+            string finalDateTime = $"{date} {time}";
+            PlayerSettings.bundleVersion = $"0.0-{finalDateTime}";
+            Debug.Log(PlayerSettings.bundleVersion);
+            UnityEditor.AssetDatabase.Refresh();
+        }
     }
 }

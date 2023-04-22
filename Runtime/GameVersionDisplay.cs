@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Build;
 using TMPro;
 using System;
 
+#if UNITY_EDITOR
 namespace meangpu
 {
     [RequireComponent(typeof(TMP_Text))]
@@ -12,17 +12,12 @@ namespace meangpu
     {
         [SerializeField] string _frontWord = "v.";
 
-        void Awake()
-        {
-            MainSetLoop();
-        }
+        void Awake() => MainLoop();
 
-        void MainSetLoop()
+        void MainLoop()
         {
-            if (!IsProjectFormatCorrect())
-            {
-                SetFirstTimeFormat();
-            }
+            if (!IsProjectFormatCorrect()) SetFirstTimeFormat();
+
             TMP_Text textVersion = GetComponent<TMP_Text>();
             string[] versionValue = Application.version.Split('-', 2); // split in to 2 part
 
@@ -35,7 +30,6 @@ namespace meangpu
             return currentVersionNumber.Length >= 1 ? true : false;
         }
 
-        [MenuItem("MeangpuTools/Setup/Set Game Version")]
         public static void SetFirstTimeFormat()
         {
             Debug.Log("Perform first time version set");
@@ -49,3 +43,4 @@ namespace meangpu
     }
 
 }
+#endif
