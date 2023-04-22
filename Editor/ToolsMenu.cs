@@ -1,6 +1,4 @@
-using System.Net.Mime;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.IO;
 using static System.IO.Directory;
