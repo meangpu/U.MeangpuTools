@@ -17,10 +17,7 @@ public class GameVersionDisplay : MonoBehaviour
         {
             textVersion.text = $"{_frontWord}{versionValue[0]}\n<size=20>{versionValue[1]}";
         }
-        else
-        {
-            textVersion.text = $"<color=red>Game version format is wrong</color>";
-        }
+        else textVersion.text = $"<color=red>Game version format is wrong</color>";
 
     }
 }
