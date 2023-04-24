@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(RawImage))]
 public class ScreenCaptureDisplay : MonoBehaviour
 {
     [SerializeField] RawImage _img;
@@ -22,9 +23,9 @@ public class ScreenCaptureDisplay : MonoBehaviour
 
     void Start()
     {
+        if (_img == null) _img = GetComponent<RawImage>();
         _img.enabled = false;
     }
-
 
     void SetPaperTexture(Texture2D _tex)
     {
