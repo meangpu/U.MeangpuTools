@@ -27,10 +27,6 @@
       "path": "Samples~/ShaderGraph"
     },
     {
-      "displayName": "VersionScene",
-      "path": "Samples~/VersionScene"
-    },
-    {
       "displayName": "Font",
       "path": "Samples~/Font"
     }
