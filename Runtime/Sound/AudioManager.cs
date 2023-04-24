@@ -95,7 +95,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    AudioSource FindAudioSource(string soundName)
+    public AudioSource FindAudioSource(string soundName)
     {
         Sound foundSound = Array.Find(_sounds, sound => sound.audioName == soundName);
         if (foundSound == null)
@@ -105,6 +105,40 @@ public class AudioManager : MonoBehaviour
         }
         AudioSource audioSourceComponent = foundSound.source;
         return audioSourceComponent;
+    }
+
+    public void MuteSourceByName(string soundName)
+    {
+        Sound foundSound = Array.Find(_sounds, sound => sound.audioName == soundName);
+        if (foundSound == null)
+        {
+            Debug.Log("No Sound Found");
+            return;
+        }
+        AudioSource audioSourceComponent = foundSound.source;
+        audioSourceComponent.volume = 0;
+    }
+
+    public void SetSourceVolumeByName(string soundName, int newVol)
+    {
+        Sound foundSound = Array.Find(_sounds, sound => sound.audioName == soundName);
+        if (foundSound == null)
+        {
+            Debug.Log("No Sound Found");
+            return;
+        }
+        foundSound.source.volume = newVol;
+    }
+
+    public void ResetVolumeByName(string soundName)
+    {
+        Sound foundSound = Array.Find(_sounds, sound => sound.audioName == soundName);
+        if (foundSound == null)
+        {
+            Debug.Log("No Sound Found");
+            return;
+        }
+        foundSound.source.volume = foundSound.volume;
     }
 
 }
