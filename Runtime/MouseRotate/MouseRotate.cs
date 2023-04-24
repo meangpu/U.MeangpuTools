@@ -4,7 +4,7 @@ public class MouseRotate : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] Vector3 offset = new Vector3(0, 0, -10);
-    [SerializeField] Vector3 scollZoomSpeed = new Vector3(0, 0, 5);
+    [SerializeField] Vector3 scrollZoomSpeed = new Vector3(0, 0, 5);
     [SerializeField] float clampZMin = -20;
     [SerializeField] float clampZMax = 0;
 
@@ -34,11 +34,11 @@ public class MouseRotate : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y > 0)  // mouse up
         {
-            offset += scollZoomSpeed;
+            offset += scrollZoomSpeed;
         }
         if (Input.mouseScrollDelta.y < 0)  // mouse down
         {
-            offset -= scollZoomSpeed;
+            offset -= scrollZoomSpeed;
         }
     }
 

@@ -3,19 +3,16 @@ using UnityEngine.UI;
 
 public class CameraRotate : MonoBehaviour
 {
-    public float speed;
+    public float Speed;
     public bool DoRotate = true;
-    [SerializeField] Slider mainSlider;
+    [SerializeField] Slider _mainSlider;
 
     void Update()
     {
-        if (DoRotate)
-        {
-            transform.Rotate(0, speed * Time.deltaTime, 0);
-        }
+        if (DoRotate) transform.Rotate(0, Speed * Time.deltaTime, 0);
     }
 
-    public void doSwitchRotate()
+    public void ToggleRotate()
     {
         if (DoRotate)
         {
@@ -29,6 +26,7 @@ public class CameraRotate : MonoBehaviour
 
     public void setRotSpeed()
     {
-        speed = mainSlider.value;
+        Speed = _mainSlider.value;
     }
+
 }
