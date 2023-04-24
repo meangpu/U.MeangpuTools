@@ -1,9 +1,8 @@
-using System.Reflection.Emit;
 using UnityEngine;
 
 public class SpawnObjectAtMouseClick : MonoBehaviour
 {
-    // can be used to spawn object on 3D plane raycast
+    // spawn object on 3D plane raycast
     [SerializeField] Camera _camera;
     [SerializeField] GameObject _spawnPref;
     [SerializeField] Vector3 _offset;
@@ -12,7 +11,6 @@ public class SpawnObjectAtMouseClick : MonoBehaviour
     void Start()
     {
         if (_camera == null) _camera = Camera.main;
-
     }
 
     void Update()
