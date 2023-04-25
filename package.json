@@ -27,6 +27,10 @@
       "path": "Samples~/ShaderGraph"
     },
     {
+      "displayName": "LogoSermtat",
+      "path": "Samples~/Logo"
+    },
+    {
       "displayName": "Font",
       "path": "Samples~/Font"
     }
