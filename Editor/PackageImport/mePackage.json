@@ -1,22 +1,28 @@
 {
   "packages": [
     {
+      "name": "com.madsbangh.easybuttons",
+      "version": "1.4.0",
+      "description": "Easy to use inspector button",
+      "url": "https://github.com/madsbangh/EasyButtons.git#upm"
+    },
+    {
       "name": "com.meangpu.audio",
       "version": "0.0.1",
-      "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
+      "description": "meangpu audio system",
       "url": "https://github.com/meangpu/U.MeAudio.git"
     },
     {
       "name": "com.meangpu.tooltip",
       "version": "0.0.1",
-      "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
+      "description": "for game tooltips like, how to play",
       "url": "https://github.com/meangpu/U.MeTooltip.git"
     },
     {
-      "name": "com.madsbangh.easybuttons",
-      "version": "1.4.0",
-      "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
-      "url": "https://github.com/madsbangh/EasyButtons.git#upm"
+      "name": "com.meangpu.scoreboard",
+      "version": "0.0.1",
+      "description": "meangpu scoreboard",
+      "url": "https://github.com/meangpu/U.MeScoreboard.git"
     }
   ]
 }

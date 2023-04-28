@@ -1,5 +1,4 @@
 using UnityEngine;
-using EasyButtons;
 using System;
 
 public class ScreenCaptureToTextureFile : MonoBehaviour
@@ -8,7 +7,6 @@ public class ScreenCaptureToTextureFile : MonoBehaviour
     [SerializeField] Camera _screenShotCam;
     public static event Action<Texture2D> DoGetTexture;
 
-    [Button]
     public void CaptureScreen()
     {
         DoGetTexture?.Invoke(SaveCameraView(_screenShotCam));
