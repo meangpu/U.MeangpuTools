@@ -19,7 +19,7 @@ namespace meangpu
         private static EditorWindow promptWindow;
         private const string WindowPath = "MeangpuTools/";
         private const string WindowName = "Package Importer";
-        private const string DataUri = "https://github.com/meangpu/U.MeangpuTools/blob/60637b26d25ec476359ea1545cf40b6eb4f9400f/Editor/PackageImport/mePackage.json";
+        private const string DataUri = "https://raw.githubusercontent.com/meangpu/U.MeangpuTools/main/Editor/PackageImport/mePackage.json";
         private const string titleLabel = " Available Tilia Packages To Import";
         private const string addingPackagesMessage = "Adding packages, please wait...";
         private const string scopedRegisryMissingText = "The required scoped registry has not been found in your project manifest.json.\n\nClick the button below to attempt to automatically add the required scoped registry to your project manifest.json file.";
