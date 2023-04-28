@@ -84,61 +84,9 @@ namespace meangpu
             {
                 scrollPosition = scrollViewScope.scrollPosition;
 
-                if (addRequest != null)
-                {
-                    GUILayout.Label(addingPackagesMessage);
-                }
-                else if (addAndRemoveRequest != null)
-                {
-                    GUILayout.Label(addingPackagesMessage);
-                }
-                else
-                {
-                    List<string> notInstallYet = availablePackages.Keys.Except(installedPackages).ToList();
-                    _dictCanInstall.Clear();
-
-                    foreach (string packageName in notInstallYet)
-                    {
-                        if (availablePackages.ContainsKey(packageName))
-                        {
-                            _dictCanInstall.Add(packageName, availablePackages[packageName]);
-                        }
-                    }
-
-                    foreach (var availablePackage in _dictCanInstall)
-                    {
-                        if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Key.Contains(searchString))
-                        {
-                            continue;
-                        }
-
-                        using (new EditorGUILayout.HorizontalScope())
-                        {
-                            packageDescriptions.TryGetValue(availablePackage.Key, out string packageDescription);
-                            packageUrls.TryGetValue(availablePackage.Value, out string packageUrl);
-
-                            if (checkboxes.ContainsKey(availablePackage.Key))
-                            {
-                                checkboxes[availablePackage.Key] = GUILayout.Toggle(checkboxes[availablePackage.Key], "");
-                            }
-
-                            GUILayout.Label(new GUIContent(availablePackage.Key, packageDescription));
-                            GUILayout.FlexibleSpace();
-
-                            if (GUILayout.Button(addButtonText))
-                            {
-                                AddPackage(availablePackage.Value);
-                            }
-
-                            if (GUILayout.Button(new GUIContent(viewButtonText, viewButtonTooltip)))
-                            {
-                                Application.OpenURL(packageUrl);
-                            }
-                            GUILayout.Label(" ", new GUIStyle { fontSize = 10 });
-                        }
-                        DrawHorizontalLine();
-                    }
-                }
+                if (addRequest != null) GUILayout.Label(addingPackagesMessage);
+                else if (addAndRemoveRequest != null) GUILayout.Label(addingPackagesMessage);
+                else SetupAllButton();
             }
 
             if (HasSelectedPackages() && addRequest == null && addAndRemoveRequest == null)
@@ -147,10 +95,7 @@ namespace meangpu
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button(addSelectedPackagesButton))
-                    {
-                        AddSelectedPackages();
-                    }
+                    if (GUILayout.Button(addSelectedPackagesButton)) AddSelectedPackages();
                 }
             }
 
@@ -158,20 +103,63 @@ namespace meangpu
 
             using (new EditorGUILayout.HorizontalScope())
             {
-                if (addRequest == null)
+                if (addRequest == null && addAndRemoveRequest == null)
                 {
-                    if (addAndRemoveRequest == null)
-                    {
-                        if (GUILayout.Button(refreshPackageListButton))
-                        {
-                            DownloadPackageList();
-                        }
-                    }
+                    if (GUILayout.Button(refreshPackageListButton)) DownloadPackageList();
                 }
             }
 
-
             GUILayout.Space(8);
+        }
+
+        private void SetupAllButton()
+        {
+            SetDictForPackageThatNotInstallYet();
+
+            foreach (var availablePackage in _dictCanInstall)
+            {
+                if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Key.Contains(searchString)) continue;
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    packageDescriptions.TryGetValue(availablePackage.Key, out string packageDescription);
+                    packageUrls.TryGetValue(availablePackage.Key, out string packageUrl);
+
+                    if (checkboxes.ContainsKey(availablePackage.Key))
+                    {
+                        checkboxes[availablePackage.Key] = GUILayout.Toggle(checkboxes[availablePackage.Key], "");
+                    }
+
+                    GUILayout.Label(new GUIContent(availablePackage.Key, packageDescription));
+                    GUILayout.FlexibleSpace();
+
+                    if (GUILayout.Button(addButtonText))
+                    {
+                        AddPackage(availablePackage.Value);
+                    }
+
+                    if (GUILayout.Button(new GUIContent(viewButtonText, viewButtonTooltip)))
+                    {
+                        Application.OpenURL(packageUrl);
+                    }
+                    GUILayout.Label(" ", new GUIStyle { fontSize = 10 });
+                }
+                DrawHorizontalLine();
+            }
+        }
+
+        private void SetDictForPackageThatNotInstallYet()
+        {
+            List<string> notInstallYet = availablePackages.Keys.Except(installedPackages).ToList();
+            _dictCanInstall.Clear();
+
+            foreach (string packageName in notInstallYet)
+            {
+                if (availablePackages.ContainsKey(packageName))
+                {
+                    _dictCanInstall.Add(packageName, availablePackages[packageName]);
+                }
+            }
         }
 
         private void OnDestroy()
@@ -205,10 +193,7 @@ namespace meangpu
             bool result = false;
             foreach (KeyValuePair<string, bool> entry in checkboxes)
             {
-                if (entry.Value == true)
-                {
-                    return true;
-                }
+                if (entry.Value == true) return true;
             }
 
             return result;
@@ -237,14 +222,8 @@ namespace meangpu
         {
             if (addAndRemoveRequest != null && addAndRemoveRequest.IsCompleted)
             {
-                if (addAndRemoveRequest.Status == StatusCode.Success)
-                {
-                    GetInstalledPackages();
-                }
-                else
-                {
-                    Debug.LogError("Failure to add package: " + addAndRemoveRequest.Error.message);
-                }
+                if (addAndRemoveRequest.Status == StatusCode.Success) GetInstalledPackages();
+                else Debug.LogError("Failure to add package: " + addAndRemoveRequest.Error.message);
 
                 EditorApplication.update -= HandlePackageAddAndRemoveRequest;
                 addAndRemoveRequest = null;
@@ -271,7 +250,6 @@ namespace meangpu
         {
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
-                // Request and wait for the desired page.
                 yield return webRequest.SendWebRequest();
 
                 switch (webRequest.result)
