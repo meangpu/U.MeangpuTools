@@ -1,0 +1,17 @@
+{
+  "scopedRegistry": "\"name\": \"npmjs\", \"url\": \"https://registry.npmjs.org/\", \"scopes\": [ \"io.extendreality\"]",
+  "packages": [
+    {
+      "name": "io.extendreality.tilia.camerarigs.spatialsimulator.unity",
+      "version": "2.2.2",
+      "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
+      "url": "https://github.com/ExtendRealityLtd/Tilia.CameraRigs.SpatialSimulator.Unity"
+    },
+    {
+      "name": "io.extendreality.tilia.camerarigs.spatialsimulator.unity",
+      "version": "2.2.2",
+      "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
+      "url": "https://github.com/ExtendRealityLtd/Tilia.CameraRigs.SpatialSimulator.Unity"
+    }
+  ]
+}
