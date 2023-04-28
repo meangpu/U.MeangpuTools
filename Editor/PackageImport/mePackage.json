@@ -1,7 +1,7 @@
 {
   "packages": [
     {
-      "name": "MeAudio",
+      "name": "com.meangpu.audio",
       "version": "0.0.1",
       "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
       "url": "https://github.com/meangpu/U.MeAudio.git"
