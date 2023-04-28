@@ -48,6 +48,9 @@ namespace meangpu
         private Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
         private List<string> packagesToAdd = new List<string>();
 
+        Dictionary<string, string> _dictCanInstall = new Dictionary<string, string>();
+
+
 
         public void OnGUI()
         {
@@ -91,25 +94,18 @@ namespace meangpu
                 }
                 else
                 {
-                    List<string> toInstallPackage = availablePackages.Keys.Except(installedPackages).ToList();
-                    Dictionary<string, string> dictCanInstall = new Dictionary<string, string>();
-                    foreach (string packageName in toInstallPackage)
+                    List<string> notInstallYet = availablePackages.Keys.Except(installedPackages).ToList();
+                    _dictCanInstall.Clear();
+
+                    foreach (string packageName in notInstallYet)
                     {
                         if (availablePackages.ContainsKey(packageName))
                         {
-                            dictCanInstall.Add(packageName, availablePackages[packageName]);
+                            _dictCanInstall.Add(packageName, availablePackages[packageName]);
                         }
                     }
 
-                    foreach (var item in dictCanInstall)
-                    {
-                        Debug.Log($"{item.Key}");
-                    }
-
-
-
-
-                    foreach (var availablePackage in dictCanInstall)
+                    foreach (var availablePackage in _dictCanInstall)
                     {
                         if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Key.Contains(searchString))
                         {
@@ -221,11 +217,12 @@ namespace meangpu
         private void AddSelectedPackages()
         {
             packagesToAdd.Clear();
+
             foreach (KeyValuePair<string, bool> entry in checkboxes)
             {
-                if (entry.Value == true)
+                if (entry.Value == true && _dictCanInstall.ContainsKey(entry.Key))
                 {
-                    packagesToAdd.Add(entry.Key);
+                    packagesToAdd.Add(_dictCanInstall[entry.Key]);
                 }
             }
 
@@ -313,8 +310,8 @@ namespace meangpu
             {
                 availablePackages.Add(package["name"], package["url"]);
                 packageDescriptions.Add(package["name"], package["description"] + ".\n\nLatest version: " + package["version"]);
-                packageUrls.Add(package["url"], package["url"]);
-                checkboxes.Add(package["url"], true);
+                packageUrls.Add(package["name"], package["url"]);
+                checkboxes.Add(package["name"], true);
             }
 
         }
