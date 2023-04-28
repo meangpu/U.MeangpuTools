@@ -1,5 +1,4 @@
 {
-  "scopedRegistry": "\"name\": \"npmjs\", \"url\": \"https://registry.npmjs.org/\", \"scopes\": [ \"com.meangpu\"]",
   "packages": [
     {
       "name": "com.meangpu.audio",
@@ -11,7 +10,7 @@
       "name": "com.meangpu.tooltip",
       "version": "0.0.1",
       "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
-      "url": "https://github.com/meangpu/U.MeTooltip"
+      "url": "https://github.com/meangpu/U.MeTooltip.git"
     },
     {
       "name": "com.madsbangh.easybuttons",
