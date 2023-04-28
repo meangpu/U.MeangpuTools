@@ -20,7 +20,7 @@ namespace meangpu
         private const string WindowPath = "MeangpuTools/";
         private const string WindowName = "Package Importer";
         private const string DataUri = "https://raw.githubusercontent.com/meangpu/U.MeangpuTools/main/Editor/PackageImport/mePackage.json";
-        private const string titleLabel = " Available MEANGPU Packages To Import";
+        private const string titleLabel = "MEANGPU Packages To Import";
         private const string addingPackagesMessage = "Adding packages, please wait...";
         private const string loadingText = "Loading";
         private const string filterLabel = "Filter";
@@ -48,8 +48,14 @@ namespace meangpu
         private Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
         private List<string> packagesToAdd = new List<string>();
 
+
         public void OnGUI()
         {
+            var TextStyle = new GUIStyle();
+            TextStyle.normal.textColor = Color.white;
+            TextStyle.fontSize = 18;
+            TextStyle.fontStyle = FontStyle.Bold;
+
             if (!windowAlreadyOpen)
             {
                 DownloadPackageList();
@@ -58,7 +64,7 @@ namespace meangpu
 
             DrawHorizontalLine(Color.black);
             GUILayout.Space(1);
-            GUILayout.Label(titleLabel, new GUIStyle { fontSize = 15, fontStyle = FontStyle.Bold });
+            GUILayout.Label(titleLabel, TextStyle);
             DrawHorizontalLine(Color.black);
 
             GUILayout.Label(loadingText);
