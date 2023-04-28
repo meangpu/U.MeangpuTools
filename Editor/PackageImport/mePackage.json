@@ -1,4 +1,5 @@
 {
+  "scopedRegistry": "\"name\": \"npmjs\", \"url\": \"https://registry.npmjs.org/\", \"scopes\": [ \"com.meangpu\"]",
   "packages": [
     {
       "name": "com.meangpu.audio",
