@@ -37,7 +37,7 @@ namespace meangpu
         private string manifestFile;
         private JSONNode rootManifest;
         private EditorCoroutine getWebDataRoutine;
-        private List<string> availablePackages = new List<string>();
+        private Dictionary<string, string> availablePackages = new Dictionary<string, string>();
         private Dictionary<string, string> packageDescriptions = new Dictionary<string, string>();
         private Dictionary<string, string> packageUrls = new Dictionary<string, string>();
         private Vector2 scrollPosition;
@@ -91,29 +91,47 @@ namespace meangpu
                 }
                 else
                 {
-                    foreach (string availablePackage in availablePackages.Except(installedPackages).ToList())
+                    List<string> toInstallPackage = availablePackages.Keys.Except(installedPackages).ToList();
+                    Dictionary<string, string> dictCanInstall = new Dictionary<string, string>();
+                    foreach (string packageName in toInstallPackage)
                     {
-                        if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Contains(searchString))
+                        if (availablePackages.ContainsKey(packageName))
+                        {
+                            dictCanInstall.Add(packageName, availablePackages[packageName]);
+                        }
+                    }
+
+                    foreach (var item in dictCanInstall)
+                    {
+                        Debug.Log($"{item.Key}");
+                    }
+
+
+
+
+                    foreach (var availablePackage in dictCanInstall)
+                    {
+                        if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Key.Contains(searchString))
                         {
                             continue;
                         }
 
                         using (new EditorGUILayout.HorizontalScope())
                         {
-                            packageDescriptions.TryGetValue(availablePackage, out string packageDescription);
-                            packageUrls.TryGetValue(availablePackage, out string packageUrl);
+                            packageDescriptions.TryGetValue(availablePackage.Key, out string packageDescription);
+                            packageUrls.TryGetValue(availablePackage.Value, out string packageUrl);
 
-                            if (checkboxes.ContainsKey(availablePackage))
+                            if (checkboxes.ContainsKey(availablePackage.Key))
                             {
-                                checkboxes[availablePackage] = GUILayout.Toggle(checkboxes[availablePackage], "");
+                                checkboxes[availablePackage.Key] = GUILayout.Toggle(checkboxes[availablePackage.Key], "");
                             }
 
-                            GUILayout.Label(new GUIContent(availablePackage, packageDescription));
+                            GUILayout.Label(new GUIContent(availablePackage.Key, packageDescription));
                             GUILayout.FlexibleSpace();
 
                             if (GUILayout.Button(addButtonText))
                             {
-                                AddPackage(availablePackage);
+                                AddPackage(availablePackage.Value);
                             }
 
                             if (GUILayout.Button(new GUIContent(viewButtonText, viewButtonTooltip)))
@@ -293,10 +311,10 @@ namespace meangpu
 
             foreach (JSONNode package in jsonData["packages"])
             {
-                availablePackages.Add(package["name"]);
-                packageDescriptions.Add(package["url"], package["description"] + ".\n\nLatest version: " + package["version"]);
+                availablePackages.Add(package["name"], package["url"]);
+                packageDescriptions.Add(package["name"], package["description"] + ".\n\nLatest version: " + package["version"]);
                 packageUrls.Add(package["url"], package["url"]);
-                checkboxes.Add(package["url"], false);
+                checkboxes.Add(package["url"], true);
             }
 
         }
