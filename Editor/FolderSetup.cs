@@ -9,7 +9,7 @@ using static UnityEngine.Application;
 
 namespace meangpu
 {
-    public static class ToolsMenu
+    public static class FolderSetup
     {
         [MenuItem("MeangpuTools/Setup/Create Default Folder")]
         public static void CreateDefaultFolders()

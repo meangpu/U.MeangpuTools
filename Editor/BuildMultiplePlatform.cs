@@ -6,13 +6,13 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using Unity.EditorCoroutines.Editor;
 
-public class CrossPlatformBuild : EditorWindow
+public class BuildMultiplePlatform : EditorWindow
 {
     // learn from https://www.youtube.com/watch?v=x566N_aEBeY
-    [MenuItem("Tools/CrossPlatformBuildTools")]
+    [MenuItem("MeangpuTools/BuildMultiplePlatformTools")]
     public static void OnShowTools()
     {
-        EditorWindow.GetWindow<CrossPlatformBuild>();
+        EditorWindow.GetWindow<BuildMultiplePlatform>();
     }
 
     private BuildTargetGroup GetTargetGroupForTarget(BuildTarget target) => target switch
