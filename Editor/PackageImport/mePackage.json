@@ -1,17 +1,22 @@
 {
-  "scopedRegistry": "\"name\": \"npmjs\", \"url\": \"https://registry.npmjs.org/\", \"scopes\": [ \"io.extendreality\"]",
   "packages": [
     {
-      "name": "io.extendreality.tilia.camerarigs.spatialsimulator.unity",
-      "version": "2.2.2",
+      "name": "MeAudio",
+      "version": "0.0.1",
       "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
-      "url": "https://github.com/ExtendRealityLtd/Tilia.CameraRigs.SpatialSimulator.Unity"
+      "url": "https://github.com/meangpu/U.MeAudio.git"
     },
     {
-      "name": "io.extendreality.tilia.camerarigs.spatialsimulator.unity",
-      "version": "2.2.2",
+      "name": "MeTooltip",
+      "version": "0.0.1",
       "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
-      "url": "https://github.com/ExtendRealityLtd/Tilia.CameraRigs.SpatialSimulator.Unity"
+      "url": "https://github.com/meangpu/U.MeTooltip.git"
+    },
+    {
+      "name": "EasyButton",
+      "version": "0.0.1",
+      "description": "A camera rig prefab that simulates spatial hardware for the Unity software",
+      "url": "https://github.com/madsbangh/EasyButtons.git#upm"
     }
   ]
 }
