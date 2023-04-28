@@ -17,9 +17,9 @@ namespace meangpu
     public class PackageImporter : EditorWindow
     {
         private static EditorWindow promptWindow;
-        private const string WindowPath = "Window/Tilia/";
+        private const string WindowPath = "MeangpuTools/";
         private const string WindowName = "Package Importer";
-        private const string DataUri = "https://www.vrtk.io/tilia.json";
+        private const string DataUri = "https://github.com/meangpu/U.MeangpuTools/blob/60637b26d25ec476359ea1545cf40b6eb4f9400f/Editor/PackageImport/mePackage.json";
         private const string titleLabel = " Available Tilia Packages To Import";
         private const string addingPackagesMessage = "Adding packages, please wait...";
         private const string scopedRegisryMissingText = "The required scoped registry has not been found in your project manifest.json.\n\nClick the button below to attempt to automatically add the required scoped registry to your project manifest.json file.";
@@ -36,8 +36,6 @@ namespace meangpu
         private static AddRequest addRequest;
         private static ListRequest installedPackagesRequest;
 
-        private bool registryFound;
-        private bool registryChecked;
         private string manifestFile;
         private JSONNode rootManifest;
         private EditorCoroutine getWebDataRoutine;
@@ -68,83 +66,64 @@ namespace meangpu
             GUILayout.Label(titleLabel, new GUIStyle { fontSize = 15, fontStyle = FontStyle.Bold });
             DrawHorizontalLine(Color.black);
 
-            if (!registryFound)
+            using (new EditorGUILayout.HorizontalScope())
             {
-                if (registryChecked)
+                EditorGUILayout.LabelField(filterLabel, GUILayout.Width(filterLabelWidth));
+                searchString = EditorGUILayout.TextField(searchString);
+            }
+
+            DrawHorizontalLine();
+
+            using (GUILayout.ScrollViewScope scrollViewScope = new GUILayout.ScrollViewScope(scrollPosition))
+            {
+                scrollPosition = scrollViewScope.scrollPosition;
+
+                if (addRequest != null)
                 {
-                    EditorGUILayout.HelpBox(scopedRegisryMissingText, MessageType.Warning);
-                    GUILayout.Space(4);
-                    if (GUILayout.Button(addScopedRegistryButtonText))
-                    {
-                        AddRegistry();
-                    }
+                    GUILayout.Label(addingPackagesMessage);
                 }
+#if UNITY_2021_2_OR_NEWER
+                else if (addAndRemoveRequest != null)
+                {
+                    GUILayout.Label(addingPackagesMessage);
+                }
+#endif
                 else
                 {
-                    GUILayout.Label(loadingText);
-                }
-            }
-            else
-            {
-                using (new EditorGUILayout.HorizontalScope())
-                {
-                    EditorGUILayout.LabelField(filterLabel, GUILayout.Width(filterLabelWidth));
-                    searchString = EditorGUILayout.TextField(searchString);
-                }
-
-                DrawHorizontalLine();
-
-                using (GUILayout.ScrollViewScope scrollViewScope = new GUILayout.ScrollViewScope(scrollPosition))
-                {
-                    scrollPosition = scrollViewScope.scrollPosition;
-
-                    if (addRequest != null)
+                    foreach (string availablePackage in availablePackages.Except(installedPackages).ToList())
                     {
-                        GUILayout.Label(addingPackagesMessage);
-                    }
-#if UNITY_2021_2_OR_NEWER
-                    else if (addAndRemoveRequest != null)
-                    {
-                        GUILayout.Label(addingPackagesMessage);
-                    }
-#endif
-                    else
-                    {
-                        foreach (string availablePackage in availablePackages.Except(installedPackages).ToList())
+                        if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Contains(searchString))
                         {
-                            if (!string.IsNullOrEmpty(searchString.Trim()) && !availablePackage.Contains(searchString))
-                            {
-                                continue;
-                            }
+                            continue;
+                        }
 
-                            using (new EditorGUILayout.HorizontalScope())
-                            {
-                                packageDescriptions.TryGetValue(availablePackage, out string packageDescription);
-                                packageUrls.TryGetValue(availablePackage, out string packageUrl);
+                        using (new EditorGUILayout.HorizontalScope())
+                        {
+                            packageDescriptions.TryGetValue(availablePackage, out string packageDescription);
+                            packageUrls.TryGetValue(availablePackage, out string packageUrl);
 
 #if UNITY_2021_2_OR_NEWER
-                                if (checkboxes.ContainsKey(availablePackage))
-                                {
-                                    checkboxes[availablePackage] = GUILayout.Toggle(checkboxes[availablePackage], "");
-                                }
+                            if (checkboxes.ContainsKey(availablePackage))
+                            {
+                                checkboxes[availablePackage] = GUILayout.Toggle(checkboxes[availablePackage], "");
+                            }
 #endif
 
-                                GUILayout.Label(new GUIContent(availablePackage, packageDescription));
-                                GUILayout.FlexibleSpace();
+                            GUILayout.Label(new GUIContent(availablePackage, packageDescription));
+                            GUILayout.FlexibleSpace();
 
-                                if (GUILayout.Button(addButtonText))
-                                {
-                                    AddPackage(availablePackage);
-                                }
-
-                                if (GUILayout.Button(new GUIContent(viewButtonText, viewButtonTooltip)))
-                                {
-                                    Application.OpenURL(packageUrl);
-                                }
-                                GUILayout.Label(" ", new GUIStyle { fontSize = 10 });
+                            if (GUILayout.Button(addButtonText))
+                            {
+                                AddPackage(availablePackage);
                             }
-                            DrawHorizontalLine();
+
+                            if (GUILayout.Button(new GUIContent(viewButtonText, viewButtonTooltip)))
+                            {
+                                Application.OpenURL(packageUrl);
+                            }
+                            GUILayout.Label(" ", new GUIStyle { fontSize = 10 });
                         }
+                        DrawHorizontalLine();
                     }
                 }
 
@@ -339,51 +318,17 @@ namespace meangpu
             checkboxes.Clear();
 #endif
 
-            if (!string.IsNullOrEmpty(jsonData["scopedRegistry"]))
-            {
-                availableScopedRegistry = "{ " + jsonData["scopedRegistry"] + " }";
-            }
+            Debug.Log($"{jsonData}");
 
             foreach (JSONNode package in jsonData["packages"])
             {
+                Debug.Log($"{package}");
                 availablePackages.Add(package["name"]);
                 packageDescriptions.Add(package["name"], package["description"] + ".\n\nLatest version: " + package["version"]);
                 packageUrls.Add(package["name"], package["url"]);
 #if UNITY_2021_2_OR_NEWER
                 checkboxes.Add(package["name"], false);
 #endif
-            }
-
-            DoesRegistryExist();
-        }
-
-        private void DoesRegistryExist()
-        {
-            manifestFile = Path.Combine(Application.dataPath, "..", "Packages", "manifest.json");
-            string manifest = File.ReadAllText(manifestFile);
-            rootManifest = JSONNode.Parse(manifest);
-
-            registryFound = false;
-
-            foreach (JSONNode registry in rootManifest["scopedRegistries"])
-            {
-                if (Array.IndexOf(registry["scopes"], "io.extendreality") > -1)
-                {
-                    registryFound = true;
-                }
-            }
-
-            registryChecked = true;
-        }
-
-        private void AddRegistry()
-        {
-            if (!registryFound && !string.IsNullOrEmpty(availableScopedRegistry))
-            {
-                JSONNode newNode = JSONNode.Parse(availableScopedRegistry);
-                rootManifest["scopedRegistries"].Add(newNode);
-                File.WriteAllText(manifestFile, rootManifest.ToString());
-                DownloadPackageList();
             }
         }
 
