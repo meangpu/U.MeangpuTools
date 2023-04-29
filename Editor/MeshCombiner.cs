@@ -13,7 +13,6 @@ public class MeshCombiner : EditorWindow
 
     private void OnGUI()
     {
-
         TransformToCombine = EditorGUILayout.ObjectField("TransformToCombine", TransformToCombine, typeof(Transform), true) as Transform;
 
         EditorGUILayout.LabelField("Count", EditorStyles.boldLabel);
@@ -29,6 +28,7 @@ public class MeshCombiner : EditorWindow
 
     void CombineMesh()
     {
+        // this pass horse model test with 839 batch to only 8 batch, and fps from lag 4.2ms to 1.8 ms on empty scene
         if (TransformToCombine == null)
         {
             Debug.Log($"<color=red>Parent mesh transform is null!</color>");
