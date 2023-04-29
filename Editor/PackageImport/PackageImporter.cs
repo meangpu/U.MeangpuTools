@@ -50,8 +50,6 @@ namespace meangpu
 
         Dictionary<string, string> _dictCanInstall = new Dictionary<string, string>();
 
-
-
         public void OnGUI()
         {
             var TextStyle = new GUIStyle();
@@ -289,9 +287,8 @@ namespace meangpu
                 availablePackages.Add(package["name"], package["url"]);
                 packageDescriptions.Add(package["name"], package["description"] + ".\n\nLatest version: " + package["version"]);
                 packageUrls.Add(package["name"], package["url"]);
-                checkboxes.Add(package["name"], true);
+                checkboxes.Add(package["name"], package["isSelectAtStart"]);
             }
-
         }
 
 
