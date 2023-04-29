@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MeshCombiner : EditorWindow
 {
-    public Transform _transformToCombine;
+    public Transform TransformToCombine;
 
     [MenuItem("MeangpuTools/MeshCombine")]
     public static void ShowWindow()
@@ -14,7 +14,7 @@ public class MeshCombiner : EditorWindow
     private void OnGUI()
     {
 
-        _transformToCombine = EditorGUILayout.ObjectField("_transformToCombine", _transformToCombine, typeof(Transform), true) as Transform;
+        TransformToCombine = EditorGUILayout.ObjectField("TransformToCombine", TransformToCombine, typeof(Transform), true) as Transform;
 
         EditorGUILayout.LabelField("Count", EditorStyles.boldLabel);
 
@@ -29,20 +29,20 @@ public class MeshCombiner : EditorWindow
 
     void CombineMesh()
     {
-        if (_transformToCombine == null)
+        if (TransformToCombine == null)
         {
             Debug.Log($"<color=red>Parent mesh transform is null!</color>");
             return;
         }
 
         // Drag this into parent game obj then run this function 
-        Quaternion _oldRot = _transformToCombine.rotation;
-        Vector3 _oldPos = _transformToCombine.position;
+        Quaternion _oldRot = TransformToCombine.rotation;
+        Vector3 _oldPos = TransformToCombine.position;
 
-        _transformToCombine.rotation = Quaternion.identity;
-        _transformToCombine.position = Vector3.zero;
+        TransformToCombine.rotation = Quaternion.identity;
+        TransformToCombine.position = Vector3.zero;
 
-        MeshFilter[] _filters = _transformToCombine.GetComponentsInChildren<MeshFilter>();
+        MeshFilter[] _filters = TransformToCombine.GetComponentsInChildren<MeshFilter>();
 
         Debug.Log($"{name} is combining {_filters.Length} meshes");
 
@@ -53,7 +53,7 @@ public class MeshCombiner : EditorWindow
 
         for (int i = 0; i < _filters.Length; i++)
         {
-            if (_filters[i].transform == _transformToCombine) continue;
+            if (_filters[i].transform == TransformToCombine) continue;
 
             _combiners[i].subMeshIndex = 0;
             _combiners[i].mesh = _filters[i].sharedMesh;
@@ -61,14 +61,14 @@ public class MeshCombiner : EditorWindow
         }
 
         _finalMesh.CombineMeshes(_combiners);
-        GetCreateComponent<MeshFilter>(_transformToCombine).sharedMesh = _finalMesh;
+        GetCreateComponent<MeshFilter>(TransformToCombine).sharedMesh = _finalMesh;
 
-        _transformToCombine.rotation = _oldRot;
-        _transformToCombine.position = _oldPos;
+        TransformToCombine.rotation = _oldRot;
+        TransformToCombine.position = _oldPos;
 
-        for (int i = 0; i < _transformToCombine.childCount; i++)
+        for (int i = 0; i < TransformToCombine.childCount; i++)
         {
-            _transformToCombine.GetChild(i).gameObject.SetActive(false);
+            TransformToCombine.GetChild(i).gameObject.SetActive(false);
         }
 
         // save asset to asset folder
