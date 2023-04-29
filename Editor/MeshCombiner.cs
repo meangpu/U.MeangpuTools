@@ -1,0 +1,96 @@
+using UnityEditor;
+using UnityEngine;
+
+public class MeshCombiner : EditorWindow
+{
+    public Transform _transformToCombine;
+
+    [MenuItem("MeangpuTools/MeshCombine")]
+    public static void ShowWindow()
+    {
+        GetWindow<MeshCombiner>("MeshCombiner");
+    }
+
+    private void OnGUI()
+    {
+
+        _transformToCombine = EditorGUILayout.ObjectField("_transformToCombine", _transformToCombine, typeof(Transform), true) as Transform;
+
+        EditorGUILayout.LabelField("Count", EditorStyles.boldLabel);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Separator();
+
+        if (GUILayout.Button("Combine Mesh"))
+        {
+            CombineMesh();
+        }
+    }
+
+    void CombineMesh()
+    {
+        if (_transformToCombine == null)
+        {
+            Debug.Log($"<color=red>Parent mesh transform is null!</color>");
+            return;
+        }
+
+        // Drag this into parent game obj then run this function 
+        Quaternion _oldRot = _transformToCombine.rotation;
+        Vector3 _oldPos = _transformToCombine.position;
+
+        _transformToCombine.rotation = Quaternion.identity;
+        _transformToCombine.position = Vector3.zero;
+
+        MeshFilter[] _filters = _transformToCombine.GetComponentsInChildren<MeshFilter>();
+
+        Debug.Log($"{name} is combining {_filters.Length} meshes");
+
+        Mesh _finalMesh = new Mesh();
+        _finalMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+
+        CombineInstance[] _combiners = new CombineInstance[_filters.Length];
+
+        for (int i = 0; i < _filters.Length; i++)
+        {
+            if (_filters[i].transform == _transformToCombine) continue;
+
+            _combiners[i].subMeshIndex = 0;
+            _combiners[i].mesh = _filters[i].sharedMesh;
+            _combiners[i].transform = _filters[i].transform.localToWorldMatrix;
+        }
+
+        _finalMesh.CombineMeshes(_combiners);
+        GetCreateComponent<MeshFilter>(_transformToCombine).sharedMesh = _finalMesh;
+
+        _transformToCombine.rotation = _oldRot;
+        _transformToCombine.position = _oldPos;
+
+        for (int i = 0; i < _transformToCombine.childCount; i++)
+        {
+            _transformToCombine.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // save asset to asset folder
+        SaveMeshAsset(_finalMesh);
+        Debug.Log($"<color=#4ec9b0>Finish Create obj</color>");
+    }
+
+    private void SaveMeshAsset(Mesh _finalMesh)
+    {
+        string assetPath = $"Assets/{name}-{UnityEditor.GUID.Generate()}.mesh";
+
+        UnityEditor.AssetDatabase.CreateAsset(_finalMesh, assetPath);
+        UnityEditor.AssetDatabase.SaveAssets();
+
+        Object obj = AssetDatabase.LoadAssetAtPath(assetPath, typeof(Object));
+        Selection.activeObject = obj;
+    }
+
+    public static T GetCreateComponent<T>(Transform _transform) where T : Component
+    {
+        if (_transform.GetComponent<T>()) return _transform.GetComponent<T>();
+        return _transform.gameObject.AddComponent<T>();
+    }
+}
+
