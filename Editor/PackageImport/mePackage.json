@@ -4,25 +4,29 @@
       "name": "com.madsbangh.easybuttons",
       "version": "1.4.0",
       "description": "Easy to use inspector button",
-      "url": "https://github.com/madsbangh/EasyButtons.git#upm"
+      "url": "https://github.com/madsbangh/EasyButtons.git#upm",
+      "isSelectAtStart": true
     },
     {
       "name": "com.meangpu.audio",
       "version": "0.0.1",
       "description": "meangpu audio system",
-      "url": "https://github.com/meangpu/U.MeAudio.git"
+      "url": "https://github.com/meangpu/U.MeAudio.git",
+      "isSelectAtStart": true
     },
     {
       "name": "com.meangpu.tooltip",
       "version": "0.0.1",
       "description": "for game tooltips like, how to play",
-      "url": "https://github.com/meangpu/U.MeTooltip.git"
+      "url": "https://github.com/meangpu/U.MeTooltip.git",
+      "isSelectAtStart": true
     },
     {
       "name": "com.meangpu.scoreboard",
       "version": "0.0.1",
       "description": "meangpu scoreboard",
-      "url": "https://github.com/meangpu/U.MeScoreboard.git"
+      "url": "https://github.com/meangpu/U.MeScoreboard.git",
+      "isSelectAtStart": false
     }
   ]
 }
