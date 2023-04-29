@@ -19,8 +19,8 @@ public class ChangeGameSpeed : EditorWindow
 
         EditorGUILayout.LabelField("TIME SETTING", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("x.1")) Time.timeScale = 0.1f;
-        if (GUILayout.Button("x.5")) Time.timeScale = 0.5f;
+        if (GUILayout.Button("x0.1")) Time.timeScale = 0.1f;
+        if (GUILayout.Button("x0.5")) Time.timeScale = 0.5f;
         if (GUILayout.Button("x1")) Time.timeScale = 1;
         if (GUILayout.Button("x2")) Time.timeScale = 2;
         if (GUILayout.Button("x5")) Time.timeScale = 5;
