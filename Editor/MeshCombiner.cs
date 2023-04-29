@@ -93,4 +93,3 @@ public class MeshCombiner : EditorWindow
         return _transform.gameObject.AddComponent<T>();
     }
 }
-
