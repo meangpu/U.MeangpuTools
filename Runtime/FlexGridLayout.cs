@@ -35,7 +35,7 @@ public class FlexGridLayout : LayoutGroup
 
     [Min(0)]
 
-    public Vector2 spacing;
+    public Vector2 spacing = new Vector2(5, 5);
     public Vector2 cellSize;
 
     public bool fitX;
