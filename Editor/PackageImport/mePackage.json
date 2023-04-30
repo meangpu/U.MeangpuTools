@@ -34,6 +34,13 @@
       "description": "meangpu day night cycle",
       "url": "https://github.com/meangpu/U.MeSkyboxDayNight.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.clock",
+      "version": "0.0.1",
+      "description": "meangpu clock",
+      "url": "https://github.com/meangpu/U.MeClock.git",
+      "isSelectAtStart": false
     }
   ]
 }
