@@ -41,6 +41,13 @@
       "description": "meangpu clock",
       "url": "https://github.com/meangpu/U.MeClock.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.camshake",
+      "version": "0.0.1",
+      "description": "meangpu cam shake",
+      "url": "https://github.com/meangpu/U.MeCamShake.git",
+      "isSelectAtStart": false
     }
   ]
 }
