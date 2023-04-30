@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "unity": "2021.3",
   "displayName": "MeangpuTools",
-  "description": "Meangpu tools for starter unity project have script that \n- Auto create project folder\n- Mesh combiner\n- Game speed/Time scale setter\n- Screenshot taker\n- Game version auto / display\n- Create gameobject at mouse pos",
+  "description": "Meangpu tools for starter unity project have script that \n- Auto create project folder\n- Mesh combiner\n- Game speed/Time scale setter\n- Screenshot taker\n- Game version auto / display\n- Create gameobject at mouse pos\n- Animation set through script\n- Better flex grid",
   "type": "template",
   "author": {
     "name": "meangpu",
