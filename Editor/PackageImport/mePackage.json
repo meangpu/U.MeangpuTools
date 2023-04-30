@@ -27,6 +27,13 @@
       "description": "meangpu scoreboard",
       "url": "https://github.com/meangpu/U.MeScoreboard.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.skyboxdaynight",
+      "version": "0.0.1",
+      "description": "meangpu day night cycle",
+      "url": "https://github.com/meangpu/U.MeSkyboxDayNight.git",
+      "isSelectAtStart": false
     }
   ]
 }
