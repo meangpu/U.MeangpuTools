@@ -55,6 +55,13 @@
       "description": "meangpu cam dolly",
       "url": "https://github.com/meangpu/U.MeCamDolly.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.videoplayer",
+      "version": "0.0.1",
+      "description": "meangpu video player",
+      "url": "https://github.com/meangpu/U.MeVideoPlayer.git",
+      "isSelectAtStart": false
     }
   ]
 }
