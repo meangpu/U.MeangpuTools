@@ -48,6 +48,13 @@
       "description": "meangpu cam shake",
       "url": "https://github.com/meangpu/U.MeCamShake.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.camdolly",
+      "version": "0.0.1",
+      "description": "meangpu cam dolly",
+      "url": "https://github.com/meangpu/U.MeCamDolly.git",
+      "isSelectAtStart": false
     }
   ]
 }
