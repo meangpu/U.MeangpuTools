@@ -62,6 +62,13 @@
       "description": "meangpu video player",
       "url": "https://github.com/meangpu/U.MeVideoPlayer.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.timer",
+      "version": "0.0.1",
+      "description": "timer",
+      "url": "https://github.com/meangpu/U.MeTimer.git",
+      "isSelectAtStart": false
     }
   ]
 }
