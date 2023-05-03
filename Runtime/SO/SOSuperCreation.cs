@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using EasyButtons;
+// using EasyButtons;
 
 [CreateAssetMenu(fileName = "New SOSuperXrayCreator", menuName = "Meangpu/SOSuperXrayCreator")]
 public class SoSuperCreation : ScriptableObject
