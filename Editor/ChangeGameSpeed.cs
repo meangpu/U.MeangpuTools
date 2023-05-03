@@ -14,8 +14,10 @@ public class ChangeGameSpeed : EditorWindow
 
     private void OnGUI()
     {
-        GameSpeed = EditorGUILayout.FloatField("layer1", GameSpeed);
+        // obj example
+        // _targetPref = EditorGUILayout.ObjectField("TargetPrefab", _targetPref, typeof(Transform), true) as Transform;
 
+        GameSpeed = EditorGUILayout.FloatField("layer1", GameSpeed);
 
         EditorGUILayout.LabelField("TIME SETTING", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
