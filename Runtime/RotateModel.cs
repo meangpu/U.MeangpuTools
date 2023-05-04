@@ -9,7 +9,7 @@ public class RotateModel : MonoBehaviour
 
     private void Start() => _nowRotSpeed = _rotSpeed;
 
-    void FixedUpdate() => transform.Rotate(_nowRotSpeed);
+    void Update() => transform.Rotate(_nowRotSpeed * Time.deltaTime);
 
 }
 
