@@ -1,14 +1,14 @@
 using UnityEngine;
 public class RotateModel : MonoBehaviour
 {
-    [SerializeField] float _rotSpeed;
-    float _nowRotSpeed;
+    [SerializeField] Vector3 _rotSpeed = new Vector3(0, 1, 0);
+    Vector3 _nowRotSpeed;
 
-    void RotateStop() => _nowRotSpeed = 0;
+    void RotateStop() => _nowRotSpeed = Vector3.zero;
     void RotateStart() => _nowRotSpeed = _rotSpeed;
 
     private void Start() => _nowRotSpeed = _rotSpeed;
 
-    void Update() => transform.Rotate(0, _rotSpeed, 0);
+    void Update() => transform.Rotate(_nowRotSpeed);
 }
 
