@@ -15,8 +15,8 @@ namespace meangpu
         public static void CreateDefaultFolders()
         {
 
-            Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound");
-            Dir("_Project/Art", "Materials");
+            Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data");
+            Dir("_Project/Art", "Materials", "Model", "Icon");
             Refresh();
         }
 
