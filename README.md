@@ -8,3 +8,9 @@ to edit this package need to
 - nest this inside `Assets/MeangpuTools`
 
 fix editor by use `allow unsafe code`
+
+min max slider from // add to main script for easier setup
+
+```text
+   https://github.com/ayellowpaper/MinMaxSlider
+```
