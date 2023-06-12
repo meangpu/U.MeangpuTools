@@ -26,4 +26,5 @@ public class Screenshot
 
     public static char GetCh() => (char)UnityEngine.Random.Range('A', 'Z');
 }
+
 #endif

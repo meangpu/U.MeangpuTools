@@ -4,7 +4,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using System;
 
-namespace meangpu
+namespace Meangpu
 {
     public class BuildVersionAutoIncrease : IPreprocessBuildWithReport
     {

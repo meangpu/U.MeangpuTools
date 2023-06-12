@@ -1,4 +1,4 @@
-namespace meangpu
+namespace Meangpu
 {
     using SimpleJSON;
     using System;

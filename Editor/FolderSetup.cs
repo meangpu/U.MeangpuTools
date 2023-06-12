@@ -7,7 +7,7 @@ using UnityEditor;
 using static UnityEditor.AssetDatabase;
 using static UnityEngine.Application;
 
-namespace meangpu
+namespace Meangpu
 {
     public static class FolderSetup
     {
