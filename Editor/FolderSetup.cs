@@ -14,7 +14,6 @@ namespace meangpu
         [MenuItem("MeangpuTools/Setup/Create Default Folder")]
         public static void CreateDefaultFolders()
         {
-
             Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data");
             Dir("_Project/Art", "Materials", "Model", "Icon");
             Refresh();
@@ -26,7 +25,6 @@ namespace meangpu
             foreach (var newDirectory in dir)
             {
                 CreateDirectory(Combine(fullPath, newDirectory));
-
             }
         }
 
@@ -52,7 +50,6 @@ namespace meangpu
         }
 
 
-
         static string GetGistUrl(string id, string user = "meangpu") => $"https://gist.githubusercontent.com/{user}/{id}/raw/";
 
         static async Task<string> GetContents(string url)
@@ -69,8 +66,5 @@ namespace meangpu
             File.WriteAllText(existing, contents);
             UnityEditor.PackageManager.Client.Resolve();
         }
-
-
     }
-
 }
