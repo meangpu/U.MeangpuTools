@@ -16,6 +16,7 @@ namespace meangpu
         {
             Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data");
             Dir("_Project/Art", "Materials", "Model", "Icon");
+            Dir("_Project/Resources", "SOSound");
             Refresh();
         }
 
@@ -48,7 +49,6 @@ namespace meangpu
             // https://gist.githubusercontent.com/meangpu/25cefd54ac38510850b5174a6026b64e/raw/
             LoadNewManifest("25cefd54ac38510850b5174a6026b64e"); // vr package
         }
-
 
         static string GetGistUrl(string id, string user = "meangpu") => $"https://gist.githubusercontent.com/{user}/{id}/raw/";
 
