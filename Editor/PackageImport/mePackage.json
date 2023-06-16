@@ -69,6 +69,13 @@
       "description": "timer",
       "url": "https://github.com/meangpu/U.MeTimer.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.audiovisualizer",
+      "version": "0.0.1",
+      "description": "audio visualizer",
+      "url": "https://github.com/meangpu/U.AudioVisualizer.git",
+      "isSelectAtStart": false
     }
   ]
 }
