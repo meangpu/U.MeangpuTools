@@ -7,6 +7,12 @@ public class KillAllChild : MonoBehaviour
         for (int i = parentTransform.childCount; i > 0; --i)
             DestroyImmediate(parentTransform.GetChild(0).gameObject);
     }
+
+    public static void KillAllChildInTransformDestroyNormal(Transform parentTransform)
+    {
+        for (int i = parentTransform.childCount; i > 0; --i)
+            Destroy(parentTransform.GetChild(0).gameObject);
+    }
     public static void KillWithTag(Transform parentTransform, string tag)
     {
         // compare children of game object
@@ -17,5 +23,4 @@ public class KillAllChild : MonoBehaviour
                 DestroyImmediate(parentTransform.GetChild(i).gameObject);
         }
     }
-
 }
