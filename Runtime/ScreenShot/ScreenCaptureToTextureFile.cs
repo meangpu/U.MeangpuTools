@@ -33,7 +33,4 @@ public class ScreenCaptureToTextureFile : MonoBehaviour
         byte[] byteArray = renderedTexture.EncodeToPNG();
         System.IO.File.WriteAllBytes(Application.dataPath + "/cameraCapture.png", byteArray);
     }
-
-
-
 }

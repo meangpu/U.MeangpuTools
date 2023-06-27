@@ -5,9 +5,11 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "New SOSuperXrayCreator", menuName = "Meangpu/SOSuperXrayCreator")]
 public class SoSuperCreation : ScriptableObject
 {
+    // is SO that loop create SO object it self
     public Sprite[] _xrayTutorial;
     public Sprite[] _xrayImg;
     public string[] _operationName;
+
     // public XrayLegLocation[] _legLocation;
     // public LegPose[] _legPose;
 
@@ -43,7 +45,6 @@ public class SoSuperCreation : ScriptableObject
     //         EditorUtility.FocusProjectWindow();
     //         Selection.activeObject = nowXrayOperation;
     //     }
-
 
 
     // }
