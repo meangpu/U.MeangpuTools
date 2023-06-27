@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MeangpuTools
+namespace Meangpu.Util
 {
     public class RotateModelAroundObject : MonoBehaviour
     {

@@ -1,11 +1,12 @@
 using UnityEngine;
 using TMPro;
 
-public class SetTmpText : MonoBehaviour
+namespace Meangpu.Util
 {
-    [SerializeField] TMP_Text _targetText;
-    public void SetText(string word)
+    public class SetTmpText : MonoBehaviour
     {
-        _targetText.SetText(word);
+        [SerializeField] TMP_Text _targetText;
+
+        public void SetText(string word) => _targetText.SetText(word);
     }
 }

@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class AnimationCall : MonoBehaviour
+namespace Meangpu.Util
 {
-    private string _nowState;
-
-    public void changeAnimState(string newState, Animator animator)
+    public class AnimationCall : MonoBehaviour
     {
-        if (_nowState == newState) return;
-        animator.Play(newState);
-        _nowState = newState;
+        private string _nowState;
+
+        public void ChangeAnimationState(string newState, Animator animator)
+        {
+            if (_nowState == newState) return;
+            animator.Play(newState);
+            _nowState = newState;
+        }
     }
 }
