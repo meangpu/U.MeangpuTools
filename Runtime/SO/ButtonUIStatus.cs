@@ -9,7 +9,8 @@ namespace Meangpu.Util
         [SerializeField] Button _btn;
         [SerializeField] Image _statusImg;
         [SerializeField] SOStatus _statusData;
-        [SerializeField] bool nowStatus = true;
+        [SerializeField] bool _nowStatus = true;
+        [SerializeField] bool _setButtonInteractable = false;
 
         private void Start()
         {
@@ -18,29 +19,29 @@ namespace Meangpu.Util
 
         private void SetButtonByStatus()
         {
-            if (nowStatus) DoEnableButton();
+            if (_nowStatus) DoEnableButton();
             else DoDisableButton();
         }
 
         [Button]
         public void ToggleButton()
         {
-            nowStatus = !nowStatus;
+            _nowStatus = !_nowStatus;
             SetButtonByStatus();
         }
 
         public void DoEnableButton()
         {
-            nowStatus = true;
-            _btn.interactable = true;
+            _nowStatus = true;
+            if (_setButtonInteractable) _btn.interactable = true;
             _statusImg.color = _statusData.EnableColor;
             _statusImg.sprite = _statusData.EnableImg;
         }
 
         public void DoDisableButton()
         {
-            nowStatus = false;
-            _btn.interactable = false;
+            _nowStatus = false;
+            if (_setButtonInteractable) _btn.interactable = false;
             _statusImg.color = _statusData.DisableColor;
             _statusImg.sprite = _statusData.DisableImg;
         }
