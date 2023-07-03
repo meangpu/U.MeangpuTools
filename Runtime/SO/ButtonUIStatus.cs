@@ -12,14 +12,11 @@ namespace Meangpu.Util
         [SerializeField] bool _nowStatus = true;
         [SerializeField] bool _setButtonInteractable = false;
 
-        private void Start()
-        {
-            SetButtonByStatus();
-        }
+        private void Start() => SetButtonByStatus(_nowStatus);
 
-        private void SetButtonByStatus()
+        public void SetButtonByStatus(bool newStatus)
         {
-            if (_nowStatus) DoEnableButton();
+            if (newStatus) DoEnableButton();
             else DoDisableButton();
         }
 
@@ -27,7 +24,7 @@ namespace Meangpu.Util
         public void ToggleButton()
         {
             _nowStatus = !_nowStatus;
-            SetButtonByStatus();
+            SetButtonByStatus(_nowStatus);
         }
 
         public void DoEnableButton()
