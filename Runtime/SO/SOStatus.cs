@@ -5,10 +5,10 @@ namespace Meangpu
     [CreateAssetMenu(fileName = "SOStatus", menuName = "Meangpu/SOStatus")]
     public class SOStatus : ScriptableObject
     {
-        public Color _enableColor;
-        public Color _disableColor;
+        public Color EnableColor;
+        public Color DisableColor;
 
-        public Sprite _enableImg;
-        public Sprite _disableImg;
+        public Sprite EnableImg;
+        public Sprite DisableImg;
     }
 }
