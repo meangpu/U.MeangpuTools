@@ -9,10 +9,10 @@ namespace Meangpu.Util
         [SerializeField] bool _sliderIsHorizontal;
         Vector3 _startPos;
 
-        void Awake() => _startPos = transform.position;
+        void Awake() => _startPos = transform.localPosition;
 
-        float GetOffsetY() => -(_startPos.y - transform.position.y);
-        float GetOffsetX() => -(_startPos.x - transform.position.x);
+        float GetOffsetY() => -(_startPos.y - transform.localPosition.y);
+        float GetOffsetX() => -(_startPos.x - transform.localPosition.x);
 
         void Update() => UpdatePinPosToSetTargetObjectHeight();
 
@@ -20,11 +20,11 @@ namespace Meangpu.Util
         {
             if (_sliderIsHorizontal)
             {
-                _targetTransform.position = new Vector3(_targetTransform.position.x, GetOffsetX(), _targetTransform.position.z);
+                _targetTransform.localPosition = new Vector3(_targetTransform.localPosition.x, GetOffsetX(), _targetTransform.localPosition.z);
             }
             else
             {
-                _targetTransform.position = new Vector3(_targetTransform.position.x, GetOffsetY(), _targetTransform.position.z);
+                _targetTransform.localPosition = new Vector3(_targetTransform.localPosition.x, GetOffsetY(), _targetTransform.localPosition.z);
             }
         }
     }
