@@ -7,7 +7,7 @@ namespace Meangpu.Util
         [SerializeField] Transform _targetTransform;
         // horizontal mean it vertical bar but it slider left right that set object height
         [SerializeField] bool _sliderIsHorizontal;
-        [SerializeField] float _moveMultiplier;
+        [SerializeField] float _moveMultiplier = 1;
         Vector3 _startPos;
 
         void Awake() => _startPos = transform.localPosition;
