@@ -21,11 +21,11 @@ namespace Meangpu.Util
         {
             if (_sliderIsHorizontal)
             {
-                _targetTransform.localPosition = new Vector3(_targetTransform.localPosition.x, GetOffsetX() * _moveMultiplier, _targetTransform.localPosition.z);
+                _targetTransform.position = new Vector3(_targetTransform.position.x, GetOffsetX() * _moveMultiplier, _targetTransform.position.z);
             }
             else
             {
-                _targetTransform.localPosition = new Vector3(_targetTransform.localPosition.x, GetOffsetY() * _moveMultiplier, _targetTransform.localPosition.z);
+                _targetTransform.position = new Vector3(_targetTransform.position.x, GetOffsetY() * _moveMultiplier, _targetTransform.position.z);
             }
         }
     }
