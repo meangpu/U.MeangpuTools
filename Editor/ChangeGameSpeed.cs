@@ -8,10 +8,10 @@ namespace Meangpu
         public float GameSpeed;
         public int GameFramerate = 1;
 
-        [MenuItem("MeangpuTools/GameSpeed")]
+        [MenuItem("MeangpuTools/GameSpeed-Framerate")]
         public static void ShowWindow()
         {
-            GetWindow<ChangeGameSpeed>("Set Game Speed");
+            GetWindow<ChangeGameSpeed>("Set GameSpeed-Framerate");
         }
 
         private void OnGUI()
