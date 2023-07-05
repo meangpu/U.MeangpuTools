@@ -7,15 +7,19 @@ namespace Meangpu.Datatype
     public class StringBoolDrawerTextArea : PropertyDrawer
     {
         float textHeight;
+        GUIStyle TextAreaStyle = new(EditorStyles.textArea);
+
+        SerializedProperty stringValueProperty;
+        SerializedProperty boolValue;
+
+        GUIContent textAreaContent;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
 
-            GUIStyle TextAreaStyle = new(EditorStyles.textArea);
-
-            SerializedProperty boolValue = property.FindPropertyRelative("boolValue");
-            SerializedProperty stringValue = property.FindPropertyRelative("stringValue");
+            stringValueProperty = property.FindPropertyRelative("stringValue");
+            boolValue = property.FindPropertyRelative("boolValue");
 
             const int column = 20;
             const int boolTickSpaceRation = 1;
@@ -28,15 +32,18 @@ namespace Meangpu.Datatype
             Rect pos1 = new(position.x, position.y, (widthSize * widthRatio) - offsetSize, position.height);
             Rect pos2 = new(position.x + (widthSize * widthRatio), position.y, widthSize - offsetSize, position.height);
 
-            stringValue.stringValue = EditorGUI.TextArea(pos1, stringValue.stringValue, TextAreaStyle);
+            stringValueProperty.stringValue = EditorGUI.TextArea(pos1, stringValueProperty.stringValue, TextAreaStyle);
             EditorGUI.PropertyField(pos2, boolValue, GUIContent.none);
-
-            GUIContent guiContent = new(stringValue.stringValue);
-            textHeight = TextAreaStyle.CalcHeight(guiContent, EditorGUIUtility.currentViewWidth);
 
             EditorGUI.EndProperty();
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => textHeight;
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            stringValueProperty = property.FindPropertyRelative("stringValue");
+            textAreaContent = new(stringValueProperty.stringValue);
+            textHeight = TextAreaStyle.CalcHeight(textAreaContent, EditorGUIUtility.currentViewWidth);
+            return textHeight;
+        }
     }
 }
