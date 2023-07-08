@@ -10,5 +10,8 @@ namespace Meangpu
 
         public Sprite EnableImg;
         public Sprite DisableImg;
+
+        public string EnableText;
+        public string DisableText;
     }
 }
