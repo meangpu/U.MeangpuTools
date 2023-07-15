@@ -9,6 +9,6 @@ namespace Meangpu.Util
         [SerializeField] float _speed;
 
         void RotateAroundObject() => transform.RotateAround(_objectToRotateAround.position, _rotSpeed, _speed * Time.deltaTime);
-        private void Update() => RotateAroundObject();
+        private void FIxedUpdate() => RotateAroundObject();
     }
 }
