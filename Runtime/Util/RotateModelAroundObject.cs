@@ -8,7 +8,7 @@ namespace Meangpu.Util
         [SerializeField] Vector3 _rotSpeed = new(0, 1, 0);
         [SerializeField] float _speed;
 
-        void RotateAroundObject() => transform.RotateAround(_objectToRotateAround.position, _rotSpeed, _speed * Time.deltaTime);
-        private void FIxedUpdate() => RotateAroundObject();
+        void RotateAroundObject() => transform.RotateAround(_objectToRotateAround.position, _rotSpeed, _speed * Time.fixedDeltaTime);
+        private void FixedUpdate() => RotateAroundObject();
     }
 }

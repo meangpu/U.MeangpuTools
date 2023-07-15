@@ -12,6 +12,6 @@ namespace Meangpu.Util
 
         private void Start() => _nowRotSpeed = _rotSpeed;
 
-        void FixedUpdate() => transform.Rotate(_nowRotSpeed * Time.deltaTime);
+        void FixedUpdate() => transform.Rotate(_nowRotSpeed * Time.fixedDeltaTime);
     }
 }
