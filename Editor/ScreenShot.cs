@@ -2,29 +2,30 @@
 using UnityEditor;
 using UnityEngine;
 
-public class Screenshot
+namespace Meangpu
 {
-    [MenuItem("Screenshot/Grab")]
-    public static void Grab()
+    public static class Screenshot
     {
-        // if not Assets/ it will save at project root
-        string imageName = $"Assets/Screenshot{GetCh()}{GetCh()}{GetCh()}_{Screen.width}x{Screen.height}.png";
+        [MenuItem("Screenshot/Grab")]
+        public static void Grab()
+        {
+            // if not Assets/ it will save at project root
+            string imageName = $"Assets/Screenshot{GetCh()}{GetCh()}{GetCh()}_{Screen.width}x{Screen.height}.png";
 
-        ScreenCapture.CaptureScreenshot(imageName, 1);
+            ScreenCapture.CaptureScreenshot(imageName, 1);
 
-        Debug.Log($"<color=#4ec9b0>{imageName} was create!</color>");
-        SelectObjectOnEditor(imageName);
+            Debug.Log($"<color=#4ec9b0>{imageName} was create!</color>");
+            SelectObjectOnEditor(imageName);
+        }
 
+        private static void SelectObjectOnEditor(string imageName)
+        {
+            AssetDatabase.Refresh();
+            Selection.activeObject = AssetDatabase.LoadAssetAtPath(imageName, typeof(Object));
+        }
+
+        public static char GetCh() => (char)Random.Range('A', 'Z');
     }
-
-    private static void SelectObjectOnEditor(string imageName)
-    {
-        AssetDatabase.Refresh();
-        Object obj = AssetDatabase.LoadAssetAtPath(imageName, typeof(Object));
-        Selection.activeObject = obj;
-    }
-
-    public static char GetCh() => (char)UnityEngine.Random.Range('A', 'Z');
 }
 
 #endif

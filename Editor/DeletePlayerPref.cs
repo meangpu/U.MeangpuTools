@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEditor;
 
-public class DeletePlayerPref : EditorWindow
+namespace Meangpu
 {
-    [MenuItem("MeangpuTools/Delete PlayerPrefs (All)")]
-    static void DeleteAllPlayerPrefs()
+    public class DeletePlayerPref : EditorWindow
     {
-        PlayerPrefs.DeleteAll();
+        [MenuItem("MeangpuTools/Delete PlayerPrefs (All)")]
+        static void DeleteAllPlayerPrefs()
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 }

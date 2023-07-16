@@ -2,22 +2,25 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 
-public class OpenFolderTool
+namespace Meangpu
 {
-    [OnOpenAsset]
-    public static bool OnOpenAsset(int instanceId)
+    public static class OpenFolderTool
     {
-        Event e = Event.current;
-
-        if (e?.shift != true)
-            return false;
-
-        Object obj = EditorUtility.InstanceIDToObject(instanceId);
-        string path = AssetDatabase.GetAssetPath(obj);
-        if (AssetDatabase.IsValidFolder(path))
+        [OnOpenAsset]
+        public static bool OnOpenAsset(int instanceId)
         {
-            EditorUtility.RevealInFinder(path);
+            Event e = Event.current;
+
+            if (e?.shift != true)
+                return false;
+
+            Object obj = EditorUtility.InstanceIDToObject(instanceId);
+            string path = AssetDatabase.GetAssetPath(obj);
+            if (AssetDatabase.IsValidFolder(path))
+            {
+                EditorUtility.RevealInFinder(path);
+            }
+            return true;
         }
-        return true;
     }
 }
