@@ -76,6 +76,13 @@
       "description": "audio visualizer",
       "url": "https://github.com/meangpu/U.AudioVisualizer.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.quest",
+      "version": "0.0.1",
+      "description": "meangpu quest system",
+      "url": "https://github.com/meangpu/U.MeQuest.git",
+      "isSelectAtStart": false
     }
   ]
 }
