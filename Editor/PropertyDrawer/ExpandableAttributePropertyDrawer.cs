@@ -19,7 +19,7 @@ namespace Meangpu
                 if (!m_editor) Editor.CreateCachedEditor(property.objectReferenceValue, null, ref m_editor);
                 m_editor.OnInspectorGUI();
                 EditorGUILayout.EndVertical();
-                DrawOutlineBox(rect, Color.cyan, 1);
+                DrawOutlineBox(rect, Color.gray, 1);
                 EditorGUI.indentLevel--;
             }
         }
