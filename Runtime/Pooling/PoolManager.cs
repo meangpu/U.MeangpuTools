@@ -17,6 +17,7 @@ namespace Meangpu.Pool
 
         private void Awake() => SetupHolderObject();
 
+        // beware of pool type
         private void SetupHolderObject()
         {
             _poolObjectHolder = new GameObject("==============PoolObjects==============");
@@ -28,7 +29,7 @@ namespace Meangpu.Pool
             _gameObjectHolder.transform.SetParent(_poolObjectHolder.transform);
         }
 
-        public static GameObject SpawnObject(GameObject objToSpawn, Vector3 pos, Quaternion rot, PoolType poolType = PoolType.GAMEOBJECT)
+        public static GameObject SpawnObject(GameObject objToSpawn, Vector3 pos, Quaternion rot, PoolType poolType = PoolType.NONE)
         {
             PoolObjectInfo pool = ObjPools.Find(p => p.Id == objToSpawn.name);
             if (pool == null)
@@ -73,7 +74,6 @@ namespace Meangpu.Pool
             }
             else
             {
-                spawnObj.transform.SetParent(parent);
                 pool.InactiveObj.Remove(spawnObj);
                 spawnObj.SetActive(true);
             }
