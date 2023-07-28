@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Meangpu.Pool
 {
+    // note that it is static mode, so there can be error that pool not used when use FAST PLAY MODE 
     public class PoolManager : MonoBehaviour
     {
         public static List<PoolObjectInfo> ObjPools = new();
@@ -17,7 +18,6 @@ namespace Meangpu.Pool
 
         private void Awake() => SetupHolderObject();
 
-        // beware of pool type
         private void SetupHolderObject()
         {
             _poolObjectHolder = new GameObject("==============PoolObjects==============");
