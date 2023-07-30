@@ -16,7 +16,7 @@ namespace Meangpu
         {
             Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data");
             Dir("_Project/Art", "Materials", "Model", "Icon");
-            Dir("_Project/Resources", "SOSound");
+            Dir("Resources", "SOSound");
             Refresh();
         }
 
