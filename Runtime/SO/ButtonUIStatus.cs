@@ -11,8 +11,15 @@ namespace Meangpu.Util
         [SerializeField] Image _statusImg;
         [SerializeField] TMP_Text _statusText;
         [SerializeField] SOStatus _statusData;
+
+        [Header("Start Status")]
         [SerializeField] bool _nowStatus = true;
-        [SerializeField] bool _setButtonInteractable = false;
+        [Space]
+        [Header("Set Option")]
+        [SerializeField] bool _doSetButtonInteractable;
+        [SerializeField] bool _doSetImage = true;
+        [SerializeField] bool _doSetText;
+        [SerializeField] bool _doSetAlphaOnly;
 
         private void Start() => SetButtonByStatus(_nowStatus);
 
@@ -32,18 +39,26 @@ namespace Meangpu.Util
         public void DoEnableButton()
         {
             _nowStatus = true;
-            if (_setButtonInteractable) _btn.interactable = true;
-            _statusImg.color = _statusData.EnableColor;
-            _statusImg.sprite = _statusData.EnableImg;
+            if (_doSetButtonInteractable) _btn.interactable = true;
+
+            _statusImg.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.EnableColor;
+
+            if (_doSetImage) _statusImg.sprite = _statusData.EnableImg;
+
+            if (!_doSetText) return;
             _statusText?.SetText(_statusData.EnableText);
         }
 
         public void DoDisableButton()
         {
             _nowStatus = false;
-            if (_setButtonInteractable) _btn.interactable = false;
-            _statusImg.color = _statusData.DisableColor;
-            _statusImg.sprite = _statusData.DisableImg;
+            if (_doSetButtonInteractable) _btn.interactable = false;
+
+            _statusImg.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.DisableColor.a) : _statusData.DisableColor;
+
+            if (_doSetImage) _statusImg.sprite = _statusData.DisableImg;
+
+            if (!_doSetText) return;
             _statusText?.SetText(_statusData.DisableText);
         }
     }
