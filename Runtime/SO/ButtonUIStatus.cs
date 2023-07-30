@@ -10,6 +10,7 @@ namespace Meangpu.Util
         [SerializeField] Button _btn;
         [SerializeField] Image _statusImg;
         [SerializeField] TMP_Text _statusText;
+        [Expandable]
         [SerializeField] SOStatus _statusData;
 
         [Header("Start Status")]
