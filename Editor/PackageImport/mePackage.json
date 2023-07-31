@@ -43,17 +43,10 @@
       "isSelectAtStart": false
     },
     {
-      "name": "com.meangpu.camshake",
+      "name": "com.meangpu.cam_addon",
       "version": "0.0.1",
-      "description": "meangpu cam shake",
-      "url": "https://github.com/meangpu/U.MeCamShake.git",
-      "isSelectAtStart": false
-    },
-    {
-      "name": "com.meangpu.camdolly",
-      "version": "0.0.1",
-      "description": "meangpu cam dolly",
-      "url": "https://github.com/meangpu/U.MeCamDolly.git",
+      "description": "meangpu camera with cinemachine addon",
+      "url": "https://github.com/meangpu/U.MeCamCineAddon.git",
       "isSelectAtStart": false
     },
     {
