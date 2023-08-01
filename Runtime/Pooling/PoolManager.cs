@@ -14,8 +14,6 @@ namespace Meangpu.Pool
         private static GameObject _gameObjectHolder;
         private static GameObject _particleHolder;
 
-        public static PoolType PoolType;
-
         private void Awake() => SetupHolderObject();
 
         private void SetupHolderObject()
@@ -29,7 +27,7 @@ namespace Meangpu.Pool
             _gameObjectHolder.transform.SetParent(_poolObjectHolder.transform);
         }
 
-        public static GameObject SpawnObject(GameObject objToSpawn, Vector3 pos, Quaternion rot, PoolType poolType = PoolType.NONE)
+        public static GameObject SpawnObject(GameObject objToSpawn, Vector3 pos, Quaternion rot)
         {
             PoolObjectInfo pool = ObjPools.Find(p => p.Id == objToSpawn.name);
             if (pool == null)
@@ -43,9 +41,6 @@ namespace Meangpu.Pool
             if (spawnObj == null)
             {
                 spawnObj = Instantiate(objToSpawn, pos, rot);
-
-                GameObject parentObj = SetParentObj(poolType);
-                if (parentObj != null) spawnObj.transform.SetParent(parentObj.transform);
             }
             else
             {
@@ -75,6 +70,7 @@ namespace Meangpu.Pool
             else
             {
                 pool.InactiveObj.Remove(spawnObj);
+                spawnObj.transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
                 spawnObj.SetActive(true);
             }
             return spawnObj;
@@ -93,17 +89,6 @@ namespace Meangpu.Pool
                 obj.SetActive(false);
                 pool.InactiveObj.Add(obj);
             }
-        }
-
-        private static GameObject SetParentObj(PoolType type)
-        {
-            return type switch
-            {
-                PoolType.PARTICLE => _particleHolder,
-                PoolType.GAMEOBJECT => _gameObjectHolder,
-                PoolType.NONE => null,
-                _ => null,
-            };
         }
     }
 }
