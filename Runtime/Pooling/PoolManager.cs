@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Meangpu.Pool
 {
@@ -8,28 +9,17 @@ namespace Meangpu.Pool
     public class PoolManager : MonoBehaviour
     {
         public static List<PoolObjectInfo> ObjPools = new();
+        static StringBuilder _stringBuilder = new();
 
-        private GameObject _poolObjectHolder;
-
-        private static GameObject _gameObjectHolder;
-        private static GameObject _particleHolder;
-
-        private void Awake() => SetupHolderObject();
-
-        private void SetupHolderObject()
+        private void Awake()
         {
-            _poolObjectHolder = new GameObject("==============PoolObjects==============");
-
-            _particleHolder = new GameObject("particlePool");
-            _particleHolder.transform.SetParent(_poolObjectHolder.transform);
-
-            _gameObjectHolder = new GameObject("gameobjectPool");
-            _gameObjectHolder.transform.SetParent(_poolObjectHolder.transform);
+            ObjPools.Clear();
+            _stringBuilder.Clear();
         }
 
         public static GameObject SpawnObject(GameObject objToSpawn, Vector3 pos, Quaternion rot)
         {
-            PoolObjectInfo pool = ObjPools.Find(p => p.Id == objToSpawn.name);
+            PoolObjectInfo pool = ObjPools.Find(p => p.Id.Equals(objToSpawn.name));
             if (pool == null)
             {
                 pool = new PoolObjectInfo() { Id = objToSpawn.name };
@@ -54,7 +44,7 @@ namespace Meangpu.Pool
 
         public static GameObject SpawnObject(GameObject objToSpawn, Transform parent)
         {
-            PoolObjectInfo pool = ObjPools.Find(p => p.Id == objToSpawn.name);
+            PoolObjectInfo pool = ObjPools.Find(p => p.Id.Equals(objToSpawn.name));
             if (pool == null)
             {
                 pool = new PoolObjectInfo() { Id = objToSpawn.name };
@@ -70,6 +60,7 @@ namespace Meangpu.Pool
             else
             {
                 pool.InactiveObj.Remove(spawnObj);
+                spawnObj.transform.SetParent(parent);
                 spawnObj.transform.SetPositionAndRotation(parent.transform.position, parent.transform.rotation);
                 spawnObj.SetActive(true);
             }
@@ -78,8 +69,11 @@ namespace Meangpu.Pool
 
         public static void ReturnObjectToPool(GameObject obj)
         {
-            string checkName = obj.name.Replace("(Clone)", string.Empty);
-            PoolObjectInfo pool = ObjPools.Find(p => p.Id == checkName);
+            _stringBuilder.Clear();
+            _stringBuilder.Append(obj.name);
+            _stringBuilder.Replace("(Clone)", string.Empty);
+
+            PoolObjectInfo pool = ObjPools.Find(p => p.Id.Equals(_stringBuilder.ToString()));
             if (pool == null)
             {
                 Debug.LogWarning("try to return object that not in pool yet");
