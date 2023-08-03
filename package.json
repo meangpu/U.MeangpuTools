@@ -27,6 +27,10 @@
       "path": "Samples~/ShaderGraph"
     },
     {
+      "displayName": "ShaderGraphCrossSection",
+      "path": "Samples~/ShaderGraphCrossSection"
+    },
+    {
       "displayName": "LogoSermtat",
       "path": "Samples~/Logo"
     },
