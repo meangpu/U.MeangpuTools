@@ -7,7 +7,7 @@ namespace Meangpu.Brain
     {
         public string TargetTag = "Player";
 
-        public override void Think(Thinker _think)
+        public override void Think(ICanThink _think)
         {
             GameObject target = GameObject.FindGameObjectWithTag(TargetTag);
             if (target)
