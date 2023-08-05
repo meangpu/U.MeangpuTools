@@ -76,6 +76,13 @@
       "description": "meangpu quest system",
       "url": "https://github.com/meangpu/U.MeQuest.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.cross_section",
+      "version": "0.0.1",
+      "description": "meangpu quest system",
+      "url": "https://github.com/meangpu/U.MeCrossSection.git",
+      "isSelectAtStart": false
     }
   ]
 }
