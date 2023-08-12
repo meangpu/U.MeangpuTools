@@ -11,10 +11,7 @@ namespace Meangpu
         public static string FolderPath = "Assets/Libraries";
 
         [MenuItem("MeangpuTools/Setup Preset")]
-        public static void ShowWindow()
-        {
-            GetWindow<SetupDefaultPreset>("Set Default preset");
-        }
+        public static void ShowWindow() => GetWindow<SetupDefaultPreset>("Set Default preset");
 
         private void OnGUI()
         {
@@ -26,7 +23,6 @@ namespace Meangpu
         {
             foreach (string guid in FindAssets("t:preset", new[] { FolderPath }))
             {
-                Debug.Log($"{guid}");
                 string path = GUIDToAssetPath(guid);
                 Preset preset = LoadAssetAtPath<Preset>(path);
 
@@ -36,6 +32,7 @@ namespace Meangpu
                     new DefaultPreset(null, preset)
                 };
                 Preset.SetDefaultPresetsForType(type, list.ToArray());
+                Debug.Log($"set:{type}, with:{guid}");
             }
         }
     }
