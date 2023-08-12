@@ -46,7 +46,7 @@ namespace Meangpu
             string finalDateTime = $"{date} {time}";
             PlayerSettings.bundleVersion = $"0.0-{finalDateTime}";
             Debug.Log(PlayerSettings.bundleVersion);
-            UnityEditor.AssetDatabase.Refresh();
+            AssetDatabase.Refresh();
         }
     }
 }

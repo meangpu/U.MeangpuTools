@@ -7,7 +7,6 @@ using UnityEditor;
 
 public class BatchRename : ScriptableWizard
 {
-
     /// <summary>
     /// Base name
     /// </summary>
@@ -50,20 +49,17 @@ public class BatchRename : ScriptableWizard
     /// </summary>
     void UpdateSelectionHelper()
     {
-
         helpString = "";
 
         if (Selection.objects != null)
             helpString = "Number of objects selected: " + Selection.objects.Length;
     }
 
-
     /// <summary>
     /// Rename
     /// </summary>
     void OnWizardCreate()
     {
-
         // If selection is empty, then exit
         if (Selection.objects == null)
             return;

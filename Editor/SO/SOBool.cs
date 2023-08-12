@@ -14,11 +14,10 @@ public class SOBool : ScriptableObject
     }
 
     public bool BoolState;
-
 }
 
 [CustomEditor(typeof(SOBool))]
-public class SOBoolEditor : UnityEditor.Editor
+public class SOBoolEditor : Editor
 {
     // learn more from here https://docs.unity3d.com/ScriptReference/EditorGUIUtility.SetIconForObject.html
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
@@ -26,7 +25,7 @@ public class SOBoolEditor : UnityEditor.Editor
         SOBool SOBool = (SOBool)target;
         if (SOBool == null || SOBool.PreviewIcon == null) return null;
 
-        Texture2D tex = new Texture2D(width, height);
+        Texture2D tex = new(width, height);
         EditorUtility.CopySerialized(SOBool.PreviewIcon, tex);
         return tex;
     }

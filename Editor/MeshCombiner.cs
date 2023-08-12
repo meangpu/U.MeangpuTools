@@ -22,10 +22,7 @@ namespace Meangpu
             EditorGUILayout.Space();
             EditorGUILayout.Separator();
 
-            if (GUILayout.Button("Combine Mesh"))
-            {
-                CombineMesh();
-            }
+            if (GUILayout.Button("Combine Mesh")) CombineMesh();
         }
 
         void CombineMesh()
@@ -82,13 +79,12 @@ namespace Meangpu
 
         private void SaveMeshAsset(Mesh _finalMesh)
         {
-            string assetPath = $"Assets/{name}-{UnityEditor.GUID.Generate()}.mesh";
+            string assetPath = $"Assets/{name}-{GUID.Generate()}.mesh";
 
-            UnityEditor.AssetDatabase.CreateAsset(_finalMesh, assetPath);
-            UnityEditor.AssetDatabase.SaveAssets();
+            AssetDatabase.CreateAsset(_finalMesh, assetPath);
+            AssetDatabase.SaveAssets();
 
-            Object obj = AssetDatabase.LoadAssetAtPath(assetPath, typeof(Object));
-            Selection.activeObject = obj;
+            Selection.activeObject = AssetDatabase.LoadAssetAtPath(assetPath, typeof(Object));
         }
 
         public static T GetCreateComponent<T>(Transform _transform) where T : Component

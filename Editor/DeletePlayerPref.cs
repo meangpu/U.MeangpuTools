@@ -6,9 +6,6 @@ namespace Meangpu
     public class DeletePlayerPref : EditorWindow
     {
         [MenuItem("MeangpuTools/Delete PlayerPrefs (All)")]
-        static void DeleteAllPlayerPrefs()
-        {
-            PlayerPrefs.DeleteAll();
-        }
+        static void DeleteAllPlayerPrefs() => PlayerPrefs.DeleteAll();
     }
 }
