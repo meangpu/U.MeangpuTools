@@ -9,9 +9,7 @@ using static UnityEngine.Application;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.EditorCoroutines.Editor;
-using UnityEditor.Presets;
 
 namespace Meangpu
 {
@@ -23,30 +21,6 @@ namespace Meangpu
             CreateDefaultFolders();
             CreateEditorConfig();
             SetFastPlayMode();
-            SetDefaultPreset();
-        }
-
-        [MenuItem("MeangpuTools/Setup/Set default Preset")]
-        private static void SetDefaultPreset()
-        {
-            /* 
-            คือถ้าเอาไฟล์ preset ไว้ใน ตำแหน่งนี้ 
-            - Assets/Libraries
-            มันจะ set default ทุกอันให้ตามนี้
-            */
-            foreach (string guid in FindAssets("t:preset", new[] { "Packages/MeangpuTools/Preset" }))
-            {
-                Debug.Log($"{guid}");
-                string path = GUIDToAssetPath(guid);
-                Preset preset = LoadAssetAtPath<Preset>(path);
-
-                PresetType type = preset.GetPresetType();
-                List<DefaultPreset> list = new(Preset.GetDefaultPresetsForType(type))
-                {
-                    new DefaultPreset(null, preset)
-                };
-                Preset.SetDefaultPresetsForType(type, list.ToArray());
-            }
         }
 
         [MenuItem("MeangpuTools/Setup/Fast Play Mode")]
