@@ -1,10 +1,8 @@
 namespace Meangpu
 {
     using SimpleJSON;
-    using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using Unity.EditorCoroutines.Editor;
     using UnityEditor;
@@ -30,25 +28,25 @@ namespace Meangpu
         private const string viewButtonTooltip = "View on GitHub";
         private const string refreshPackageListButton = "Refresh Package List";
         private static bool windowAlreadyOpen;
-        private static List<string> installedPackages = new List<string>();
+        private static List<string> installedPackages = new();
         private static AddRequest addRequest;
         private static ListRequest installedPackagesRequest;
 
         private string manifestFile;
         private JSONNode rootManifest;
         private EditorCoroutine getWebDataRoutine;
-        private Dictionary<string, string> availablePackages = new Dictionary<string, string>();
-        private Dictionary<string, string> packageDescriptions = new Dictionary<string, string>();
-        private Dictionary<string, string> packageUrls = new Dictionary<string, string>();
+        private Dictionary<string, string> availablePackages = new();
+        private Dictionary<string, string> packageDescriptions = new();
+        private Dictionary<string, string> packageUrls = new();
         private Vector2 scrollPosition;
         private string searchString = "";
 
         private const string addSelectedPackagesButton = "Add Selected Packages";
         private static AddAndRemoveRequest addAndRemoveRequest;
-        private Dictionary<string, bool> checkboxes = new Dictionary<string, bool>();
-        private List<string> packagesToAdd = new List<string>();
+        private Dictionary<string, bool> checkboxes = new();
+        private List<string> packagesToAdd = new();
 
-        Dictionary<string, string> _dictCanInstall = new Dictionary<string, string>();
+        Dictionary<string, string> _dictCanInstall = new();
 
         public void OnGUI()
         {
@@ -78,7 +76,7 @@ namespace Meangpu
 
             DrawHorizontalLine();
 
-            using (GUILayout.ScrollViewScope scrollViewScope = new GUILayout.ScrollViewScope(scrollPosition))
+            using (GUILayout.ScrollViewScope scrollViewScope = new(scrollPosition))
             {
                 scrollPosition = scrollViewScope.scrollPosition;
 
@@ -188,10 +186,10 @@ namespace Meangpu
 
         private bool HasSelectedPackages()
         {
-            bool result = false;
+            const bool result = false;
             foreach (KeyValuePair<string, bool> entry in checkboxes)
             {
-                if (entry.Value == true) return true;
+                if (entry.Value) return true;
             }
 
             return result;
@@ -203,7 +201,7 @@ namespace Meangpu
 
             foreach (KeyValuePair<string, bool> entry in checkboxes)
             {
-                if (entry.Value == true && _dictCanInstall.ContainsKey(entry.Key))
+                if (entry.Value && _dictCanInstall.ContainsKey(entry.Key))
                 {
                     packagesToAdd.Add(_dictCanInstall[entry.Key]);
                 }
@@ -218,7 +216,7 @@ namespace Meangpu
 
         private static void HandlePackageAddAndRemoveRequest()
         {
-            if (addAndRemoveRequest != null && addAndRemoveRequest.IsCompleted)
+            if (addAndRemoveRequest?.IsCompleted == true)
             {
                 if (addAndRemoveRequest.Status == StatusCode.Success) GetInstalledPackages();
                 else Debug.LogError("Failure to add package: " + addAndRemoveRequest.Error.message);
@@ -291,7 +289,6 @@ namespace Meangpu
             }
         }
 
-
         private static void GetInstalledPackages()
         {
             installedPackagesRequest = Client.List(false, true);
@@ -321,7 +318,7 @@ namespace Meangpu
 
         private static void HandlePackageAddRequest()
         {
-            if (addRequest != null && addRequest.IsCompleted)
+            if (addRequest?.IsCompleted == true)
             {
                 if (addRequest.Status == StatusCode.Success)
                 {
