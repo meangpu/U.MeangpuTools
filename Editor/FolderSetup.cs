@@ -36,7 +36,7 @@ namespace Meangpu
         {
             string projectFolderPath = GetDirectoryName(dataPath);
             string editorConfigPath = projectFolderPath + "\\.editorconfig";
-            const string EditorConfigLink = "https://raw.githubusercontent.com/meangpu/U.meangpuToolsHub/main/U.meangpuToolsHub/.editorconfig?token=GHSAT0AAAAAACDI2LDS5TYZZOG7FFYRAQRQZGXI2OA";
+            const string EditorConfigLink = "https://gist.githubusercontent.com/meangpu/ba88b1d2f35d611cbfac91c659211ac3/raw/87539aef5a0e64455e50d7b341a2a7e19b9b1437/.editorconfig";
 
             if (!File.Exists(editorConfigPath))
             {
