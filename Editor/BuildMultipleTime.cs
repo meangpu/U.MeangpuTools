@@ -1,9 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections;
-using UnityEngine.SceneManagement;
-using System.Linq;
 
 namespace Meangpu
 {
@@ -11,10 +7,9 @@ namespace Meangpu
     {
         public int levelNow;
         public static string FolderPath = "D:\\Github\\SPOLS_Web\\level";
-
         // public int[] buildList = { 4, 5, 6, 7, 8 };
 
-        [MenuItem("Meangpu/BuildMultipleTime")]
+        [MenuItem("MeangpuTools/BuildMultipleTime")]
         public static void ShowWindow() => GetWindow<BuildMultipleTime>("BuildSetting");
 
         private void OnGUI()
