@@ -33,7 +33,7 @@ namespace Meangpu
             - Assets/Libraries
             มันจะ set default ทุกอันให้ตามนี้
             */
-            foreach (string guid in FindAssets("t:preset", new[] { "Packages/U.MeangpuTools/Preset" }))
+            foreach (string guid in FindAssets("t:preset", new[] { "Packages/MeangpuTools/Preset" }))
             {
                 string path = GUIDToAssetPath(guid);
                 Preset preset = LoadAssetAtPath<Preset>(path);
