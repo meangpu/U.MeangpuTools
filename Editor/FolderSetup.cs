@@ -51,6 +51,12 @@ namespace Meangpu
             }
         }
 
+        [MenuItem("MeangpuTools/Setup/Edit Editor Config")]
+        public static void EditEditorConfig()
+        {
+            OpenURL("https://gist.github.com/meangpu/ba88b1d2f35d611cbfac91c659211ac3/");
+        }
+
         public static IEnumerator GetText(string url, string path)
         {
             UnityWebRequest www = UnityWebRequest.Get(url);
