@@ -1,16 +1,27 @@
+using UnityEditor;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.IO;
 using static System.IO.Directory;
 using static System.IO.Path;
-using UnityEditor;
 using static UnityEditor.AssetDatabase;
 using static UnityEngine.Application;
+using UnityEngine;
+using UnityEngine.Networking;
+using System.Collections;
+using Unity.EditorCoroutines.Editor;
 
 namespace Meangpu
 {
     public static class FolderSetup
     {
+        [MenuItem("MeangpuTools/DO_SETUP")]
+        public static void MainInitLoop()
+        {
+            CreateDefaultFolders();
+            CreateEditorConfig();
+        }
+
         [MenuItem("MeangpuTools/Setup/Create Default Folder")]
         public static void CreateDefaultFolders()
         {
@@ -18,6 +29,38 @@ namespace Meangpu
             Dir("_Project/Art", "Materials", "Model", "Icon");
             Dir("Resources", "SOSound", "GameState");
             Refresh();
+        }
+
+        [MenuItem("MeangpuTools/Setup/AddEditorConfig")]
+        public static void CreateEditorConfig()
+        {
+            string projectFolderPath = GetDirectoryName(dataPath);
+            string editorConfigPath = projectFolderPath + "\\.editorconfig";
+            const string EditorConfigLink = "https://raw.githubusercontent.com/meangpu/U.meangpuToolsHub/main/U.meangpuToolsHub/.editorconfig?token=GHSAT0AAAAAACDI2LDS5TYZZOG7FFYRAQRQZGXI2OA";
+
+            if (!File.Exists(editorConfigPath))
+            {
+                EditorCoroutineUtility.StartCoroutineOwnerless(GetText(EditorConfigLink, editorConfigPath));
+            }
+        }
+
+        public static IEnumerator GetText(string url, string path)
+        {
+            UnityWebRequest www = UnityWebRequest.Get(url);
+            Debug.Log(www.downloadHandler.text);
+
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log($"<color=red>{www.error}</color>");
+            }
+            else
+            {
+                string fileContent = www.downloadHandler.text;
+                File.WriteAllText(path, fileContent);
+                Debug.Log($"write{fileContent} to {path}");
+            }
         }
 
         public static void Dir(string root, params string[] dir)
@@ -62,7 +105,7 @@ namespace Meangpu
 
         static void ReplacePackageFile(string contents)
         {
-            var existing = Path.Combine(dataPath, "../Packages/manifest.json");
+            var existing = Combine(dataPath, "../Packages/manifest.json");
             File.WriteAllText(existing, contents);
             UnityEditor.PackageManager.Client.Resolve();
         }
