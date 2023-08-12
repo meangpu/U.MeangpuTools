@@ -23,6 +23,7 @@ namespace Meangpu
             CreateDefaultFolders();
             CreateEditorConfig();
             SetFastPlayMode();
+            SetDefaultPreset();
         }
 
         [MenuItem("MeangpuTools/Setup/Set default Preset")]
@@ -35,6 +36,7 @@ namespace Meangpu
             */
             foreach (string guid in FindAssets("t:preset", new[] { "Packages/MeangpuTools/Preset" }))
             {
+                Debug.Log($"{guid}");
                 string path = GUIDToAssetPath(guid);
                 Preset preset = LoadAssetAtPath<Preset>(path);
 
