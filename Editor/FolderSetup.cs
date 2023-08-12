@@ -15,7 +15,7 @@ namespace Meangpu
 {
     public static class FolderSetup
     {
-        [MenuItem("MeangpuTools/DO_SETUP")]
+        [MenuItem("MeangpuTools/__DO_SETUP")]
         public static void MainInitLoop()
         {
             CreateDefaultFolders();
@@ -31,7 +31,7 @@ namespace Meangpu
             Refresh();
         }
 
-        [MenuItem("MeangpuTools/Setup/AddEditorConfig")]
+        [MenuItem("MeangpuTools/Setup/Create Editor Config")]
         public static void CreateEditorConfig()
         {
             string projectFolderPath = GetDirectoryName(dataPath);
