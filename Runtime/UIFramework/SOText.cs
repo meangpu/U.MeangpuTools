@@ -10,5 +10,6 @@ namespace Meangpu.UI
         public SOTheme Theme;
         public TMP_FontAsset Font;
         public float Size;
+        public Vector4 Padding;
     }
 }

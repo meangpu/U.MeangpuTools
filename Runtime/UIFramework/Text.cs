@@ -10,6 +10,7 @@ namespace Meangpu.UI
         [Expandable]
         [SerializeField] SOText _textData;
         [SerializeField] Style _textStyle;
+
         private TextMeshProUGUI _textMeshProUGUI;
 
         private void Awake() => Init();
@@ -31,6 +32,8 @@ namespace Meangpu.UI
             _textMeshProUGUI.color = _textData.Theme.GetTextColor(_textStyle);
             _textMeshProUGUI.font = _textData.Font;
             _textMeshProUGUI.fontSize = _textData.Size;
+            _textMeshProUGUI.margin = _textData.Padding;
         }
+        private void OnValidate() => Init();
     }
 }
