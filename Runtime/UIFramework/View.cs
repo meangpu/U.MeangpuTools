@@ -1,3 +1,4 @@
+using EasyButtons;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace Meangpu.UI
 
         private void Awake() => Init();
 
+        [Button]
         private void Init()
         {
             Setup();
@@ -39,6 +41,5 @@ namespace Meangpu.UI
             _imageMid.color = _data.Theme.SecondaryBG;
             _imageBot.color = _data.Theme.TertiaryBG;
         }
-        private void OnValidate() => Init();
     }
 }

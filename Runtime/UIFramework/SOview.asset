@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8589af2de3755534b9a45b6c18e690c4, type: 3}
   m_Name: SOview
   m_EditorClassIdentifier: 
+  Theme: {fileID: 11400000, guid: 0a278e107415e134094bef99de970e81, type: 2}
   Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  Spacing: 0
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
+  Spacing: 5

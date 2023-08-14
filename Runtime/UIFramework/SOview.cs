@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Meangpu.UI
 {
-    [CreateAssetMenu(fileName = "SOview", menuName = "Meangpu/SO_UIView")]
+    [CreateAssetMenu(fileName = "SOview", menuName = "Meangpu/UI/View")]
     public class SOview : ScriptableObject
     {
         [Expandable]
