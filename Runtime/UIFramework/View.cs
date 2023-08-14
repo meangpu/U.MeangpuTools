@@ -1,10 +1,9 @@
-using EasyButtons;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Meangpu.UI
 {
-    public class View : MonoBehaviour
+    public class View : CustomUIComponent
     {
         [Expandable]
         [SerializeField] SOview _data;
@@ -16,16 +15,7 @@ namespace Meangpu.UI
         Image _imageBot;
         VerticalLayoutGroup _verticalLayoutGroup;
 
-        private void Awake() => Init();
-
-        [Button]
-        private void Init()
-        {
-            Setup();
-            Configure();
-        }
-
-        private void Setup()
+        public override void Setup()
         {
             _verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
             _imageTop = _containerTop.GetComponent<Image>();
@@ -33,7 +23,7 @@ namespace Meangpu.UI
             _imageBot = _containerBot.GetComponent<Image>();
         }
 
-        private void Configure()
+        public override void Configure()
         {
             _verticalLayoutGroup.padding = _data.Padding;
             _verticalLayoutGroup.spacing = _data.Spacing;
@@ -41,7 +31,5 @@ namespace Meangpu.UI
             _imageMid.color = _data.Theme.SecondaryBG;
             _imageBot.color = _data.Theme.TertiaryBG;
         }
-
-        private void OnValidate() => Init();
     }
 }
