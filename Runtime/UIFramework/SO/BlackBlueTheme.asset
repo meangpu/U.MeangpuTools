@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b90e821f4db850742b6a21d7ce223fa1, type: 3}
-  m_Name: SOTheme
+  m_Name: BlackBlueTheme
   m_EditorClassIdentifier: 
   PrimaryBG: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
   PrimaryText: {r: 0.9254902, g: 0.9411765, b: 0.94509804, a: 1}

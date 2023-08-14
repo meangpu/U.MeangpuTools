@@ -8,7 +8,7 @@ namespace Meangpu.UI
         private void Awake() => Init();
 
         [Button]
-        private void Init()
+        public void Init()
         {
             Setup();
             Configure();
