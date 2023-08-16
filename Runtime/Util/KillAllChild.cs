@@ -1,4 +1,5 @@
 using UnityEngine;
+using Meangpu.Pool;
 
 namespace Meangpu.Util
 {
@@ -8,6 +9,11 @@ namespace Meangpu.Util
         {
             for (int i = parentTransform.childCount; i > 0; --i)
                 DestroyImmediate(parentTransform.GetChild(0).gameObject);
+        }
+
+        public static void KillAllChildPool(Transform parentTransform)
+        {
+            foreach (Transform child in parentTransform) PoolManager.ReturnObjectToPool(child.gameObject);
         }
 
         public static void KillAllChildInTransformDestroyNormal(Transform parentTransform)
