@@ -83,6 +83,13 @@
       "description": "meangpu quest system",
       "url": "https://github.com/meangpu/U.MeCrossSection.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.gacha",
+      "version": "0.0.1",
+      "description": "meangpu gacha system, require main meangpu tool package",
+      "url": "https://github.com/meangpu/U.MeGacha.git",
+      "isSelectAtStart": false
     }
   ]
 }
