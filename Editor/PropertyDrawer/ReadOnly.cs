@@ -15,6 +15,4 @@ namespace Meangpu
             GUI.enabled = true;
         }
     }
-
-    public class ReadOnlyAttribute : PropertyAttribute { }
 }
