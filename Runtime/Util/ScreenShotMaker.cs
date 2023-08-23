@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EasyButtons;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Meangpu.Util
         [SerializeField] string _prefix = "img";
         [SerializeField] bool _useIncreaseNum = true;
         [SerializeField] int _nowNumCount;
+        [SerializeField] List<GameObject> _objectList;
+        [SerializeField] Transform _spawnPos;
         // learn from: [Creating An Inventory System in Unity - YouTube](https://www.youtube.com/watch?v=SGz3sbZkfkg&t=396s)
 
         [Button]
@@ -24,6 +27,18 @@ namespace Meangpu.Util
             else
             {
                 TakeScreenShotWithPath(_folderPath + _prefix + ".png");
+            }
+        }
+
+        [Button]
+        void TakeImgByObjectList()
+        {
+            foreach (GameObject gameObject in _objectList)
+            {
+                GameObject nowObj = Instantiate(gameObject, _spawnPos);
+                TakeScreenShotWithPath(_folderPath + gameObject.name + ".png");
+                if (Application.isEditor) DestroyImmediate(nowObj);
+                else Destroy(nowObj);
             }
         }
 
