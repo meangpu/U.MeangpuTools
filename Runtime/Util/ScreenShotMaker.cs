@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using EasyButtons;
 using UnityEngine;
@@ -33,13 +34,19 @@ namespace Meangpu.Util
         [Button]
         void TakeImgByObjectList()
         {
+            StartCoroutine(TakeScreenShotCoroutine());
+        }
+
+        private IEnumerator TakeScreenShotCoroutine()
+        {
             foreach (GameObject gameObject in _objectList)
             {
                 GameObject nowObj = Instantiate(gameObject, _spawnPos);
                 TakeScreenShotWithPath(_folderPath + gameObject.name + ".png");
-                if (Application.isEditor) DestroyImmediate(nowObj);
-                else Destroy(nowObj);
+                DestroyImmediate(nowObj);
+                yield return null;
             }
+            yield return null;
         }
 
         [Button]
