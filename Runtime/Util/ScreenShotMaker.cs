@@ -1,5 +1,4 @@
 using EasyButtons;
-using UnityEditor;
 using UnityEngine;
 
 namespace Meangpu.Util
@@ -47,7 +46,7 @@ namespace Meangpu.Util
             byte[] bytes = screenShot.EncodeToPNG();
             System.IO.File.WriteAllBytes(fullPath, bytes);
 #if UNITY_EDITOR
-            AssetDatabase.Refresh();
+            UnityEditor.AssetDatabase.Refresh();
 #endif
         }
     }
