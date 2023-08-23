@@ -11,9 +11,7 @@ namespace Meangpu
         {
             // if not Assets/ it will save at project root
             string imageName = $"Assets/Screenshot{GetCh()}{GetCh()}{GetCh()}_{Screen.width}x{Screen.height}.png";
-
             ScreenCapture.CaptureScreenshot(imageName, 1);
-
             Debug.Log($"<color=#4ec9b0>{imageName} was create!</color>");
             SelectObjectOnEditor(imageName);
         }
