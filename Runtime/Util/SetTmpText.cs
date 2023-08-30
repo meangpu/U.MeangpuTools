@@ -6,7 +6,6 @@ namespace Meangpu.Util
     public class SetTmpText : MonoBehaviour
     {
         [SerializeField] TMP_Text _targetText;
-
         public void SetText(string word) => _targetText.SetText(word);
     }
 }

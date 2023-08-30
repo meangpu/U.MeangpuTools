@@ -10,9 +10,6 @@ namespace Meangpu.Util
         [SerializeField] RawImage _img;
         [SerializeField] Vector2 _scrollDir;
 
-        private void FixedUpdate()
-        {
-            _img.uvRect = new Rect(_img.uvRect.position + (_scrollDir * Time.fixedDeltaTime), _img.uvRect.size);
-        }
+        private void FixedUpdate() => _img.uvRect = new Rect(_img.uvRect.position + (_scrollDir * Time.fixedDeltaTime), _img.uvRect.size);
     }
 }
