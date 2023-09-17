@@ -8,6 +8,10 @@ namespace Meangpu.Util
         [SerializeField] protected Animator _animator;
         [SerializeField] protected float _crossFadeTime = .5f;
 
+        /// <summary>
+        ///suggest to use AnimationClip as var instead of string to prevent human error
+        /// </summary>
+        /// <param name="newState"></param>
         public virtual void ChangeAnimationState(string newState)
         {
             if (_nowState == newState) return;
