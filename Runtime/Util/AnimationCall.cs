@@ -7,6 +7,7 @@ namespace Meangpu.Util
         protected string _nowState;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected float _crossFadeTime = .5f;
+        [SerializeField] protected bool _canRecallCurrentAnimation;
 
         /// <summary>
         ///suggest to use AnimationClip as var instead of string to prevent human error
@@ -14,7 +15,7 @@ namespace Meangpu.Util
         /// <param name="newState"></param>
         public virtual void ChangeAnimationState(string newState)
         {
-            if (_nowState == newState) return;
+            if (!_canRecallCurrentAnimation && _nowState == newState) return;
             _animator.Play(newState);
             _animator.CrossFade(newState, _crossFadeTime);
             _nowState = newState;
