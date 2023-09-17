@@ -7,6 +7,7 @@ namespace Meangpu.Util
         protected string _nowState;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected float _crossFadeTime = .5f;
+        [SerializeField] protected bool _useCrossFade = true;
         [SerializeField] protected bool _canRecallCurrentAnimation;
 
         /// <summary>
@@ -16,8 +17,10 @@ namespace Meangpu.Util
         public virtual void ChangeAnimationState(string newState)
         {
             if (!_canRecallCurrentAnimation && _nowState == newState) return;
-            _animator.Play(newState);
-            _animator.CrossFade(newState, _crossFadeTime);
+
+            if (_useCrossFade) _animator.CrossFadeInFixedTime(newState, _crossFadeTime);
+            else _animator.Play(newState);
+
             _nowState = newState;
         }
     }
