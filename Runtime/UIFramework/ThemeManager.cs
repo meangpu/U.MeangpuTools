@@ -10,5 +10,6 @@ namespace Meangpu.UI
         public static ThemeManager Instance;
         private void Awake() => Instance = this;
         public SOTheme GetMainTheme() => _mainTheme;
+        void OnValidate() => Instance = this;
     }
 }

@@ -22,6 +22,7 @@ namespace Meangpu.UI
         public abstract void Configure();
 
         private void OnValidate() => Init();
+
         protected SOTheme GetMainTheme()
         {
             if (OverwriteTheme != null) return OverwriteTheme;

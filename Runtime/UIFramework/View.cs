@@ -26,7 +26,11 @@ namespace Meangpu.UI
         public override void Configure()
         {
             SOTheme theme = GetMainTheme();
-            if (theme == null) return;
+            if (theme == null)
+            {
+                Debug.Log("Null Theme!");
+                return;
+            }
 
             _verticalLayoutGroup.padding = _data.Padding;
             _verticalLayoutGroup.spacing = _data.Spacing;
