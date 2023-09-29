@@ -14,23 +14,20 @@ namespace Meangpu.UI
         [SerializeField] Style _style;
         [SerializeField] UnityEvent _onClick;
 
-        Button _button;
+        Image _image;
         TextMeshProUGUI _buttonText;
 
         public override void Setup()
         {
-            _button = GetComponentInChildren<Button>();
+            _image = GetComponentInChildren<Image>();
             _buttonText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public override void Configure()
         {
-            ColorBlock cb = _button.colors;
             SOTheme theme = GetMainTheme();
             if (theme == null) return;
-
-            cb.normalColor = theme.GetBGColor(_style);
-            _button.colors = cb;
+            _image.color = theme.GetBGColor(_style);
 
             _buttonText.color = theme.GetTextColor(_style);
             _buttonText.font = _textData.Font;
