@@ -15,7 +15,9 @@ namespace Meangpu.UI
 
         public override void Configure()
         {
-            _textMeshProUGUI.color = _textData.Theme.GetTextColor(_textStyle);
+            SOTheme theme = GetMainTheme();
+            if (theme == null) return;
+            _textMeshProUGUI.color = theme.GetTextColor(_textStyle);
             _textMeshProUGUI.font = _textData.Font;
             _textMeshProUGUI.fontSize = _textData.Size;
             _textMeshProUGUI.margin = _textData.Padding;

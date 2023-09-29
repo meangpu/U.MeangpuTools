@@ -5,6 +5,10 @@ namespace Meangpu.UI
 {
     public abstract class CustomUIComponent : MonoBehaviour
     {
+        [Expandable]
+        [Tooltip("This is optional, if null will use ThemeManager one")]
+        public SOTheme OverwriteTheme;
+
         private void Awake() => Init();
 
         [Button]
@@ -18,5 +22,11 @@ namespace Meangpu.UI
         public abstract void Configure();
 
         private void OnValidate() => Init();
+        protected SOTheme GetMainTheme()
+        {
+            if (OverwriteTheme != null) return OverwriteTheme;
+            else if (ThemeManager.Instance != null) return ThemeManager.Instance.GetMainTheme();
+            return null;
+        }
     }
 }

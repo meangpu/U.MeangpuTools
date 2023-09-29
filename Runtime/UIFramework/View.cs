@@ -25,11 +25,14 @@ namespace Meangpu.UI
 
         public override void Configure()
         {
+            SOTheme theme = GetMainTheme();
+            if (theme == null) return;
+
             _verticalLayoutGroup.padding = _data.Padding;
             _verticalLayoutGroup.spacing = _data.Spacing;
-            _imageTop.color = _data.Theme.PrimaryBG;
-            _imageMid.color = _data.Theme.SecondaryBG;
-            _imageBot.color = _data.Theme.TertiaryBG;
+            _imageTop.color = theme.PrimaryBG;
+            _imageMid.color = theme.SecondaryBG;
+            _imageBot.color = theme.TertiaryBG;
         }
     }
 }

@@ -26,10 +26,13 @@ namespace Meangpu.UI
         public override void Configure()
         {
             ColorBlock cb = _button.colors;
-            cb.normalColor = _textData.Theme.GetBGColor(_style);
+            SOTheme theme = GetMainTheme();
+            if (theme == null) return;
+
+            cb.normalColor = theme.GetBGColor(_style);
             _button.colors = cb;
 
-            _buttonText.color = _textData.Theme.GetTextColor(_style);
+            _buttonText.color = theme.GetTextColor(_style);
             _buttonText.font = _textData.Font;
             _buttonText.fontSize = _textData.Size;
             _buttonText.margin = _textData.Padding;
