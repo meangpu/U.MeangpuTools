@@ -15,25 +15,29 @@ namespace Meangpu
         ExportCurrentScenePackage() : base(ExportNowScene.k_id) { }
         [EditorToolbarElement(k_id, typeof(SceneView))]
 
-        class ExportNowScene : EditorToolbarDropdownToggle, IAccessContainerWindow
+        class ExportNowScene : EditorToolbarDropdownToggle
         {
             public const string k_id = "ExportCurrentScenePackage/ExportToggle";
-            public EditorWindow containerWindow { get; set; }
+            public string ExportFileName = "ExportedScene.unitypackage";
+
             ExportNowScene()
             {
                 text = "ExportPackage";
                 tooltip = "Export current scene";
                 icon = AssetDatabase.LoadAssetAtPath<Texture2D>(k_icon);
-                dropdownClicked += ShowSceneMenu;
+                dropdownClicked += ExportPackage;
             }
 
-            private void ShowSceneMenu()
+            private void ExportPackage()
             {
-                GenericMenu menu = new();
                 string path = SceneManager.GetActiveScene().path;
-                AssetDatabase.ExportPackage(path, "scene.unitypackage",
+                Debug.Log($"<color=#4ec9b0>Exporting :{path}:</color>");
+
+                AssetDatabase.ExportPackage(path, ExportFileName,
                     ExportPackageOptions.Recurse | ExportPackageOptions.IncludeDependencies);
-                menu.ShowAsContext();
+                EditorUtility.RevealInFinder(ExportFileName);
+
+                Debug.Log($"<color=#4ec9b0>Finish export file at {ExportFileName}</color>");
             }
         }
     }
