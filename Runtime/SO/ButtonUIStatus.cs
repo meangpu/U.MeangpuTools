@@ -9,6 +9,7 @@ namespace Meangpu.Util
     {
         [SerializeField] Button _btn;
         [SerializeField] Image _statusImg;
+        [SerializeField] Image _statusImgColorTarget;
         [SerializeField] TMP_Text _statusText;
         [Expandable]
         [SerializeField] SOStatus _statusData;
@@ -26,6 +27,8 @@ namespace Meangpu.Util
 
         public void SetButtonByStatus(bool newStatus)
         {
+            if (_statusImgColorTarget == null) _statusImgColorTarget = _statusImg;
+
             if (newStatus) DoEnableButton();
             else DoDisableButton();
         }
@@ -42,7 +45,7 @@ namespace Meangpu.Util
             _nowStatus = true;
             if (_doSetButtonInteractable) _btn.interactable = true;
 
-            _statusImg.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.EnableColor;
+            _statusImgColorTarget.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.EnableColor;
 
             if (_doSetImage) _statusImg.sprite = _statusData.EnableImg;
 
@@ -55,7 +58,7 @@ namespace Meangpu.Util
             _nowStatus = false;
             if (_doSetButtonInteractable) _btn.interactable = false;
 
-            _statusImg.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.DisableColor.a) : _statusData.DisableColor;
+            _statusImgColorTarget.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.DisableColor;
 
             if (_doSetImage) _statusImg.sprite = _statusData.DisableImg;
 
