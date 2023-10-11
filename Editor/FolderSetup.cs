@@ -32,7 +32,7 @@ namespace Meangpu
         [MenuItem("MeangpuTools/Setup/Create Default Folder")]
         public static void CreateDefaultFolders()
         {
-            Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data", "Screenshot");
+            Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data", "Screenshot", "Editor");
             Dir("_Project/Art", "Materials", "Model", "Icon");
             Dir("Resources", "SOSound", "GameState");
             Refresh();
