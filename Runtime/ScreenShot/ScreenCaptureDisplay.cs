@@ -1,36 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(RawImage))]
-public class ScreenCaptureDisplay : MonoBehaviour
+namespace Meangpu
 {
-    [SerializeField] RawImage _img;
-
-    void OnEnable()
+    [RequireComponent(typeof(RawImage))]
+    public class ScreenCaptureDisplay : MonoBehaviour
     {
-        ScreenCaptureToTextureFile.DoGetTexture += SetPaperTexture;
-    }
+        [SerializeField] RawImage _img;
 
-    void OnDisable()
-    {
-        ScreenCaptureToTextureFile.DoGetTexture -= SetPaperTexture;
-    }
+        void OnEnable()
+        {
+            ScreenCaptureToTextureFile.DoGetTexture += SetPaperTexture;
+        }
 
-    public Sprite ConvertToSprite(Texture2D texture)
-    {
-        return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-    }
+        void OnDisable()
+        {
+            ScreenCaptureToTextureFile.DoGetTexture -= SetPaperTexture;
+        }
 
-    void Start()
-    {
-        if (_img == null) _img = GetComponent<RawImage>();
-        _img.enabled = false;
-    }
+        public Sprite ConvertToSprite(Texture2D texture)
+        {
+            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        }
 
-    void SetPaperTexture(Texture2D _tex)
-    {
-        _img.enabled = true;
-        _img.texture = _tex;
-    }
+        void Start()
+        {
+            if (_img == null) _img = GetComponent<RawImage>();
+            _img.enabled = false;
+        }
 
+        void SetPaperTexture(Texture2D _tex)
+        {
+            _img.enabled = true;
+            _img.texture = _tex;
+        }
+    }
 }
