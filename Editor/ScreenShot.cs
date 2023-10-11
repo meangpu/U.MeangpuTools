@@ -22,7 +22,7 @@ namespace Meangpu
 
         private static IEnumerator SelectObjectOnEditor(string imageName)
         {
-            yield return new EditorWaitForSeconds(1f);
+            yield return new EditorWaitForSeconds(1.2f);
             AssetDatabase.Refresh();
             EditorUtility.FocusProjectWindow();
             currentImage = AssetDatabase.LoadAssetAtPath(imageName, typeof(Object));
