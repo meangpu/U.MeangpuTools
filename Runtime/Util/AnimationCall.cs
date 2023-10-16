@@ -17,11 +17,17 @@ namespace Meangpu.Util
         public virtual void ChangeAnimationState(string newState)
         {
             if (!_canRecallCurrentAnimation && _nowState == newState) return;
-
             if (_useCrossFade) _animator.CrossFadeInFixedTime(newState, _crossFadeTime);
             else _animator.Play(newState);
-
             _nowState = newState;
+        }
+
+        public virtual void ChangeAnimationState(AnimationClip newState)
+        {
+            if (!_canRecallCurrentAnimation && _nowState == newState.name) return;
+            if (_useCrossFade) _animator.CrossFadeInFixedTime(newState.name, _crossFadeTime);
+            else _animator.Play(newState.name);
+            _nowState = newState.name;
         }
     }
 }
