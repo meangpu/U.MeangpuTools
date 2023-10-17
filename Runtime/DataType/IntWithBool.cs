@@ -1,7 +1,7 @@
 namespace Meangpu.Datatype
 {
     [System.Serializable]
-    public class IntWithBool
+    public struct IntWithBool
     {
         public int intValue;
         public bool boolValue;

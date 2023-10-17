@@ -2,7 +2,7 @@ using UnityEngine;
 namespace Meangpu.Datatype
 {
     [System.Serializable]
-    public class StringWithBoolTextArea
+    public struct StringWithBoolTextArea
     {
         [TextArea]
         public string stringValue;
