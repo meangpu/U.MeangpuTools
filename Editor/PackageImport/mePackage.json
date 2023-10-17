@@ -90,6 +90,13 @@
       "description": "meangpu gacha system, require main meangpu tool package",
       "url": "https://github.com/meangpu/U.MeGacha.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.quiz",
+      "version": "0.0.1",
+      "description": "quiz system for mini game",
+      "url": "https://github.com/meangpu/U.MeQuiz.git",
+      "isSelectAtStart": false
     }
   ]
 }
