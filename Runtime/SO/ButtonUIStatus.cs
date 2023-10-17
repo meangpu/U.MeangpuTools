@@ -16,6 +16,7 @@ namespace Meangpu.Util
 
         [Header("Start Status")]
         [SerializeField] bool _nowStatus = true;
+        [SerializeField] bool _doSetVisualOnStart = true;
         [Space]
         [Header("Set Option")]
         [SerializeField] bool _doSetButtonInteractable;
@@ -23,13 +24,17 @@ namespace Meangpu.Util
         [SerializeField] bool _doSetText;
         [SerializeField] bool _doSetAlphaOnly;
 
-        private void Start() => SetButtonByStatus(_nowStatus);
+        private void Start()
+        {
+            if (_doSetVisualOnStart) SetButtonByStatus(_nowStatus);
+            if (_statusImgColorTarget == null) _statusImgColorTarget = _statusImg;
+        }
 
-        public void SetButtonByStatus(bool newStatus)
+        public void SetButtonByStatus(bool isEnable)
         {
             if (_statusImgColorTarget == null) _statusImgColorTarget = _statusImg;
 
-            if (newStatus) DoEnableButton();
+            if (isEnable) DoEnableButton();
             else DoDisableButton();
         }
 
@@ -43,11 +48,14 @@ namespace Meangpu.Util
         public void DoEnableButton()
         {
             _nowStatus = true;
-            if (_doSetButtonInteractable) _btn.interactable = true;
+            if (_doSetButtonInteractable && _btn) _btn.interactable = true;
 
-            _statusImgColorTarget.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.EnableColor;
+            if (_statusImgColorTarget && _statusImg)
+            {
+                _statusImgColorTarget.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.EnableColor;
 
-            if (_doSetImage) _statusImg.sprite = _statusData.EnableImg;
+                if (_doSetImage) _statusImg.sprite = _statusData.EnableImg;
+            }
 
             if (!_doSetText) return;
             _statusText?.SetText(_statusData.EnableText);
@@ -56,11 +64,14 @@ namespace Meangpu.Util
         public void DoDisableButton()
         {
             _nowStatus = false;
-            if (_doSetButtonInteractable) _btn.interactable = false;
+            if (_doSetButtonInteractable && _btn) _btn.interactable = false;
 
-            _statusImgColorTarget.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.DisableColor;
+            if (_statusImgColorTarget && _statusImg)
+            {
+                _statusImgColorTarget.color = _doSetAlphaOnly ? new Color(_statusImg.color.r, _statusImg.color.g, _statusImg.color.b, _statusData.EnableColor.a) : _statusData.DisableColor;
 
-            if (_doSetImage) _statusImg.sprite = _statusData.DisableImg;
+                if (_doSetImage) _statusImg.sprite = _statusData.DisableImg;
+            }
 
             if (!_doSetText) return;
             _statusText?.SetText(_statusData.DisableText);

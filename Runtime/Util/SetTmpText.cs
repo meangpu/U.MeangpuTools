@@ -10,5 +10,6 @@ namespace Meangpu.Util
 
         public void SetText(string word) => _targetText.SetText(word);
         public void SetTextColor(Color newColor) => _targetText.color = newColor;
+        public void SetTextGameObjectActive(bool status) => _targetText.gameObject.SetActive(status);
     }
 }
