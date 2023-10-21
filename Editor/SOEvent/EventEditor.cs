@@ -8,17 +8,20 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(GameEvent), editorForChildClasses: true)]
-public class EventEditor : Editor
+namespace Meangpu.SOEvent
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(GameEvent), editorForChildClasses: true)]
+    public class EventEditor : Editor
     {
-        base.OnInspectorGUI();
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
 
-        GUI.enabled = Application.isPlaying;
+            GUI.enabled = Application.isPlaying;
 
-        GameEvent e = target as GameEvent;
-        if (GUILayout.Button("Raise"))
-            e.Raise();
+            GameEvent e = target as GameEvent;
+            if (GUILayout.Button("Raise"))
+                e.Raise();
+        }
     }
 }
