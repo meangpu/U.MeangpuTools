@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Meangpu.SOEvent
 {
-    public abstract class BaseGameEvent<T> : ScriptableObject
+    public abstract class SOBaseGameEvent<T> : ScriptableObject
     {
         private readonly List<IGameEventListener<T>> _eventListener = new();
 
@@ -18,7 +18,6 @@ namespace Meangpu.SOEvent
         public void RegisterListener(IGameEventListener<T> listener)
         {
             if (!_eventListener.Contains(listener)) _eventListener.Add(listener);
-
         }
 
         public void UnregisterListener(IGameEventListener<T> listener)

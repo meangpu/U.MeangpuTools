@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Meangpu.SOEvent
 {
-    public abstract class BaseGameEventListener<T, E, UER> : MonoBehaviour, IGameEventListener<T> where E : BaseGameEvent<T> where UER : UnityEvent<T>
+    public abstract class BaseGameEventListener<T, E, UER> : MonoBehaviour, IGameEventListener<T> where E : SOBaseGameEvent<T> where UER : UnityEvent<T>
     {
         [SerializeField] E _gameEvent;
         public E GameEvent { get { return _gameEvent; } set { _gameEvent = value; } }
