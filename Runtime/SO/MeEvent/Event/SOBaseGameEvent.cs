@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using EasyButtons;
 using UnityEngine;
 
 namespace Meangpu.SOEvent
@@ -7,6 +8,7 @@ namespace Meangpu.SOEvent
     {
         private readonly List<IGameEventListener<T>> _eventListener = new();
 
+        [Button]
         public void Raise(T data)
         {
             for (int i = _eventListener.Count - 1; i >= 0; i--)

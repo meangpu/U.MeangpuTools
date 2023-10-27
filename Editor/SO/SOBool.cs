@@ -1,32 +1,34 @@
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "New SOBool", menuName = "Meangpu/SOBool")]
-public class SOBool : ScriptableObject
+namespace Meangpu
 {
-    [HideInInspector]
-    public Texture2D _true;
-    [HideInInspector]
-    public Texture2D _false;
-    public Texture2D PreviewIcon
+    [CreateAssetMenu(fileName = "New SOBool", menuName = "Meangpu/SOBool")]
+    public class SOBool : ScriptableObject
     {
-        get => BoolState ? _true : _false;
+        [HideInInspector]
+        public Texture2D _true;
+        [HideInInspector]
+        public Texture2D _false;
+        public Texture2D PreviewIcon
+        {
+            get => BoolState ? _true : _false;
+        }
+
+        public bool BoolState;
     }
-
-    public bool BoolState;
-}
-
-[CustomEditor(typeof(SOBool))]
-public class SOBoolEditor : Editor
-{
-    // learn more from here https://docs.unity3d.com/ScriptReference/EditorGUIUtility.SetIconForObject.html
-    public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
+    [CustomEditor(typeof(SOBool))]
+    public class SOBoolEditor : Editor
     {
-        SOBool SOBool = (SOBool)target;
-        if (SOBool == null || SOBool.PreviewIcon == null) return null;
+        // learn more from here https://docs.unity3d.com/ScriptReference/EditorGUIUtility.SetIconForObject.html
+        public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
+        {
+            SOBool SOBool = (SOBool)target;
+            if (SOBool == null || SOBool.PreviewIcon == null) return null;
 
-        Texture2D tex = new(width, height);
-        EditorUtility.CopySerialized(SOBool.PreviewIcon, tex);
-        return tex;
+            Texture2D tex = new(width, height);
+            EditorUtility.CopySerialized(SOBool.PreviewIcon, tex);
+            return tex;
+        }
     }
 }
