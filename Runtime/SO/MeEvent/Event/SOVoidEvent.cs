@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Meangpu.SOEvent
 {
-    [CreateAssetMenu(fileName = "VoidEvent", menuName = "Meangpu/Event/SOVoidEvent")]
+    [CreateAssetMenu(fileName = "UE_VoidEvent", menuName = "Meangpu/Event/SOVoidEvent")]
     public class SOVoidEvent : SOBaseGameEvent<Void>
     {
         [Button]
