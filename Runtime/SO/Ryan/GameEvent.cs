@@ -10,7 +10,8 @@ using UnityEngine;
 
 namespace Ryan
 {
-    [CreateAssetMenu]
+    // Disable create asset to reduce clutter
+    // [CreateAssetMenu]
     public class GameEvent : ScriptableObject
     {
         /// <summary>
