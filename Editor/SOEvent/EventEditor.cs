@@ -8,7 +8,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Meangpu.SOEvent
+namespace Ryan
 {
     [CustomEditor(typeof(GameEvent), editorForChildClasses: true)]
     public class EventEditor : Editor
