@@ -27,7 +27,7 @@ namespace Meangpu.SOEvent
 #if UNITY_EDITOR
             if (_doLogData)
             {
-                Debug.Log($"SO:{_gameEvent}\ndata:{data}", _gameEvent);
+                Debug.Log($"<color=#4ec9b0>SO:{_gameEvent.name}</color> \n data:{data}", _gameEvent);
             }
 #endif
         }
