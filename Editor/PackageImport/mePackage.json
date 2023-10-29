@@ -98,5 +98,12 @@
       "url": "https://github.com/meangpu/U.MeQuiz.git",
       "isSelectAtStart": false
     }
+    {
+      "name": "com.meangpu.firebase",
+      "version": "0.0.1",
+      "description": "Firebase system",
+      "url": "https://github.com/meangpu/U.MeFirebase.git",
+      "isSelectAtStart": false
+    }
   ]
 }
