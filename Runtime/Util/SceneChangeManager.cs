@@ -39,8 +39,8 @@ namespace Meangpu.Util
             if (_loading) return;
             _loading = true;
             _waitingCount = WhenLoadingScene.GetInvocationList().Length - 1;
-            if (_waitingCount == 0) HandleReadyToLoad(sceneObj.SceneData.name);
-            else WhenLoadingScene.Invoke(sceneObj.SceneData.name);
+            if (_waitingCount == 0) HandleReadyToLoad(sceneObj.SCENE_ID);
+            else WhenLoadingScene.Invoke(sceneObj.SCENE_ID);
         }
 
         public void HandleReadyToLoad(string sceneName)
