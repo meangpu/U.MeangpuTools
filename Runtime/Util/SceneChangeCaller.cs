@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Meangpu.Util
 {
@@ -9,12 +8,12 @@ namespace Meangpu.Util
 
         public void LoadScene()
         {
-            if (SceneChange.instance == null)
+            if (SceneChangeManager.instance == null)
             {
                 Debug.LogError("Fail to find sceneChange instance");
                 return;
             }
-            SceneChange.instance.LoadScene(_sceneToGo);
+            SceneChangeManager.instance.LoadScene(_sceneToGo);
         }
     }
 }

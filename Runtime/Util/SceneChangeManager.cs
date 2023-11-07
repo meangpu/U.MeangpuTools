@@ -5,11 +5,11 @@ using System.Collections;
 
 namespace Meangpu.Util
 {
-    public class SceneChange : MonoBehaviour
+    public class SceneChangeManager : MonoBehaviour
     {
         // put this inside System prefab like audio manager
 
-        public static SceneChange instance;
+        public static SceneChangeManager instance;
 
         private void Awake()
         {
