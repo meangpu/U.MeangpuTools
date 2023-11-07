@@ -7,14 +7,22 @@ namespace Meangpu.Util
 {
     public class SceneChange : MonoBehaviour
     {
+        // put this inside System prefab like audio manager
+
+        public static SceneChange instance;
+
+        private void Awake()
+        {
+            if (instance == null) instance = this;
+            else Destroy(gameObject);
+        }
+
         private bool _loading;
         public Action<string> WhenLoadingScene = delegate { };
         public Action<string> WhenSceneLoaded = delegate { };
         private int _waitingCount;
 
-        public void GoToString(string sceneName) => SceneManager.LoadScene(sceneName);
-        public void GoToIndex(int index) => SceneManager.LoadScene(index);
-        public void RestartThisScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        public void RestartThisScene() => LoadScene(SceneManager.GetActiveScene().name);
         public void QuitGame() => Application.Quit();
 
         public void LoadScene(string sceneName)
@@ -24,6 +32,15 @@ namespace Meangpu.Util
             _waitingCount = WhenLoadingScene.GetInvocationList().Length - 1;
             if (_waitingCount == 0) HandleReadyToLoad(sceneName);
             else WhenLoadingScene.Invoke(sceneName);
+        }
+
+        public void LoadScene(SOScene sceneObj)
+        {
+            if (_loading) return;
+            _loading = true;
+            _waitingCount = WhenLoadingScene.GetInvocationList().Length - 1;
+            if (_waitingCount == 0) HandleReadyToLoad(sceneObj.SceneData.name);
+            else WhenLoadingScene.Invoke(sceneObj.SceneData.name);
         }
 
         public void HandleReadyToLoad(string sceneName)
