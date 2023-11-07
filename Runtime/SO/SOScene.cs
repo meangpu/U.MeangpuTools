@@ -1,3 +1,4 @@
+using EasyButtons;
 using UnityEngine;
 
 namespace Meangpu
@@ -9,10 +10,22 @@ namespace Meangpu
         public UnityEditor.SceneAsset SceneData;
         private void OnValidate()
         {
-            if (SceneData != null)
+            if (SceneData == null) return;
+            SCENE_ID = SceneData.name;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        [Button]
+        void RenameThis()
+        {
+            if (SceneData == null)
             {
-                SCENE_ID = SceneData.name;
+                Debug.LogError("Scene data is null");
+                return;
             }
+            string assetPath = UnityEditor.AssetDatabase.GetAssetPath(this.GetInstanceID());
+            UnityEditor.AssetDatabase.RenameAsset(assetPath, SceneData.name);
+            UnityEditor.AssetDatabase.SaveAssets();
             UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
