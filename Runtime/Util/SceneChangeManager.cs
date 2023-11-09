@@ -19,7 +19,7 @@ namespace Meangpu.Util
 
         private bool _loading;
         public Action<string> WhenLoadingScene = delegate { };
-        public Action<string> WhenSceneLoaded = delegate { };
+        public static Action<string> WhenSceneLoaded;
         private int _waitingCount;
 
         public void RestartThisScene() => LoadScene(SceneManager.GetActiveScene().name);
@@ -53,7 +53,7 @@ namespace Meangpu.Util
         {
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
             while (!asyncLoad.isDone) yield return null;
-            WhenSceneLoaded.Invoke(sceneName);
+            WhenSceneLoaded?.Invoke(sceneName);
             _loading = false;
         }
     }

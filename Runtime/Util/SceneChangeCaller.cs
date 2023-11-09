@@ -1,3 +1,4 @@
+using EasyButtons;
 using UnityEngine;
 
 namespace Meangpu.Util
@@ -6,6 +7,7 @@ namespace Meangpu.Util
     {
         [Expandable][SerializeField] SOScene _sceneToGo;
 
+        [Button]
         public void LoadScene()
         {
             if (SceneChangeManager.instance == null)
