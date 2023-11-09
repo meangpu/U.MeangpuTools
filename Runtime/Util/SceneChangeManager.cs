@@ -54,6 +54,7 @@ namespace Meangpu.Util
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
             while (!asyncLoad.isDone) yield return null;
             WhenSceneLoaded.Invoke(sceneName);
+            _loading = false;
         }
     }
 }
