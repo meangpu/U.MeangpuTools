@@ -34,7 +34,7 @@ namespace Meangpu
         {
             Dir("_Project", "_Scripts", "_Scenes", "Art", "_Prefabs", "Sound", "Data", "Screenshot", "Editor");
             Dir("_Project/Art", "Materials", "Model", "Icon");
-            Dir("Resources", "SOSound", "GameState");
+            Dir("Resources", "SOSound", "SOScene", "GameState");
             Refresh();
         }
 
