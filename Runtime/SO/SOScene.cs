@@ -16,7 +16,7 @@ namespace Meangpu
         }
 
         [Button]
-        void RenameThis()
+        public void RenameThis()
         {
             if (SceneData == null)
             {
