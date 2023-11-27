@@ -2,7 +2,7 @@ using UnityEngine;
 namespace Meangpu.Datatype
 {
     [System.Serializable]
-    public struct GameObjectWithBool
+    public class GameObjectWithBool
     {
         public GameObject gameObjectValue;
         public bool boolValue;
@@ -12,5 +12,7 @@ namespace Meangpu.Datatype
             boolValue = _boolValue;
             gameObjectValue = _gameObjectValue;
         }
+
+        public void SetActiveByState() => gameObjectValue.SetActive(boolValue);
     }
 }
