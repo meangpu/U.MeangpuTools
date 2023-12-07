@@ -30,13 +30,15 @@ namespace Meangpu
         {
             if (EditorUtility.InstanceIDToObject(instanceID) is not GameObject obj) return;
 
+            if (PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj) != null) return; // leave it as blue box if it is prefab
+
             Component[] components = obj.GetComponents<Component>();
             if (components == null || components.Length == 0) return;
 
             Component component = components.Length > 1 ? components[1] : components[0];  // first custom component
             Type type = component.GetType();
 
-            GUIContent content = EditorGUIUtility.ObjectContent(null, type);
+            GUIContent content = EditorGUIUtility.ObjectContent(component, type);
             content.text = null;
             content.tooltip = type.Name;
             if (content.image == null) return;
