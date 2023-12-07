@@ -22,7 +22,7 @@ namespace Meangpu
 
         private static void OnEditorUpdate()
         {
-            if (_hierarchyEditorWIndow == null) _hierarchyEditorWIndow = EditorWindow.GetWindow(Type.GetType("UnityEditor.SceneHierarchyWindow.UnityEditor"));
+            if (_hierarchyEditorWIndow == null) _hierarchyEditorWIndow = EditorWindow.GetWindow(Type.GetType("UnityEditor.SceneHierarchyWindow,UnityEditor"));
             _hierarchyHasFocus = EditorWindow.focusedWindow != null && EditorWindow.focusedWindow == _hierarchyEditorWIndow;
         }
 
