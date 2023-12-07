@@ -8,9 +8,9 @@ namespace Meangpu.Util
     {
         [SerializeField] GameObject _target;
 
-        [Header("duration")]
-        [SerializeField] float _onDuration = .9f;
-        [SerializeField] float _offDuration = .15f;
+        [Header("Duration")]
+        [SerializeField] float _onDuration = 1.2f;
+        [SerializeField] float _offDuration = .25f;
 
         [Header("Start state")]
         [SerializeField] bool _objectActiveState = true;
