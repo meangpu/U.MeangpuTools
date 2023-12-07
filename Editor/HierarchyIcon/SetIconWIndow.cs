@@ -6,6 +6,7 @@ namespace Meangpu
 {
     /// <summary>
     /// learn from this [Embrace Unity's Script Icons - YouTube](https://www.youtube.com/watch?v=SY_SdcPW8vE)
+    /// - need to go to icon then choose Label as "ScriptIcon" then it will show up on select
     /// </summary>
     public class SetIconWIndow : EditorWindow
     {
