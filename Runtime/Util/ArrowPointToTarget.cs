@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Meangpu.Util
 {
-    public class ArrowToTarget : MonoBehaviour
+    public class ArrowPointToTarget : MonoBehaviour
     {
         [SerializeField] Transform _target;
         [SerializeField] float _rotSpeed = 10f;
