@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Meangpu
 {
     /// <summary>
-    /// learn from this awesome guy [Next LEVEL Unity Hierarchy - YouTube](https://www.youtube.com/watch?v=EFh7tniBqkk) 
+    /// learn from this awesome guy [Next LEVEL Unity Hierarchy - YouTube](https://www.youtube.com/watch?v=EFh7tniBqkk)
     /// </summary>
     public static class UnityEditorBackgroundColor
     {
@@ -19,8 +19,6 @@ namespace Meangpu
 
         static readonly Color k_hoveredColor = new(.698f, .698f, .698f);
         static readonly Color k_hoveredProColor = new(.2706f, .2706f, .2706f);
-
-
 
         public static Color Get(bool isSelected, bool isHovered, bool isWindowFocused)
         {
@@ -37,7 +35,6 @@ namespace Meangpu
             {
                 return EditorGUIUtility.isProSkin ? k_defaultProColor : k_defaultColor;
             }
-
         }
     }
 }
