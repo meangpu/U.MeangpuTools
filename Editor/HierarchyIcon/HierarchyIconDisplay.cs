@@ -11,20 +11,7 @@ namespace Meangpu
     [InitializeOnLoad]
     public static class HierarchyIconDisplay
     {
-        static bool _hierarchyHasFocus;
-        static EditorWindow _hierarchyEditorWIndow;
-
-        static HierarchyIconDisplay()
-        {
-            EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyWindowItemOnGUI;
-            EditorApplication.update += OnEditorUpdate;
-        }
-
-        private static void OnEditorUpdate()
-        {
-            if (_hierarchyEditorWIndow == null) _hierarchyEditorWIndow = EditorWindow.GetWindow(Type.GetType("UnityEditor.SceneHierarchyWindow,UnityEditor"));
-            _hierarchyHasFocus = EditorWindow.focusedWindow != null && EditorWindow.focusedWindow == _hierarchyEditorWIndow;
-        }
+        static HierarchyIconDisplay() => EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyWindowItemOnGUI;
 
         private static void OnHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
         {
@@ -52,7 +39,7 @@ namespace Meangpu
             bool isSelected = Selection.instanceIDs.Contains(instanceID);
             bool isHovering = selectionRect.Contains(Event.current.mousePosition);
 
-            Color color = UnityEditorBackgroundColor.Get(isSelected, isHovering, _hierarchyHasFocus);
+            Color color = UnityEditorBackgroundColor.Get(isSelected, isHovering);
             Rect backgroundRect = selectionRect;
             backgroundRect.width = 18.5f;
             EditorGUI.DrawRect(backgroundRect, color);

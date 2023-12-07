@@ -20,7 +20,7 @@ namespace Meangpu
         static readonly Color k_hoveredColor = new(.698f, .698f, .698f);
         static readonly Color k_hoveredProColor = new(.2706f, .2706f, .2706f);
 
-        public static Color Get(bool isSelected, bool isHovered, bool isWindowFocused)
+        public static Color Get(bool isSelected, bool isHovered, bool isWindowFocused = false)
         {
             if (isSelected)
             {
