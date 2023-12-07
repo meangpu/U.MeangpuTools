@@ -6,7 +6,7 @@ namespace Meangpu
 {
     public class SetIconWIndow : EditorWindow
     {
-        const string k_menuPath = "Assets/Create/SetIcon..";
+        const string k_menuPath = "Assets/SetIcon..";
         List<Texture2D> m_icons = null;
         int m_selectedIcon = 0;
 
