@@ -38,6 +38,12 @@ namespace Meangpu
             Component component = components.Length > 1 ? components[1] : components[0];  // first custom component
             Type type = component.GetType();
 
+            if (type == typeof(CanvasRenderer))
+            {
+                component = components[2];  // display tmp or image instead of canvas renderer
+                type = component.GetType();
+            }
+
             GUIContent content = EditorGUIUtility.ObjectContent(component, type);
             content.text = null;
             content.tooltip = type.Name;
