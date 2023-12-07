@@ -30,7 +30,7 @@ namespace Meangpu
         {
             if (EditorUtility.InstanceIDToObject(instanceID) is not GameObject obj) return;
 
-            if (PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj) != null) return; // leave it as blue box if it is prefab
+            // if (PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj) != null) return; //! = toggle this for PREFAB = leave it as blue box if it is prefab
 
             Component[] components = obj.GetComponents<Component>();
             if (components == null || components.Length == 0) return;
