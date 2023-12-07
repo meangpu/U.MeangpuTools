@@ -1,20 +1,23 @@
 using EasyButtons;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace Meangpu.Util
 {
-    public class SetActiveBlink : MonoBehaviour
+    public abstract class BlinkSystem : MonoBehaviour
     {
-        [SerializeField] GameObject _target;
-
         [Header("Duration")]
-        [SerializeField] float _onDuration = 1.2f;
-        [SerializeField] float _offDuration = .25f;
+        [SerializeField] protected float _onDuration = 1.2f;
+        [SerializeField] protected float _offDuration = .25f;
 
         [Header("Start state")]
-        [SerializeField] bool _objectActiveState = true;
-        [SerializeField] bool _blinkOnStart;
+        [SerializeField] protected bool _objectActiveState = true;
+        [SerializeField] protected bool _blinkOnStart;
+
+        [Header("Unity event")]
+        [SerializeField] UnityEvent _onBlinkOnEvent;
+        [SerializeField] UnityEvent _onBlinkOffEvent;
 
         IEnumerator _enumerator;
         bool _isBlinking;
@@ -24,8 +27,12 @@ namespace Meangpu.Util
         public void SetObjectState(bool state)
         {
             _objectActiveState = state;
-            _target?.SetActive(state);
+            BlinkAction(state);
+            if (state) _onBlinkOffEvent?.Invoke();
+            else _onBlinkOffEvent?.Invoke();
         }
+
+        public abstract void BlinkAction(bool nowState);
 
         private void Start()
         {
