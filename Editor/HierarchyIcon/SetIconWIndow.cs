@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Meangpu
 {
+    /// <summary>
+    /// learn from this [Embrace Unity's Script Icons - YouTube](https://www.youtube.com/watch?v=SY_SdcPW8vE)
+    /// </summary>
     public class SetIconWIndow : EditorWindow
     {
         const string k_menuPath = "Assets/SetIcon..";
