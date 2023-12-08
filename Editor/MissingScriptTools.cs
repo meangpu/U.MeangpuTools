@@ -10,7 +10,7 @@ namespace MeangpuTools
         [MenuItem(_commandName + "Find")]
         static void FindMissingScript()
         {
-            Debug.Log("<color=#37d2e1>=====================</color>");
+            LogEnd();
             Debug.Log("<color=#37d2e1>FIND MISSING script....</color>");
             foreach (GameObject gameObject in GameObject.FindObjectsOfType<GameObject>(true))
             {
@@ -23,13 +23,18 @@ namespace MeangpuTools
                     }
                 }
             }
-            Debug.Log("<color=#37d2e1>=====================</color>");
+            LogEnd();
+        }
+
+        static void LogEnd()
+        {
+            Debug.Log(">-----------------------------------------------------------------<");
         }
 
         [MenuItem(_commandName + "Delete")]
         static void DeleteMissingScript()
         {
-            Debug.Log("<color=#37d2e1>=====================</color>");
+            LogEnd();
             Debug.Log("<color=RED>DELETE</color> <color=#37d2e1>SCRIPT....</color>");
             foreach (GameObject gameObject in GameObject.FindObjectsOfType<GameObject>(true))
             {
@@ -43,7 +48,7 @@ namespace MeangpuTools
                     }
                 }
             }
-            Debug.Log("<color=#37d2e1>=====================</color>");
+            LogEnd();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Meangpu
     public static class OpenFolderTool
     {
         // [Skip The Menu In Unity - YouTube] (https://www.youtube.com/watch?v=d7vsQ8AkpMY)
+        // this not work on two column project view = need to change to one column for it to work
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId)
         {
