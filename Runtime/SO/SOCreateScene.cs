@@ -15,14 +15,12 @@ namespace Meangpu
         {
             for (var i = 0; i < _scene.Length; i++)
             {
-                string nowSceneName = _scene[i].name;
                 SOScene nowScene = ScriptableObject.CreateInstance<SOScene>();
 
                 nowScene.SceneData = _scene[i];
+                nowScene.name = _scene[i].name;
 
-                string path = GetFullFilePath(nowSceneName);
-                nowScene.name = nowSceneName;
-
+                string path = GetFullFilePath(_scene[i].name);
                 CreateAsset(nowScene, path);
             }
         }
