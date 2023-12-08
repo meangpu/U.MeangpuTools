@@ -8,9 +8,10 @@ namespace Meangpu
     {
         public const string ScreenShotPath = "Assets/_Project/Screenshot";
 
-        [MenuItem("Screenshot/GrabCam")]
-        public static void GrabCam()
+        [MenuItem("Screenshot/GrabCamNoUI")]
+        public static void GrabCamNoUI()
         {
+            // [How to capture the screen in Unity (3 methods) - Game Dev Beginner](https://gamedevbeginner.com/how-to-capture-the-screen-in-unity-3-methods/)
             int width = Screen.width;
             int height = Screen.height;
 
@@ -22,17 +23,21 @@ namespace Meangpu
 
             RenderTexture screenTexture = new(width, height, 16);
             mainCam.targetTexture = screenTexture;
-            RenderTexture.active = screenTexture;
             mainCam.Render();
+
+            RenderTexture.active = screenTexture;
             Texture2D renderedTexture = new(width, height);
             renderedTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            renderedTexture.Apply();
+
             RenderTexture.active = null;
+
             byte[] byteArray = renderedTexture.EncodeToPNG();
             File.WriteAllBytes(filePath, byteArray);
 
             mainCam.targetTexture = originalCamTex;
 
-            Debug.Log($"<color=#4ec9b0>{filePath} was create!</color>");
+            Debug.Log($"<color=#4ec9b0>{fileName} was create!</color>");
             SelectObjectOnEditor($"Assets/{fileName}");
 
             AssetDatabase.Refresh();
@@ -75,7 +80,7 @@ namespace Meangpu
             capture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             capture.Apply();
             byte[] bytes = capture.EncodeToPNG();
-            Debug.Log($"<color=#4ec9b0>{filePath} was create!</color>");
+            Debug.Log($"<color=#4ec9b0>{fileName} was create!</color>");
             File.WriteAllBytes(filePath, bytes);
 
             SelectObjectOnEditor($"Assets/{fileName}");
