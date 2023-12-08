@@ -6,11 +6,10 @@ using EasyButtons;
 namespace Meangpu
 {
     [CreateAssetMenu(menuName = "Meangpu/SOCreateScene")]
-    public class SOCreateScene : SOCreateSOTemplate
+    public class SOCreateScene : SOCreateSOTemplate<SOScene>
     {
         [Button] void SetPathToSOScene() => targetCreatePath = "Assets/Resources/SOScene/";
         [SerializeField] SceneAsset[] _scene;
-        [SerializeField] string _sceneFolderLocation = "Assets/_Project/_Scenes/";
 
         public override void CreateSO_ObjectList()
         {
@@ -24,12 +23,7 @@ namespace Meangpu
                 string path = GetFullFilePath(nowSceneName);
                 nowScene.name = nowSceneName;
 
-                AssetDatabase.CreateAsset(nowScene, path);
-                AssetDatabase.SaveAssets();
-                Debug.Log($"create {nowScene} obj at {path}!");
-                AssetDatabase.Refresh();
-                EditorUtility.FocusProjectWindow();
-                Selection.activeObject = nowScene;
+                CreateAsset(nowScene, path);
             }
         }
     }
