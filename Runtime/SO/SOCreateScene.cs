@@ -8,8 +8,9 @@ namespace Meangpu
     [CreateAssetMenu(menuName = "Meangpu/SOCreateScene")]
     public class SOCreateScene : SOCreateSOTemplate
     {
-        [Button] void SetPathToSOScene() => path = "Assets/Resources/SOScene/";
+        [Button] void SetPathToSOScene() => targetCreatePath = "Assets/Resources/SOScene/";
         [SerializeField] SceneAsset[] _scene;
+        [SerializeField] string _sceneFolderLocation = "Assets/_Project/_Scenes/";
 
         public override void CreateSO_ObjectList()
         {
