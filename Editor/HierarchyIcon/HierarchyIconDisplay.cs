@@ -6,7 +6,7 @@ using System.Linq;
 namespace Meangpu
 {
     /// <summary>
-    /// learn from this awesome guy [Next LEVEL Unity Hierarchy - YouTube](https://www.youtube.com/watch?v=EFh7tniBqkk) 
+    /// learn from this awesome guy [Next LEVEL Unity Hierarchy - YouTube](https://www.youtube.com/watch?v=EFh7tniBqkk)
     /// </summary>
     [InitializeOnLoad]
     public static class HierarchyIconDisplay
@@ -25,7 +25,7 @@ namespace Meangpu
             Component component = components.Length > 1 ? components[1] : components[0];  // first custom component
             Type type = component.GetType();
 
-            if (type == typeof(CanvasRenderer))
+            if (type == typeof(CanvasRenderer) && components.Length > 2)
             {
                 component = components[2];  // display tmp or image instead of canvas renderer
                 type = component.GetType();
