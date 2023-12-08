@@ -1,3 +1,4 @@
+using EasyButtons;
 using UnityEngine;
 
 namespace Meangpu.Util
@@ -9,10 +10,19 @@ namespace Meangpu.Util
         [SerializeField] Vector3 _allowRotationAxis = Vector3.one;
         Vector3 _tempRot;
 
-        private void Update()
+        [Button]
+        public void UpdateTarget(Transform newTarget)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_target.position - transform.position), _rotSpeed * Time.deltaTime);
+            _target = newTarget;
+            UpdateRotationToTarget();
+        }
 
+        private void Update() => UpdateRotationToTarget();
+
+        void UpdateRotationToTarget()
+        {
+            if (_target == null) return;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_target.position - transform.position), _rotSpeed * Time.deltaTime);
             _tempRot = transform.localEulerAngles;
             _tempRot = Vector3.Scale(_tempRot, _allowRotationAxis);
             transform.localEulerAngles = _tempRot;
