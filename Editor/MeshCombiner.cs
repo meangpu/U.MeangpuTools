@@ -30,7 +30,7 @@ namespace Meangpu
             // this pass horse model test with 839 batch to only 8 batch, and fps from lag 4.2ms to 1.8 ms on empty scene
             if (TransformToCombine == null)
             {
-                Debug.Log($"<color=red>Parent mesh transform is null!</color>");
+                Debug.Log("<color=red>Parent mesh transform is null!</color>");
                 return;
             }
 
@@ -74,7 +74,7 @@ namespace Meangpu
 
             // save asset to asset folder
             SaveMeshAsset(_finalMesh);
-            Debug.Log($"<color=#4ec9b0>Finish Create obj</color>");
+            Debug.Log("<color=#4ec9b0>Finish Create obj</color>");
         }
 
         private void SaveMeshAsset(Mesh _finalMesh)

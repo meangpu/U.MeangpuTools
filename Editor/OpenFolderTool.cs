@@ -6,6 +6,7 @@ namespace Meangpu
 {
     public static class OpenFolderTool
     {
+        // [Skip The Menu In Unity - YouTube] (https://www.youtube.com/watch?v=d7vsQ8AkpMY)
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId)
         {

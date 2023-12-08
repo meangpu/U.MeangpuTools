@@ -11,11 +11,20 @@ namespace Meangpu
         [MenuItem("Screenshot/GrabCam")]
         public static void GrabCam()
         {
-            string fileName = $"_Project/Screenshot/{GetCh()}{GetCh()}{GetCh()}_{Screen.width}x{Screen.height}.png";
+            int width = Screen.width;
+            int height = Screen.height;
+
+            string fileName = $"_Project/Screenshot/{GetCh()}{GetCh()}{GetCh()}_{width}x{height}.png";
             string filePath = $"{Application.dataPath}/{fileName}";
-            ScreenCapture.CaptureScreenshot(filePath, 1);
+
+            Texture2D screenImage = new(width, height);
+            screenImage.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            screenImage.Apply();
+            byte[] imageBytes = screenImage.EncodeToPNG();
+            File.WriteAllBytes(filePath, imageBytes);
+
             Debug.Log($"<color=#4ec9b0>{filePath} was create!</color>");
-            OpenScreenShotFolder();
+            SelectObjectOnEditor($"Assets/{fileName}");
         }
 
         private static void SelectObjectOnEditor(string imageName)
@@ -31,16 +40,6 @@ namespace Meangpu
         {
             Selection.activeObject = obj;
             EditorGUIUtility.PingObject(obj);
-        }
-
-        private static void OpenScreenShotFolder()
-        {
-            AssetDatabase.Refresh();
-            EditorUtility.FocusProjectWindow();
-            Object obj = AssetDatabase.LoadAssetAtPath<Object>(ScreenShotPath);
-            AssetDatabase.OpenAsset(obj);
-            PingAndSetActive(obj);
-            AssetDatabase.Refresh();
         }
 
         public static char GetCh() => (char)Random.Range('A', 'Z');
