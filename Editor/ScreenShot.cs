@@ -14,17 +14,28 @@ namespace Meangpu
             int width = Screen.width;
             int height = Screen.height;
 
-            string fileName = $"_Project/Screenshot/{GetCh()}{GetCh()}{GetCh()}_{width}x{height}.png";
+            string fileName = $"_Project/Screenshot/{GetDateTime()}_{width}x{height}.png";
             string filePath = $"{Application.dataPath}/{fileName}";
 
-            Texture2D screenImage = new(width, height);
-            screenImage.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-            screenImage.Apply();
-            byte[] imageBytes = screenImage.EncodeToPNG();
-            File.WriteAllBytes(filePath, imageBytes);
+            Camera mainCam = Camera.main;
+            RenderTexture originalCamTex = mainCam.targetTexture;
+
+            RenderTexture screenTexture = new(width, height, 16);
+            mainCam.targetTexture = screenTexture;
+            RenderTexture.active = screenTexture;
+            mainCam.Render();
+            Texture2D renderedTexture = new(width, height);
+            renderedTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            RenderTexture.active = null;
+            byte[] byteArray = renderedTexture.EncodeToPNG();
+            File.WriteAllBytes(filePath, byteArray);
+
+            mainCam.targetTexture = originalCamTex;
 
             Debug.Log($"<color=#4ec9b0>{filePath} was create!</color>");
             SelectObjectOnEditor($"Assets/{fileName}");
+
+            AssetDatabase.Refresh();
         }
 
         private static void SelectObjectOnEditor(string imageName)
@@ -43,6 +54,7 @@ namespace Meangpu
         }
 
         public static char GetCh() => (char)Random.Range('A', 'Z');
+        public static string GetDateTime() => System.DateTime.Now.ToString("dd-MMM-yy_HHmmss)");
 
         [MenuItem("Screenshot/GrabSceneViewNoFixed")]
         public static void GrabSceneView()
@@ -53,7 +65,7 @@ namespace Meangpu
             int width = view.camera.pixelWidth;
             int height = view.camera.pixelHeight;
 
-            string fileName = $"_Project/Screenshot/{GetCh()}{GetCh()}{GetCh()}_{width}x{height}.png";
+            string fileName = $"_Project/Screenshot/{GetDateTime()}_{width}x{height}.png";
             string filePath = $"{Application.dataPath}/{fileName}";
 
             Texture2D capture = new(width, height);
