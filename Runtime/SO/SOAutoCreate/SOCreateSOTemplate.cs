@@ -9,7 +9,7 @@ namespace Meangpu
     {
         // example: $"Assets/Resources/SO/OperationData/{i + 1}.asset";
         public string targetCreatePath = "Assets/Resources/";
-        public const string extension = ".asset";
+        const string extension = ".asset";
 
         public string GetFullFilePath(string fileName) => $"{targetCreatePath}{fileName}{extension}";
 

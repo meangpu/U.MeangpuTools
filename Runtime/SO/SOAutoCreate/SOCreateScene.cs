@@ -5,15 +5,17 @@ using EasyButtons;
 
 namespace Meangpu
 {
-    [CreateAssetMenu(menuName = "Meangpu/SOCreateScene")]
+    [CreateAssetMenu(fileName = "____SceneCreator", menuName = "Meangpu/SOCreateScene")]
     public class SOCreateScene : SOCreateSOTemplate<SOScene>
     {
         [Button]
-        void SetPathToSOScene()
+        void SetPathToSOScene() => targetCreatePath = "Assets/Resources/SOScene/";
+
+        private void OnValidate()
         {
-            targetCreatePath = "Assets/Resources/SOScene/";
+            if (targetCreatePath != "Assets/Resources/") return;
+            SetPathToSOScene();
             EditorUtility.SetDirty(this);
-            AssetDatabase.Refresh();
         }
 
         [SerializeField] SceneAsset[] _scene;
