@@ -1,7 +1,5 @@
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-#endif
 
 namespace MeangpuTools
 {
@@ -12,6 +10,8 @@ namespace MeangpuTools
         [MenuItem(_commandName + "Find")]
         static void FindMissingScript()
         {
+            Debug.Log("<color=#37d2e1>=====================</color>");
+            Debug.Log("<color=#37d2e1>FIND MISSING script....</color>");
             foreach (GameObject gameObject in GameObject.FindObjectsOfType<GameObject>(true))
             {
                 foreach (Component component in gameObject.GetComponentsInChildren<Component>())
@@ -23,11 +23,14 @@ namespace MeangpuTools
                     }
                 }
             }
+            Debug.Log("<color=#37d2e1>=====================</color>");
         }
 
         [MenuItem(_commandName + "Delete")]
         static void DeleteMissingScript()
         {
+            Debug.Log("<color=#37d2e1>=====================</color>");
+            Debug.Log("<color=RED>DELETE</color> <color=#37d2e1>SCRIPT....</color>");
             foreach (GameObject gameObject in GameObject.FindObjectsOfType<GameObject>(true))
             {
                 foreach (Component component in gameObject.GetComponentsInChildren<Component>())
@@ -40,6 +43,7 @@ namespace MeangpuTools
                     }
                 }
             }
+            Debug.Log("<color=#37d2e1>=====================</color>");
         }
     }
 }
