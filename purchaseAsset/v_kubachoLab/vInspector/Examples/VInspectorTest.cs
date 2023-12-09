@@ -5,13 +5,11 @@ using UnityEngine;
 
 using VInspector;
 
-
 namespace VInspectorExamples
 {
     [ExecuteInEditMode]
-    public class Fractal : MonoBehaviour
+    public class VInspectorTest : MonoBehaviour
     {
-
         [Tab("Shape")]
 
         [Variants("Sponge", "Cloud", "Snowflake")]
@@ -26,9 +24,6 @@ namespace VInspectorExamples
         [RangeResettable(0, 1)]
         public float jitter = 0;
 
-
-
-
         [Tab("Animation")]
 
         [RangeResettable(0, 1)]
@@ -40,24 +35,15 @@ namespace VInspectorExamples
         [Tab("Animation")]
         public bool playAnimation = false;
 
-
-
-
         [Tab("Rendering")]
 
         public Mesh mesh;
         public Material material;
         public bool shadows = true;
 
-
-
         [Tab("Settings")]
 
         public SerializedDictionary<string, Color> someColorDictionary;
-
-
-
-
 
         [Tab("Shape")]
         [Button]
@@ -70,7 +56,6 @@ namespace VInspectorExamples
             DestroyImmediate(primitive);
         }
 
-
         [Tab("Shape")]
         [Button]
         [ButtonSize(22)]
@@ -79,9 +64,6 @@ namespace VInspectorExamples
             while (transform.childCount > 0)
                 DestroyImmediate(transform.GetChild(0).gameObject);
         }
-
-
-
 
         [Tab("Rendering")]
         [Button]
@@ -95,19 +77,8 @@ namespace VInspectorExamples
             }
         }
 
-
-
-
-
-
-
         // add this variable to your script so vInspector won't forget after recompilation which foldouts are expanded and which tabs are selected
         public VInspectorData vInspectorData;
-
-
-
-
-
 
         void GeneratePrimitive()
         {
@@ -115,19 +86,26 @@ namespace VInspectorExamples
             primitive.AddComponent<MeshFilter>().mesh = mesh;
             primitive.AddComponent<MeshRenderer>().material = material;
             primitive.GetComponent<MeshRenderer>().shadowCastingMode = shadows ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off;
-
         }
         void GeneratePositions()
         {
             positions = new List<Vector3>();
             for (int x = -1; x <= 1; x++)
+            {
                 for (int y = -1; y <= 1; y++)
+                {
                     for (int z = -1; z <= 1; z++)
+                    {
                         if (
-                        (type == "Sponge" && x * y + y * z + z * x != 0) ||
-                        (type == "Cloud" && x == 0 ^ y == 0 ^ z == 0 && (x != 0 || y != 0 || z != 0)) ||
-                        (type == "Snowflake" && x + y == 0 ^ y + z == 0 ^ z + x == 0))
+                        (type == "Sponge" && (x * y) + (y * z) + (z * x) != 0) ||
+                        (type == "Cloud" && (x == 0 ^ y == 0 ^ z == 0) && (x != 0 || y != 0 || z != 0)) ||
+                        (type == "Snowflake" && (x + y == 0 ^ y + z == 0 ^ z + x == 0)))
+                        {
                             positions.Add(new Vector3(x, y, z));
+                        }
+                    }
+                }
+            }
         }
         void GenerateStep(Transform parent, int step = 1)
         {
@@ -140,18 +118,14 @@ namespace VInspectorExamples
                 child.localPosition = position / 3;
 
                 child.localScale -= Vector3.one * gaps / 20;
-                child.position += (new Vector3(Random.value, Random.value, Random.value) - Vector3.one / 2) * jitter;
+                child.position += (new Vector3(Random.value, Random.value, Random.value) - (Vector3.one * .5f)) * jitter;
 
                 if (step != steps)
                     GenerateStep(child, step + 1);
             }
-
         }
         GameObject primitive;
         List<Vector3> positions;
-
-
-
 
         void PlayAnimation(Transform parent)
         {
@@ -163,7 +137,6 @@ namespace VInspectorExamples
                 dir = Vector3.Lerp(dir, child.localPosition, direction);
 
                 child.Rotate(dir, speed * 2, UnityEngine.Space.Self);
-
 
                 PlayAnimation(child);
             }
@@ -177,6 +150,12 @@ namespace VInspectorExamples
         }
         void Update() { }
 
+        public override bool Equals(object obj)
+        {
+            return obj is VInspectorTest test &&
+                   base.Equals(obj) &&
+                   EqualityComparer<SerializedDictionary<string, Color>>.Default.Equals(someColorDictionary, test.someColorDictionary);
+        }
     }
 }
 #endif
