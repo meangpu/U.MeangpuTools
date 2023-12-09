@@ -19,10 +19,6 @@
       "path": "Samples~/ColorSet"
     },
     {
-      "displayName": "Presets",
-      "path": "Samples~/Presets"
-    },
-    {
       "displayName": "ShaderGraph",
       "path": "Samples~/ShaderGraph"
     },
