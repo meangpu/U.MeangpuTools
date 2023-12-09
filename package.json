@@ -19,10 +19,6 @@
       "path": "Samples~/ColorSet"
     },
     {
-      "displayName": "ShaderGraph",
-      "path": "Samples~/ShaderGraph"
-    },
-    {
       "displayName": "ShaderGraphCrossSection",
       "path": "Samples~/ShaderGraphCrossSection"
     },
@@ -33,10 +29,6 @@
     {
       "displayName": "Font",
       "path": "Samples~/Font"
-    },
-    {
-      "displayName": "Bootstrapper",
-      "path": "Samples~/Bootstrapper"
     }
   ]
 }
