@@ -8,6 +8,13 @@
       "isSelectAtStart": true
     },
     {
+      "name": "com.yasirkula.assetusagedetector",
+      "version": "2.5.1",
+      "description": "Asset usage detector",
+      "url": "https://github.com/yasirkula/UnityAssetUsageDetector.git",
+      "isSelectAtStart": true
+    },
+    {
       "name": "com.meangpu.audio",
       "version": "0.0.1",
       "description": "meangpu audio system",
