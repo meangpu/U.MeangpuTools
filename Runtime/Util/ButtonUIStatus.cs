@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using EasyButtons;
+using VInspector;
 using TMPro;
+using UnityEngine.Events;
 
 namespace Meangpu.Util
 {
@@ -23,6 +24,9 @@ namespace Meangpu.Util
         [SerializeField] bool _doSetImage = true;
         [SerializeField] bool _doSetText;
         [SerializeField] bool _doSetAlphaOnly;
+        [Header("Unity Event")]
+        [SerializeField] UnityEvent _onOnEvent;
+        [SerializeField] UnityEvent _onOffEvent;
 
         private void Start()
         {
@@ -47,6 +51,7 @@ namespace Meangpu.Util
 
         public void DoEnableButton()
         {
+            _onOnEvent?.Invoke();
             _nowStatus = true;
             if (_doSetButtonInteractable && _btn) _btn.interactable = true;
 
@@ -63,6 +68,7 @@ namespace Meangpu.Util
 
         public void DoDisableButton()
         {
+            _onOffEvent?.Invoke();
             _nowStatus = false;
             if (_doSetButtonInteractable && _btn) _btn.interactable = false;
 
