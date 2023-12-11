@@ -1,4 +1,4 @@
-using EasyButtons;
+using VInspector;
 using UnityEngine;
 
 namespace Meangpu.SOEvent
