@@ -23,6 +23,8 @@ namespace Meangpu
             if (components == null || components.Length == 0) return;
 
             Component component = components.Length > 1 ? components[1] : components[0];  // first custom component
+            if (component == null) return;
+
             Type type = component.GetType();
 
             if (type == typeof(CanvasRenderer) && components.Length > 2)
