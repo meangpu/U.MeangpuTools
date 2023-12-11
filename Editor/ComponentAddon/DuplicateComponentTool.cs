@@ -28,6 +28,7 @@ namespace Meangpu.Util
 
         static bool DoesComponentAllowMultiples(Component component)
         {
+            if (component == null) return;
             System.Type componentType = component.GetType();
             DisallowMultipleComponent[] attributes = (DisallowMultipleComponent[])componentType.GetCustomAttributes(typeof(DisallowMultipleComponent), true);
             return attributes.Length == 0;
