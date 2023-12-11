@@ -171,12 +171,20 @@ namespace VFavorites
                     void icon()
                     {
                         var tex = AssetPreview.GetAssetPreview(obj);
+
                         if (tex == null)
                             tex = AssetPreview.GetMiniThumbnail(obj);
+
+                        if (tex == null && obj != null)
+                            tex = AssetPreview.GetMiniTypeThumbnail(obj.GetType());
+
+                        if (tex == null)
+                            tex = Texture2D.grayTexture;
 
                         var rect = rowRect.SetWidth(20).SetWidthFromRight(iconHeight).SetHeightFromMid(iconHeight).MoveX(5).Resize(-2);
 
                         GUI.DrawTexture(rect, tex);
+
                     }
                     void name_()
                     {
@@ -536,7 +544,7 @@ namespace VFavorites
         }
 
 
-        public const string version = "1.0.7";
+        public const string version = "1.0.8";
 
     }
 }

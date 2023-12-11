@@ -225,14 +225,6 @@ namespace VInspector
 
 
 
-                    ifs();
-
-                    if (hide) return;
-
-                    GUI.enabled = !disable;
-
-
-
                     tabs();
 
                     if (!selectedTabPath.StartsWith(drawingTabPath)) return;
@@ -241,9 +233,20 @@ namespace VInspector
 
 
 
+
                     foldouts();
 
                     if (!data.rootFoldout.IsSubfoldoutContentVisible(drawingFoldoutPath)) return;
+
+
+
+
+                    ifs();
+
+                    if (hide) return;
+
+                    GUI.enabled = !disable;
+
 
 
 
@@ -508,7 +511,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.17";
+        const string version = "1.2.18";
 
     }
 }

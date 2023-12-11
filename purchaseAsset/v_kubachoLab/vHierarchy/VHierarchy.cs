@@ -396,7 +396,10 @@ namespace VHierarchy
                 if (!hoveredGo) return;
                 if (e.modifiers != 0) return;
                 if (e.type != EventType.KeyDown || e.keyCode != KeyCode.E) return;
+                if (!VHierarchyMenuItems.expandCollapseEnabled) return;
+
                 e.Use();
+
                 if (hoveredGo.transform.childCount == 0) return;
 
                 SetExpandedWithAnimation(hoveredGo.GetInstanceID(), !expandedIds.Contains(hoveredGo.GetInstanceID()));
@@ -409,6 +412,7 @@ namespace VHierarchy
                 if (e == null) return;
                 if (e.modifiers != 0) return;
                 if (e.type != EventType.KeyDown || e.keyCode != KeyCode.A) return;
+                if (!VHierarchyMenuItems.setActiveEnabled) return;
 
                 var gos = Selection.gameObjects.Contains(hoveredGo) ? Selection.gameObjects : new[] { hoveredGo };
                 var active = !gos.Any(r => r.activeSelf);
@@ -427,6 +431,7 @@ namespace VHierarchy
                 if (!hoveredGo) return;
                 if (e.modifiers != 0) return;
                 if (eType != EventType.KeyDown || e.keyCode != KeyCode.X) return;
+                if (!VHierarchyMenuItems.deleteEnabled) return;
 
                 var gos = Selection.gameObjects.Contains(hoveredGo) ? Selection.gameObjects : new[] { hoveredGo };
 
@@ -439,6 +444,8 @@ namespace VHierarchy
             {
                 if (e.modifiers != (EventModifiers.Shift | EventModifiers.Command) && e.modifiers != (EventModifiers.Shift | EventModifiers.Control)) return;
                 if (eType != EventType.KeyDown || e.keyCode != KeyCode.E) return;
+                if (!VHierarchyMenuItems.collapseEverythingEnabled) return;
+
                 e.Use();
 
                 var expandedRoots = new List<GameObject>();
@@ -463,7 +470,10 @@ namespace VHierarchy
                 if (!hoveredGo) return;
                 if (e.modifiers != EventModifiers.Shift) return;
                 if (eType != EventType.KeyDown || e.keyCode != KeyCode.E) return;
+                if (!VHierarchyMenuItems.collapseEverythingElseEnabled) return;
+
                 e.Use();
+
                 if (hoveredGo.transform.childCount == 0) return;
 
                 var parents = new List<GameObject>();
@@ -699,7 +709,7 @@ namespace VHierarchy
 
 
 
-        public const string version = "1.0.17";
+        public const string version = "1.0.19";
 
     }
 }

@@ -374,8 +374,11 @@ namespace VFolders
                 {
                     if (data) return;
 
-                    data = ScriptableObject.CreateInstance<VFoldersData>();
-                    AssetDatabase.CreateAsset(data, GetScriptPath("vFolders").GetParentPath().CombinePath("vFolders Data.asset"));
+                    EditorApplication.delayCall += () =>
+                    {
+                        data = ScriptableObject.CreateInstance<VFoldersData>();
+                        AssetDatabase.CreateAsset(data, GetScriptPath("vFolders").GetParentPath().CombinePath("vFolders Data.asset"));
+                    };
 
                 }
                 void updateLastKnownPath()
@@ -410,7 +413,7 @@ namespace VFolders
         public static VFoldersData data;
 
 
-        const string version = "1.0.11";
+        const string version = "1.0.12";
 
     }
 }

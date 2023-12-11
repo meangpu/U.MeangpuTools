@@ -84,11 +84,12 @@ namespace VHierarchy
         [MenuItem(menuDir + "More", false, 1001)] static void daasadsddsas() { }
         [MenuItem(menuDir + "More", true, 1001)] static bool dadsadsdasas123() => false;
 
-        [MenuItem(menuDir + "Join our Discord", false, 1002)]
+        [MenuItem(menuDir + "Upgrade to vHierarchy 2", false, 1002)]
+        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/251320?aid=1100lGLBn&pubref=menuupgrade");
+
+        [MenuItem(menuDir + "Join our Discord", false, 1003)]
         static void dadasdsas() => Application.OpenURL("https://discord.gg/4dG9KsbspG");
 
-        [MenuItem(menuDir + "Get the rest of our Editor Ehnancers with a discount", false, 1003)]
-        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/tools/utilities/editor-enhancers-bundle-251318?aid=1100lGLBn&pubref=menu");
 
 
 
