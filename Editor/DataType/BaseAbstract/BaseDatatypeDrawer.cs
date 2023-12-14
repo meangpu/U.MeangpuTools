@@ -3,19 +3,15 @@ using UnityEditor;
 
 namespace Meangpu.Datatype
 {
-    public abstract class BaseDataWithBoolDrawer : PropertyDrawer
+    public abstract class BaseDatatypeDrawer : PropertyDrawer
     {
         protected BoolDrawerSetting _setting = new("floatValue");
 
         /*
-        Do something like
-
-        public override void SetupVariable(string A_VariableName = "floatValue")
-        {
-            A_var_name = "floatValue";
-        }
-
+        In child Do something like:
+        public override void UpdateSetting() => _setting = new("gameObjectValue");
         */
+
         public abstract void UpdateSetting();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

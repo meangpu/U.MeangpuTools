@@ -3,11 +3,8 @@ using UnityEditor;
 namespace Meangpu.Datatype
 {
     [CustomPropertyDrawer(typeof(FloatWithBool))]
-    public class FloatBoolDrawer : BaseDataWithBoolDrawer
+    public class FloatBoolDrawer : BaseDatatypeDrawer
     {
-        public override void UpdateSetting()
-        {
-            _setting = new("floatValue");
-        }
+        public override void UpdateSetting() => _setting = new("floatValue");
     }
 }
