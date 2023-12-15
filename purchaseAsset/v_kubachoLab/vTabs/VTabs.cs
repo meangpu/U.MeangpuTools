@@ -57,7 +57,8 @@ namespace VTabs
                 void switchTab(bool right)
                 {
                     if (!VTabsMenuItems.shiftscrollSwitchTabEnabled) return;
-                    if (GetDockArea(EditorWindow.mouseOverWindow).GetType() != dockAreaType) return;    // maximized
+                    if (!EditorWindow.mouseOverWindow.docked) return;
+                    if (EditorWindow.mouseOverWindow.maximized) return;
 
                     var tabs = GetTabList();
 
@@ -92,7 +93,8 @@ namespace VTabs
                     if (!curEvent.shift) return;
 
 
-                    var dScroll = Application.platform == RuntimePlatform.OSXEditor ? curEvent.delta.x : -curEvent.delta.y; // osx sends delta.y as delta.x when shift is pressed
+                    var dScroll = Application.platform == RuntimePlatform.OSXEditor ? curEvent.delta.x // osx sends delta.y as delta.x when shift is pressed
+                                                                                    : curEvent.delta.x - curEvent.delta.y; // some software on windows may do that too
 
                     if (dScroll != 0)
                         if (curEvent.control || curEvent.command)
@@ -179,6 +181,8 @@ namespace VTabs
                 if (Event.current.keyCode != KeyCode.W) return;
                 if (!VTabsMenuItems.closeTabEnabled) return;
                 if (!EditorWindow.mouseOverWindow) return;
+                if (!EditorWindow.mouseOverWindow.docked) return;
+                if (EditorWindow.mouseOverWindow.maximized) return;
                 if (GetTabList().Count <= 1) return;
 
 
@@ -374,7 +378,8 @@ namespace VTabs
         static void EnsureFocusedTabVisibleOnScroller()
         {
             if (!EditorWindow.focusedWindow) return;
-
+            if (!EditorWindow.focusedWindow.docked) return;
+            if (EditorWindow.focusedWindow.maximized) return;
 
             var dockArea = GetDockArea(EditorWindow.focusedWindow);
 
@@ -674,7 +679,7 @@ namespace VTabs
         static System.Type hierarchyType => typeof(Editor).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
 
 
-        const string version = "1.0.9";
+        const string version = "1.0.11";
 
     }
 }

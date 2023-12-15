@@ -15,14 +15,14 @@ namespace VInspector
         public static bool soInspectorEnabled { get => !ScriptHasDefineDisabled(typeof(VIScriptableObjectEditor)); set => SetDefineDisabledInScript(typeof(VIScriptableObjectEditor), !value); }
         public static bool staticInspectorEnabled { get => !ScriptHasDefineDisabled(typeof(VIScriptAssetEditor)); set => SetDefineDisabledInScript(typeof(VIScriptAssetEditor), !value); }
         public static bool resettableVariablesEnabled { get => !ScriptHasDefineDisabled(typeof(VIResettablePropDrawer)); set => SetDefineDisabledInScript(typeof(VIResettablePropDrawer), !value); }
-        public static bool hideScriptFieldEnabled { get => EditorPrefs.GetBool("vInspector-hideScriptField", true); set => EditorPrefs.SetBool("vInspector-hideScriptField", value); }
+        public static bool cleanerHeaderEnabled { get => EditorPrefs.GetBool("vInspector-hideScriptField", true); set => EditorPrefs.SetBool("vInspector-hideScriptField", value); }
 
         public static bool vInspectorDisabled { get => !scriptInspectorEnabled && !soInspectorEnabled && !staticInspectorEnabled && !resettableVariablesEnabled; set => scriptInspectorEnabled = soInspectorEnabled = staticInspectorEnabled = resettableVariablesEnabled = !value; }
 
 
         const string menuDir = "Tools/vInspector/";
 
-        const string hideScriptField = menuDir + "Hide script field";
+        const string cleanerHeader = menuDir + "Cleaner header";
         const string resettableVariables = menuDir + "Resettable variables";
         const string staticInspector = menuDir + "Static inspector";
 
@@ -33,8 +33,8 @@ namespace VInspector
         [MenuItem(resettableVariables, false, 1)] static void dadsaadsdadsas() => resettableVariablesEnabled = !resettableVariablesEnabled;
         [MenuItem(resettableVariables, true, 1)] static bool dadsadadsdasadsas() { UnityEditor.Menu.SetChecked(resettableVariables, resettableVariablesEnabled); return true; }
 
-        [MenuItem(hideScriptField, false, 2)] static void dadsadadsas() => hideScriptFieldEnabled = !hideScriptFieldEnabled;
-        [MenuItem(hideScriptField, true, 2)] static bool dadsaddasadsas() { UnityEditor.Menu.SetChecked(hideScriptField, hideScriptFieldEnabled); return true; }
+        [MenuItem(cleanerHeader, false, 2)] static void dadsadadsas() { cleanerHeaderEnabled = !cleanerHeaderEnabled; UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation(); }
+        [MenuItem(cleanerHeader, true, 2)] static bool dadsaddasadsas() { UnityEditor.Menu.SetChecked(cleanerHeader, cleanerHeaderEnabled); return true; }
 
         [MenuItem(staticInspector, false, 3)] static void dadsaadsdadsdasas() => staticInspectorEnabled = !staticInspectorEnabled;
         [MenuItem(staticInspector, true, 3)] static bool dadsadadsddsaasadsas() { UnityEditor.Menu.SetChecked(staticInspector, staticInspectorEnabled); return true; }

@@ -57,7 +57,8 @@ namespace VInspector
 
                 curProperty.NextVisible(true);
 
-                SetupHeader();
+                if (VIMenuItems.cleanerHeaderEnabled)
+                    SetupHeader();
 
                 data.rootTab.ResetSubtabsDrawn();
 
@@ -67,7 +68,7 @@ namespace VInspector
 
             void drawScriptFieldOrSpace()
             {
-                if (VIMenuItems.hideScriptFieldEnabled)
+                if (VIMenuItems.cleanerHeaderEnabled)
                     Space(3);
                 else
                     using (new EditorGUI.DisabledScope(true))
@@ -439,6 +440,11 @@ namespace VInspector
             {
                 var rect = header.contentRect.SetWidth(60).MoveX(name.GetLabelWidth(isBold: true) + 60).SetHeightFromMid(15);
 
+#if UNITY_2022_3_OR_NEWER
+                rect.x *= .94f;
+                rect.x += 2;
+#endif
+
                 rect.xMax = rect.xMax.Min(header.contentRect.width - 60).Max(rect.xMin);
 
                 rect.Draw(header.contentRect.IsHovered() && (!mousePressedOnHeader || mousePressedOnScriptName) ? bgHovered : bgNorm);
@@ -511,7 +517,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.18";
+        const string version = "1.2.19";
 
     }
 }

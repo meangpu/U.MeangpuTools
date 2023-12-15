@@ -198,6 +198,7 @@ namespace VRuler
 
                     iObjectForScale = -1;
                     objectForScalePosSet = false;
+                    scroll = 0;
 
                 }
                 void setIndex()
@@ -209,7 +210,8 @@ namespace VRuler
 
                     LoadObjectsForScale();
 
-                    var delta = Application.platform == RuntimePlatform.OSXEditor ? e.delta.x + e.delta.y : -e.delta.y;
+                    var delta = Application.platform == RuntimePlatform.OSXEditor ? e.delta.x + e.delta.y
+                                                                                  : e.delta.x - e.delta.y;
 
                     if (delta < 0 && iObjectForScale <= -1) return;
                     if (delta > 0 && iObjectForScale >= objectsForScaleMeshes.Count - 1) return;
@@ -217,7 +219,7 @@ namespace VRuler
                     scroll += delta;
 
                     if (scroll > scrollThreshold) { scroll = 0; iObjectForScale++; }
-                    if (scroll < -scrollThreshold && iObjectForScale > 0) { scroll = 0; iObjectForScale--; }
+                    if (scroll < -scrollThreshold) { scroll = 0; if (iObjectForScale > 0) iObjectForScale--; }
 
                 }
                 void setPos()
@@ -268,7 +270,7 @@ namespace VRuler
         static List<GameObject> boundsObjects = new List<GameObject>();
         static int iObjectForScale = -1;
         static float scroll;
-        static float scrollThreshold = .4f;
+        static float scrollThreshold => Application.platform == RuntimePlatform.OSXEditor ? .5f : .1f;
         static Vector3 objectForScalePos;
         static bool objectForScalePosSet;
         static bool shortcutPressed => holdingShift && holdingR;
@@ -590,7 +592,7 @@ namespace VRuler
 
 
 
-        const string version = "1.0.4";
+        const string version = "1.0.5";
 
     }
 }

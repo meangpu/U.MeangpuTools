@@ -38,6 +38,7 @@ namespace VInspector
                     if (type == typeof(MonoBehaviour)) return;
                     if (type == typeof(ScriptableObject)) return;
                     if (type == null) return;
+                    if (type.BaseType == null) return;
 
                     findMembersWithButtonAttributes(type.BaseType);
 
@@ -114,6 +115,8 @@ namespace VInspector
 
                     if (type == typeof(MonoBehaviour)) return;
                     if (type == typeof(ScriptableObject)) return;
+                    if (type == null) return;
+                    if (type.BaseType == null) return;
 
                     findTabAttributes(type.BaseType);
 
@@ -179,6 +182,8 @@ namespace VInspector
 
                     if (type == typeof(MonoBehaviour)) return;
                     if (type == typeof(ScriptableObject)) return;
+                    if (type == null) return;
+                    if (type.BaseType == null) return;
 
                     findTabAttributes(type.BaseType);
 
