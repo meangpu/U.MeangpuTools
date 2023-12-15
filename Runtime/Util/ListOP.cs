@@ -15,13 +15,21 @@ namespace Meangpu.Util
             }
         }
 
-        public static bool IsTwoListIsTheSame<T>(List<T> _listA, List<T> _listB)
+        public static bool IsTwoListIsTheSame<T>(List<T> list1, List<T> list2, bool SortBeforeCompare = false)
         {
-            if (_listA.Count != _listB.Count) return false;
+            if (list1 == null && list2 == null) return true;
+            if ((list1 == null && list2 != null) || (list1 != null && list2 == null)) return false;
+            if (list1.Count != list2.Count) return false;
 
-            for (int i = 0; i < _listA.Count; i++)
+            if (SortBeforeCompare)
             {
-                if (!EqualityComparer<T>.Default.Equals(_listA[i], _listB[i])) return false;
+                list1.Sort();
+                list2.Sort();
+            }
+
+            for (int i = 0; i < list1.Count; i++)
+            {
+                if (!EqualityComparer<T>.Default.Equals(list1[i], list2[i])) return false;
             }
 
             return true;
