@@ -17,6 +17,13 @@ namespace Meangpu.Util
 
         public static bool IsTwoListIsTheSame<T>(List<T> list1, List<T> list2, bool SortBeforeCompare = false)
         {
+
+            // if sorting special class list item, the class need reference on how to compare list before sort,
+            // so it would need ```IComparable<T>``` interface in that class,
+            // SEE EXAMPLE IN ```ListOpTest```
+
+            // ! have flaw on like list of my own create class, the value in class don't get all compared BEWARE!!!
+
             if (list1 == null && list2 == null) return true;
             if ((list1 == null && list2 != null) || (list1 != null && list2 == null)) return false;
             if (list1.Count != list2.Count) return false;
