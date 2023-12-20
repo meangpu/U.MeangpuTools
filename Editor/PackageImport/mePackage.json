@@ -1,6 +1,13 @@
 {
   "packages": [
     {
+      "name": "com.meangpu.audio",
+      "version": "0.0.1",
+      "description": "meangpu audio system",
+      "url": "https://github.com/meangpu/U.MeAudio.git",
+      "isSelectAtStart": true
+    },
+    {
       "name": "com.madsbangh.easybuttons",
       "version": "1.4.0",
       "description": "Easy to use inspector button",
@@ -15,10 +22,10 @@
       "isSelectAtStart": true
     },
     {
-      "name": "com.meangpu.audio",
-      "version": "0.0.1",
-      "description": "meangpu audio system",
-      "url": "https://github.com/meangpu/U.MeAudio.git",
+      "name": "com.vladfaust.unitywakatime",
+      "version": "2.0.8",
+      "description": "waka time for time tracker",
+      "url": "https://github.com/vladfaust/unity-wakatime.git#package",
       "isSelectAtStart": true
     },
     {
