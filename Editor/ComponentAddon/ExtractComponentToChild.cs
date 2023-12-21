@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
@@ -66,32 +67,6 @@ namespace Meangpu.Util
             Undo.DestroyObjectImmediate(targetComponent);
             Undo.CollapseUndoOperations(undoGroupIndex);
         }
-
-        // public static void ExtractComponent(Component[] targetComponent)
-        // {
-        //     int undoGroupIndex = Undo.GetCurrentGroup();
-
-        //     Undo.IncrementCurrentGroup();
-        //     GameObject gameObject = new(targetComponent[0].GetType().Name);
-
-        //     gameObject.transform.SetParent(targetComponent[0].transform);
-        //     gameObject.transform.localScale = Vector3.one;
-        //     gameObject.transform.localPosition = Vector3.zero;
-        //     gameObject.transform.localRotation = Quaternion.identity;
-        //     Undo.RegisterCreatedObjectUndo(gameObject, "Created child object");
-
-        //     foreach (Component component in targetComponent)
-        //     {
-        //         if (!ComponentUtility.CopyComponent(component) || !ComponentUtility.PasteComponentAsNew(gameObject))
-        //         {
-        //             Debug.LogError("Cannot extract component", component.gameObject);
-        //             Undo.CollapseUndoOperations(undoGroupIndex);
-        //             Undo.PerformUndo();
-        //             return;
-        //         }
-        //         Undo.DestroyObjectImmediate(component);
-        //         Undo.CollapseUndoOperations(undoGroupIndex);
-        //     }
-        // }
     }
 }
+#endif
