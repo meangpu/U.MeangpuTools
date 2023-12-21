@@ -18,36 +18,36 @@ namespace Meangpu.Util
             ExtractComponent(sourceComponent);
         }
 
-        public static void ExtractComponent(Component targetComponent)
+        public static void ExtractComponent(Component targetComponent, string namePrefix = "")
         {
             int undoGroupIndex = Undo.GetCurrentGroup();
             Undo.IncrementCurrentGroup();
-            GameObject gameObject = CreateParentObj(targetComponent);
+            GameObject gameObject = CreateParentObj(targetComponent, namePrefix);
             Undo.RegisterCreatedObjectUndo(gameObject, "Created child object");
             ExtractOperation(targetComponent, undoGroupIndex, gameObject);
         }
 
-        public static void ExtractComponent(List<Component> targetComponent)
+        public static void ExtractComponent(List<Component> targetComponent, string namePrefix = "")
         {
             int undoGroupIndex = Undo.GetCurrentGroup();
             Undo.IncrementCurrentGroup();
-            GameObject gameObject = CreateParentObj(targetComponent[0]);
+            GameObject gameObject = CreateParentObj(targetComponent[0], namePrefix);
             Undo.RegisterCreatedObjectUndo(gameObject, "Created child object");
             foreach (Component component in targetComponent) ExtractOperation(component, undoGroupIndex, gameObject);
         }
 
-        public static void ExtractComponent(Component[] targetComponent)
+        public static void ExtractComponent(Component[] targetComponent, string namePrefix = "")
         {
             int undoGroupIndex = Undo.GetCurrentGroup();
             Undo.IncrementCurrentGroup();
-            GameObject gameObject = CreateParentObj(targetComponent[0]);
+            GameObject gameObject = CreateParentObj(targetComponent[0], namePrefix);
             Undo.RegisterCreatedObjectUndo(gameObject, "Created child object");
             foreach (Component component in targetComponent) ExtractOperation(component, undoGroupIndex, gameObject);
         }
 
-        private static GameObject CreateParentObj(Component targetComponent)
+        private static GameObject CreateParentObj(Component targetComponent, string prefix)
         {
-            GameObject gameObject = new(targetComponent.GetType().Name);
+            GameObject gameObject = new($"{prefix}{targetComponent.GetType().Name}");
             gameObject.transform.SetParent(targetComponent.transform);
             gameObject.transform.localScale = Vector3.one;
             gameObject.transform.localPosition = Vector3.zero;
