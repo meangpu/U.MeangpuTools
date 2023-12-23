@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Meangpu
 {
-    public class MeSingleton<T> : MonoBehaviour where T : Component, new()
+    public class MeSingleton<T> : MonoBehaviour where T : Component
     {
         private static bool _applicationIsQuitting = false;
 
@@ -20,7 +20,7 @@ namespace Meangpu
                     _instance = FindObjectOfType<T>();
                     if (_instance == null)
                     {
-                        GameObject container = new();
+                        GameObject container = new(typeof(T).FullName);
                         _instance = container.AddComponent<T>();
                     }
                 }
