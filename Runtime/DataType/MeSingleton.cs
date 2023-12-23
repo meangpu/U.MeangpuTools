@@ -4,6 +4,7 @@ namespace Meangpu
 {
     public class MeSingleton<T> : MonoBehaviour where T : Component
     {
+        // prevent create another singleton when quit if it get called
         private static bool _applicationIsQuitting = false;
 
         [RuntimeInitializeOnLoadMethod] static void RunOnStart() { Application.quitting += () => _applicationIsQuitting = true; }
