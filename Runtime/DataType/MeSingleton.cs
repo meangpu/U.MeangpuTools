@@ -20,7 +20,7 @@ namespace Meangpu
                     _instance = FindObjectOfType<T>();
                     if (_instance == null)
                     {
-                        GameObject container = new(typeof(T).FullName);
+                        GameObject container = new(typeof(T).Name);
                         _instance = container.AddComponent<T>();
                     }
                 }
