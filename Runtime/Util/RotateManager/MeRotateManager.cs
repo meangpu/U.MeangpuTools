@@ -25,6 +25,10 @@ namespace Meangpu.Util
         {
             _rotation *= Quaternion.Euler(_rotateAxis * _rotateSpeed * Time.deltaTime);
             foreach (MeRotateObj target in _rotateTargets) target.transform.rotation = _rotation;
+
+#if UNITY_EDITOR
+            Debug.Log($"{_rotateTargets.Count}");
+#endif
         }
 
         public void Register(MeRotateObj newTarget)
