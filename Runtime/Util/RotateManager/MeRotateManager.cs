@@ -6,13 +6,14 @@ namespace Meangpu.Util
     public class MeRotateManager : MonoBehaviour
     {
         // learn this pattern from: [PERFECT Way to Rotate Coins | Unity Beginner Tutorial - YouTube](https://www.youtube.com/watch?v=pztDm7X5E9g)
+        // use this to prevent singleton error [Some objects were not cleaned up when closing the scene - Questions & Answers - Unity Discussions](https://discussions.unity.com/t/some-objects-were-not-cleaned-up-when-closing-the-scene/177426)
         [SerializeField] float _rotateSpeed = 10;
         [SerializeField] Vector3 _rotateAxis = Vector3.up;
         Quaternion _rotation;
         List<MeRotateObj> _rotateTargets;
 
         #region SINGLETON PATTERN
-        public static MeRotateManager _instance;
+        private static MeRotateManager _instance;
         private static bool applicationIsQuitting = false;
         [RuntimeInitializeOnLoadMethod] static void RunOnStart() { Application.quitting += () => applicationIsQuitting = true; }
         public static MeRotateManager Instance
@@ -39,6 +40,9 @@ namespace Meangpu.Util
 
         private void Awake()
         {
+            if (Instance != null && Instance != this) Destroy(this);
+            else _instance = this;
+
             _rotation = Quaternion.identity;
             _rotateTargets = new();
         }
