@@ -12,10 +12,33 @@ namespace Meangpu.Util
         List<MeRotateObj> _rotateTargets;
 
         #region SINGLETON PATTERN
-        public static MeRotateManager Instance;
+        public static MeRotateManager _instance;
+        private static bool applicationIsQuitting = false;
+        [RuntimeInitializeOnLoadMethod] static void RunOnStart() { Application.quitting += () => applicationIsQuitting = true; }
+        public static MeRotateManager Instance
+        {
+            get
+            {
+                if (applicationIsQuitting)
+                {
+                    return null;
+                }
+
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<MeRotateManager>();
+                    if (_instance == null)
+                    {
+                        GameObject container = new("MeRotateManager");
+                        _instance = container.AddComponent<MeRotateManager>();
+                    }
+                }
+                return _instance;
+            }
+        }
+
         private void Awake()
         {
-            Instance = this;
             _rotation = Quaternion.identity;
             _rotateTargets = new();
         }
