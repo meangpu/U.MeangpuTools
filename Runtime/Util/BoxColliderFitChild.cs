@@ -5,15 +5,18 @@ namespace Meangpu.Util
 {
     public class BoxColliderFitChild : MonoBehaviour
     {
-        [SerializeField] GameObject _parentTrans;
+        [SerializeField] GameObject parentGameobject;
 
         [Button]
         private void FitColliderToChildren()
         {
-            BoxCollider bc = _parentTrans.GetComponent<BoxCollider>() ?? _parentTrans.AddComponent<BoxCollider>();
+            if (parentGameobject == null) parentGameobject = gameObject;
+
+            BoxCollider bc = GetOrCreate.GetCreateComponent<BoxCollider>(parentGameobject);
+
             Bounds bounds = new(Vector3.zero, Vector3.zero);
             bool hasBounds = false;
-            foreach (Renderer render in _parentTrans.GetComponentsInChildren<Renderer>())
+            foreach (Renderer render in parentGameobject.GetComponentsInChildren<Renderer>())
             {
                 if (hasBounds)
                 {
@@ -27,7 +30,7 @@ namespace Meangpu.Util
             }
             if (hasBounds)
             {
-                bc.center = bounds.center - _parentTrans.transform.position;
+                bc.center = bounds.center - parentGameobject.transform.position;
                 bc.size = bounds.size;
             }
             else
