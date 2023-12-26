@@ -6,6 +6,7 @@ namespace Meangpu.Util
     public class BoxColliderFitChild : MonoBehaviour
     {
         [SerializeField] GameObject parentGameobject;
+        [SerializeField] Renderer[] _targetChildRenderer;
 
         [Button]
         private void FitColliderToChildren()
@@ -16,7 +17,13 @@ namespace Meangpu.Util
 
             Bounds bounds = new(Vector3.zero, Vector3.zero);
             bool hasBounds = false;
-            foreach (Renderer render in parentGameobject.GetComponentsInChildren<Renderer>())
+
+            if (_targetChildRenderer.Length == 0)
+            {
+                _targetChildRenderer = parentGameobject.GetComponentsInChildren<Renderer>();
+            }
+
+            foreach (Renderer render in _targetChildRenderer)
             {
                 if (hasBounds)
                 {
