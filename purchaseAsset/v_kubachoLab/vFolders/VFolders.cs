@@ -413,7 +413,7 @@ namespace VFolders
         public static VFoldersData data;
 
 
-        const string version = "1.0.12";
+        const string version = "1.0.13";
 
     }
 }

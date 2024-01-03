@@ -152,91 +152,150 @@ namespace VInspector.Libs
 
         #region Reflection
 
-        public static object GetFieldValue(this object o, string fieldName)
-        {
-            var startType = o is Type t ? t : o.GetType();
-            var curType = startType;
 
-            while (curType != null)
+        public static object GetFieldValue(this object o, string fieldName, bool exceptionIfNotFound = true)
+        {
+            if (o.GetFieldInfo(fieldName) is FieldInfo fieldInfo)
+                return fieldInfo.GetValue(o is Type ? null : o);
+
+            else if (exceptionIfNotFound)
+                throw new System.Exception($"Field '{fieldName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
+
+            else return null;
+
+        }
+
+        public static void SetFieldValue(this object o, string fieldName, object value, bool exceptionIfNotFound = true)
+        {
+            if (o.GetFieldInfo(fieldName) is FieldInfo fieldInfo)
+                fieldInfo.SetValue(o is Type ? null : o, value);
+
+            else if (exceptionIfNotFound)
+                throw new System.Exception($"Field '{fieldName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
+
+        }
+
+        static FieldInfo GetFieldInfo(this object o, string fieldName)
+        {
+            var type = (o as Type) ?? o.GetType();
+
+
+            if (fieldInfoCache.TryGetValue(type, out var fieldInfosByNames))
+                if (fieldInfosByNames.TryGetValue(fieldName, out var fieldInfo))
+                    return fieldInfo;
+
+
+            if (!fieldInfoCache.ContainsKey(type))
+                fieldInfoCache[type] = new Dictionary<string, FieldInfo>();
+
+            for (var curType = type; curType != null; curType = curType.BaseType)
                 if (curType.GetField(fieldName, maxBindingFlags) is FieldInfo fieldInfo)
-                    return fieldInfo.GetValue(o is Type ? null : o);
-                else
-                    curType = curType.BaseType;
+                    return fieldInfoCache[type][fieldName] = fieldInfo;
 
-            throw new System.Exception("Field '" + fieldName + "' not found in '" + startType.Name + "' type and its parent types");
+
+            return null;
 
         }
-        public static object GetPropertyValue(this object o, string propertyName, int typeHeight = 0)
-        {
-            var startType = o is Type t ? t : o.GetType();
-            var curType = startType;
 
-            while (curType != null)
+        static Dictionary<Type, Dictionary<string, FieldInfo>> fieldInfoCache = new Dictionary<Type, Dictionary<string, FieldInfo>>();
+
+
+
+        public static object GetPropertyValue(this object o, string propertyName, bool exceptionIfNotFound = true)
+        {
+            if (o.GetPropertyInfo(propertyName) is PropertyInfo propertyInfo)
+                return propertyInfo.GetValue(o is Type ? null : o);
+
+            else if (exceptionIfNotFound)
+                throw new System.Exception($"Property '{propertyName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
+
+            else return null;
+
+        }
+
+        public static void SetPropertyValue(this object o, string propertyName, object value, bool exceptionIfNotFound = true)
+        {
+            if (o.GetPropertyInfo(propertyName) is PropertyInfo propertyInfo)
+                propertyInfo.SetValue(o is Type ? null : o, value);
+
+            else if (exceptionIfNotFound)
+                throw new System.Exception($"Property '{propertyName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
+
+        }
+
+        static PropertyInfo GetPropertyInfo(this object o, string propertyName)
+        {
+            var type = (o as Type) ?? o.GetType();
+
+
+            if (propertyInfoCache.TryGetValue(type, out var propertyInfosByNames))
+                if (propertyInfosByNames.TryGetValue(propertyName, out var propertyInfo))
+                    return propertyInfo;
+
+
+            if (!propertyInfoCache.ContainsKey(type))
+                propertyInfoCache[type] = new Dictionary<string, PropertyInfo>();
+
+            for (var curType = type; curType != null; curType = curType.BaseType)
                 if (curType.GetProperty(propertyName, maxBindingFlags) is PropertyInfo propertyInfo)
-                    return propertyInfo.GetValue(o is Type ? null : o);
-                else
-                    curType = curType.BaseType;
+                    return propertyInfoCache[type][propertyName] = propertyInfo;
 
-            throw new System.Exception("Property '" + propertyName + "' not found in '" + startType.Name + "' type and its parent types");
 
-        }
-
-        public static void SetFieldValue(this object o, string fieldName, object value, int typeHeight = 0)
-        {
-            var startType = o is Type t ? t : o.GetType();
-            var curType = startType;
-
-            while (curType != null)
-                if (curType.GetField(fieldName, maxBindingFlags) is FieldInfo fieldInfo)
-                {
-                    fieldInfo.SetValue(o is Type ? null : o, value);
-                    return;
-                }
-                else
-                    curType = curType.BaseType;
-
-            throw new System.Exception("Field '" + fieldName + "' not found in '" + startType.Name + "' type and its parent types");
-
-        }
-        public static void SetPropertyValue(this object o, string propertyName, object value, int typeHeight = 0)
-        {
-            var startType = o is Type t ? t : o.GetType();
-            var curType = startType;
-
-            while (curType != null)
-                if (curType.GetProperty(propertyName, maxBindingFlags) is PropertyInfo propertyInfo)
-                {
-                    propertyInfo.SetValue(o is Type ? null : o, value);
-                    return;
-                }
-                else
-                    curType = curType.BaseType;
-
-            throw new System.Exception("Property '" + propertyName + "' not found in '" + startType.Name + "' type and its parent types");
+            return null;
 
         }
 
-        public static object InvokeMethod(this object o, string methodName, params object[] parameters)
+        static Dictionary<Type, Dictionary<string, PropertyInfo>> propertyInfoCache = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
+
+
+
+        public static object InvokeMethod(this object o, string methodName, params object[] parameters) // todo caching
         {
             var type = o is Type t ? t : o.GetType();
+            var target = o is Type ? null : o;
 
-            return type.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, o, parameters);
+            // return type.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, target, parameters);
+
+            try { return type.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, target, parameters); }
+            catch
+            {
+                foreach (var interfaceType in type.GetInterfaces())
+                    try { return interfaceType.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, target, parameters); } catch { }
+            }
+
+            throw new System.Exception("Method '" + methodName + "' not found in '" + type.Name + "' type, its parent types and interfaces; or it threw an exception");
 
         }
 
-        public static T GetFieldValue<T>(this object o, string fieldName) => (T)o.GetFieldValue(fieldName);
-        public static T GetPropertyValue<T>(this object o, string propertyName, int typeHeight = 0) => (T)o.GetPropertyValue(propertyName, typeHeight);
+
+
+        public static T GetFieldValue<T>(this object o, string fieldName, bool exceptionIfNotFound = true) => (T)o.GetFieldValue(fieldName, exceptionIfNotFound);
+
+        public static T GetPropertyValue<T>(this object o, string propertyName, bool exceptionIfNotFound = true) => (T)o.GetPropertyValue(propertyName, exceptionIfNotFound);
+
         public static T InvokeMethod<T>(this object o, string methodName, params object[] parameters) => (T)o.InvokeMethod(methodName, parameters);
+
+
+
+
+        public static List<Type> GetSubclasses(this Type t) => t.Assembly.GetTypes().Where(type => type.IsSubclassOf(t)).ToList();
+
+        public static object GetDefaultValue(this FieldInfo f, params object[] constructorVars) => f.GetValue(System.Activator.CreateInstance(((MemberInfo)f).ReflectedType, constructorVars));
+
+        public static object GetDefaultValue(this FieldInfo f) => f.GetValue(System.Activator.CreateInstance(((MemberInfo)f).ReflectedType));
+
+
+        public static IEnumerable<FieldInfo> GetFieldsWithoutBase(this Type t) => t.GetFields().Where(r => !t.BaseType.GetFields().Any(rr => rr.Name == r.Name));
+
+        public static IEnumerable<PropertyInfo> GetPropertiesWithoutBase(this Type t) => t.GetProperties().Where(r => !t.BaseType.GetProperties().Any(rr => rr.Name == r.Name));
 
 
         public const BindingFlags maxBindingFlags = (BindingFlags)62;
 
-        public static List<Type> GetSubclasses(this Type t) => t.Assembly.GetTypes().Where(type => type.IsSubclassOf(t)).ToList();
-        public static object GetDefaultValue(this FieldInfo f, params object[] constructorVars) => f.GetValue(System.Activator.CreateInstance(((MemberInfo)f).ReflectedType, constructorVars));
-        public static object GetDefaultValue(this FieldInfo f) => f.GetValue(System.Activator.CreateInstance(((MemberInfo)f).ReflectedType));
 
-        public static IEnumerable<FieldInfo> GetFieldsWithoutBase(this Type t) => t.GetFields().Where(r => !t.BaseType.GetFields().Any(rr => rr.Name == r.Name));
-        public static IEnumerable<PropertyInfo> GetPropertiesWithoutBase(this Type t) => t.GetProperties().Where(r => !t.BaseType.GetProperties().Any(rr => rr.Name == r.Name));
+
+
+
 
 
         #endregion
@@ -789,6 +848,96 @@ namespace VInspector.Libs
 
         #endregion
 
+        #region Events
+
+        public struct WrappedEvent
+        {
+            public Event e;
+
+            public bool isNull => e == null;
+            public bool isRepaint => isNull ? default : e.type == EventType.Repaint;
+            public bool isLayout => isNull ? default : e.type == EventType.Layout;
+            public bool isUsed => isNull ? default : e.type == EventType.Used;
+            public bool isMouseLeaveWindow => isNull ? default : e.type == EventType.MouseLeaveWindow;
+            public bool isMouseEnterWindow => isNull ? default : e.type == EventType.MouseEnterWindow;
+            public bool isContextClick => isNull ? default : e.type == EventType.ContextClick;
+
+            public bool isKeyDown => isNull ? default : e.type == EventType.KeyDown;
+            public bool isKeyUp => isNull ? default : e.type == EventType.KeyUp;
+            public KeyCode keyCode => isNull ? default : e.keyCode;
+            public char characted => isNull ? default : e.character;
+
+            public bool isExecuteCommand => isNull ? default : e.type == EventType.ExecuteCommand;
+            public string commandName => isNull ? default : e.commandName;
+
+            public bool isMouse => isNull ? default : e.isMouse;
+            public bool isMouseDown => isNull ? default : e.type == EventType.MouseDown;
+            public bool isMouseUp => isNull ? default : e.type == EventType.MouseUp;
+            public bool isMouseDrag => isNull ? default : e.type == EventType.MouseDrag;
+            public bool isMouseMove => isNull ? default : e.type == EventType.MouseMove;
+            public bool isScroll => isNull ? default : e.type == EventType.ScrollWheel;
+            public int mouseButton => isNull ? default : e.button;
+            public int clickCount => isNull ? default : e.clickCount;
+            public Vector2 mousePosition => isNull ? default : e.mousePosition;
+            public Vector2 mousePosition_screenSpace => isNull ? default : GUIUtility.GUIToScreenPoint(e.mousePosition);
+            public Vector2 mouseDelta => isNull ? default : e.delta;
+
+            public bool isDragUpdate => isNull ? default : e.type == EventType.DragUpdated;
+            public bool isDragPerform => isNull ? default : e.type == EventType.DragPerform;
+            public bool isDragExit => isNull ? default : e.type == EventType.DragExited;
+
+            public EventModifiers modifiers => isNull ? default : e.modifiers;
+            public bool holdingAnyModifierKey => modifiers != EventModifiers.None;
+
+            public bool holdingAlt => isNull ? default : e.alt;
+            public bool holdingShift => isNull ? default : e.shift;
+            public bool holdingCtrl => isNull ? default : e.control;
+            public bool holdingCmd => isNull ? default : e.command;
+            public bool holdingCmdOrCtrl => isNull ? default : e.command || e.control;
+
+            public bool holdingAltOnly => isNull ? default : e.modifiers == EventModifiers.Alt;        // in some sessions FunctionKey is always pressed?
+            public bool holdingShiftOnly => isNull ? default : e.modifiers == EventModifiers.Shift;        // in some sessions FunctionKey is always pressed?
+            public bool holdingCtrlOnly => isNull ? default : e.modifiers == EventModifiers.Control;
+            public bool holdingCmdOnly => isNull ? default : e.modifiers == EventModifiers.Command;
+            public bool holdingCmdOrCtrlOnly => isNull ? default : (e.modifiers == EventModifiers.Command || e.modifiers == EventModifiers.Control);
+
+            public EventType type => e.type;
+
+            public void Use() => e?.Use();
+
+
+            public WrappedEvent(Event e) => this.e = e;
+
+            public override string ToString() => e.ToString();
+
+        }
+        public static WrappedEvent Wrap(this Event e) => new WrappedEvent(e);
+        public static WrappedEvent curEvent => (Event.current ?? _fi_s_Current.GetValue(null) as Event).Wrap(); // todo no reflection?
+        static FieldInfo _fi_s_Current = typeof(Event).GetField("s_Current", maxBindingFlags);
+
+
+
+
+
+        public static Event e => Event.current;
+        public static bool ePresent => Event.current != null;
+        public static UnityEngine.EventType eType => ePresent ? e.type : UnityEngine.EventType.Ignore;
+        public static bool mouseDown(this Event e) => eType == EventType.MouseDown && e.button == 0;
+        public static bool mouseUp(this Event e) => eType == EventType.MouseUp && e.button == 0;
+        public static bool keyDown(this Event e) => eType == EventType.KeyDown;
+        public static bool keyUp(this Event e) => eType == EventType.KeyUp;
+
+
+        public static bool holdingAlt => ePresent && (e.alt);
+        public static bool holdingCmd => ePresent && (e.command || e.control);
+        public static bool holdingShift => ePresent && (e.shift);
+
+
+
+
+
+        #endregion
+
         #region Shortcuts
 
         public static Rect lastRect => GUILayoutUtility.GetLastRect();
@@ -808,20 +957,6 @@ namespace VInspector.Libs
         public static float GetCurrentInspectorWidth() => typeof(EditorGUIUtility).GetPropertyValue<float>("contextWidth");
 
         public static bool IsHovered(this Rect r) => ePresent && r.Contains(e.mousePosition);
-
-
-        public static Event e => Event.current;
-        public static bool ePresent => Event.current != null;
-        public static UnityEngine.EventType eType => ePresent ? e.type : UnityEngine.EventType.Ignore;
-        public static bool mouseDown(this Event e) => eType == EventType.MouseDown && e.button == 0;
-        public static bool mouseUp(this Event e) => eType == EventType.MouseUp && e.button == 0;
-        public static bool keyDown(this Event e) => eType == EventType.KeyDown;
-        public static bool keyUp(this Event e) => eType == EventType.KeyUp;
-
-
-        public static bool holdingAlt => ePresent && (e.alt);
-        public static bool holdingCmd => ePresent && (e.command || e.control);
-        public static bool holdingShift => ePresent && (e.shift);
 
 
         public static void SetGUIEnabled(bool enabled) { _prevGuiEnabled = GUI.enabled; GUI.enabled = enabled; }
