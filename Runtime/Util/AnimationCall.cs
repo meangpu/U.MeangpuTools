@@ -16,6 +16,12 @@ namespace Meangpu.Util
         /// <param name="newState"></param>
         public virtual void ChangeAnimationState(string newState)
         {
+            if (string.IsNullOrEmpty(newState))
+            {
+                Debug.Log("newState is null, cannot change state", gameObject);
+                return;
+            }
+
             if (!_canRecallCurrentAnimation && _nowState == newState) return;
             if (_useCrossFade) _animator.CrossFadeInFixedTime(newState, _crossFadeTime);
             else _animator.Play(newState);
@@ -24,6 +30,12 @@ namespace Meangpu.Util
 
         public virtual void ChangeAnimationState(AnimationClip newState)
         {
+            if (newState == null)
+            {
+                Debug.Log("AnimationClip is null, cannot change state", gameObject);
+                return;
+            }
+
             if (!_canRecallCurrentAnimation && _nowState == newState.name) return;
             if (_useCrossFade) _animator.CrossFadeInFixedTime(newState.name, _crossFadeTime);
             else _animator.Play(newState.name);
