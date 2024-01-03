@@ -11,14 +11,14 @@ namespace Meangpu.Util
         void KillAllChildCollider()
         {
             if (_parentTrans == null) _parentTrans = transform;
-            foreach (var c in _parentTrans.GetComponentsInChildren<Collider>()) DoDestroyComponent(c);
+            foreach (var c in _parentTrans.GetComponentsInChildren<Collider>(true)) DoDestroyComponent(c);
         }
 
         [Button]
         void KillAllChildRigidbody()
         {
             if (_parentTrans == null) _parentTrans = transform;
-            foreach (var c in _parentTrans.GetComponentsInChildren<Rigidbody>()) DoDestroyComponent(c);
+            foreach (var c in _parentTrans.GetComponentsInChildren<Rigidbody>(true)) DoDestroyComponent(c);
         }
 
         void DoDestroyComponent(Component c)
