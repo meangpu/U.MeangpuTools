@@ -10,7 +10,7 @@ namespace Meangpu
         private int subMeshCount;
         private int triangleCount;
 
-        [MenuItem("Tools/Mesh Info")]
+        [MenuItem("MeangpuTools/Mesh Info")]
         static void Init()
         {
             MeshInfo window = (MeshInfo)GetWindow(typeof(MeshInfo));
