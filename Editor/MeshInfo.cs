@@ -9,34 +9,52 @@ namespace Meangpu
         private int vertexCount;
         private int subMeshCount;
         private int triangleCount;
-        GUIStyle boldStyle;
 
-        [MenuItem("MeangpuTools/Mesh Info")]
+        [MenuItem("Tools/Mesh Info")]
         static void Init()
         {
-            // Get existing open window or if none, make a new one:
             MeshInfo window = (MeshInfo)GetWindow(typeof(MeshInfo));
             window.titleContent.text = "Mesh Info";
         }
+
         void OnSelectionChange() => Repaint();
+
+        void CountAllChildPoly(GameObject g)
+        {
+            MeshFilter m = g.GetComponent<MeshFilter>();
+            if (m != null)
+            {
+                vertexCount += m.sharedMesh.vertexCount;
+                triangleCount += m.sharedMesh.triangles.Length / 3;
+                subMeshCount += m.sharedMesh.subMeshCount;
+            }
+            foreach (Transform child in g.transform)
+            {
+                CountAllChildPoly(child.gameObject);
+            }
+        }
+
         void OnGUI()
         {
-            if (Selection.activeGameObject && Selection.activeGameObject.GetComponent<MeshFilter>())
+            GUIStyle boldStyle = new()
             {
-                GUIStyle boldStyle = new()
-                {
-                    fontSize = 20,
-                    fontStyle = FontStyle.Bold,
-                };
-                boldStyle.normal.textColor = Color.yellow;
-                vertexCount = Selection.activeGameObject.GetComponent<MeshFilter>().sharedMesh.vertexCount;
-                triangleCount = Selection.activeGameObject.GetComponent<MeshFilter>().sharedMesh.triangles.Length / 3;
-                subMeshCount = Selection.activeGameObject.GetComponent<MeshFilter>().sharedMesh.subMeshCount;
-                EditorGUILayout.LabelField(Selection.activeGameObject.name);
-                EditorGUILayout.LabelField("Vertices: ", $"{vertexCount}");
-                EditorGUILayout.LabelField("Triangles: ", $"{triangleCount}", boldStyle);
-                EditorGUILayout.LabelField("SubMeshes: ", $"{subMeshCount}");
-            }
+                fontSize = 20,
+                fontStyle = FontStyle.Bold,
+            };
+            boldStyle.normal.textColor = Color.yellow;
+
+            vertexCount = 0;
+            subMeshCount = 0;
+            triangleCount = 0;
+
+            if (!Selection.activeGameObject) return;
+            GameObject g = Selection.activeGameObject;
+            CountAllChildPoly(g);
+
+            EditorGUILayout.LabelField(Selection.activeGameObject.name);
+            EditorGUILayout.LabelField("Vertices: ", $"{vertexCount}");
+            EditorGUILayout.LabelField("Triangles: ", $"{triangleCount}", boldStyle);
+            EditorGUILayout.LabelField("SubMeshes: ", $"{subMeshCount}");
         }
     }
 }
