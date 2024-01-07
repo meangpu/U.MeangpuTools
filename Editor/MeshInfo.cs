@@ -9,6 +9,7 @@ namespace Meangpu
         private int vertexCount;
         private int subMeshCount;
         private int triangleCount;
+        GUIStyle boldStyle;
 
         [MenuItem("MeangpuTools/Mesh Info")]
         static void Init()
@@ -22,13 +23,19 @@ namespace Meangpu
         {
             if (Selection.activeGameObject && Selection.activeGameObject.GetComponent<MeshFilter>())
             {
+                GUIStyle boldStyle = new()
+                {
+                    fontSize = 20,
+                    fontStyle = FontStyle.Bold,
+                };
+                boldStyle.normal.textColor = Color.yellow;
                 vertexCount = Selection.activeGameObject.GetComponent<MeshFilter>().sharedMesh.vertexCount;
                 triangleCount = Selection.activeGameObject.GetComponent<MeshFilter>().sharedMesh.triangles.Length / 3;
                 subMeshCount = Selection.activeGameObject.GetComponent<MeshFilter>().sharedMesh.subMeshCount;
                 EditorGUILayout.LabelField(Selection.activeGameObject.name);
-                EditorGUILayout.LabelField("Vertices: ", vertexCount.ToString());
-                EditorGUILayout.LabelField("Triangles: ", triangleCount.ToString());
-                EditorGUILayout.LabelField("SubMeshes: ", subMeshCount.ToString());
+                EditorGUILayout.LabelField("Vertices: ", $"{vertexCount}");
+                EditorGUILayout.LabelField("Triangles: ", $"{triangleCount}", boldStyle);
+                EditorGUILayout.LabelField("SubMeshes: ", $"{subMeshCount}");
             }
         }
     }
