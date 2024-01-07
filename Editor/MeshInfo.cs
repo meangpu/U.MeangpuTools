@@ -10,7 +10,7 @@ namespace Meangpu
         private int subMeshCount;
         private int triangleCount;
 
-        [MenuItem("Tools/Mesh Info")]
+        [MenuItem("MeangpuTools/Mesh Info")]
         static void Init()
         {
             // Get existing open window or if none, make a new one:
