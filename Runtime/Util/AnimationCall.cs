@@ -14,7 +14,7 @@ namespace Meangpu.Util
         ///suggest to use AnimationClip as var instead of string to prevent human error
         /// </summary>
         /// <param name="newState"></param>
-        public virtual void ChangeAnimationState(string newState)
+        public virtual void ChangeAnimationState(string newState, bool playWithRandomOffset = false)
         {
             if (string.IsNullOrEmpty(newState))
             {
@@ -23,12 +23,20 @@ namespace Meangpu.Util
             }
 
             if (!_canRecallCurrentAnimation && _nowState == newState) return;
-            if (_useCrossFade) _animator.CrossFadeInFixedTime(newState, _crossFadeTime);
-            else _animator.Play(newState);
+            if (_useCrossFade)
+            {
+                _animator.CrossFadeInFixedTime(newState, _crossFadeTime);
+            }
+            else
+            {
+                if (playWithRandomOffset) _animator.Play(newState, 0, Random.Range(0f, 1f));
+                else _animator.Play(newState);
+            }
+
             _nowState = newState;
         }
 
-        public virtual void ChangeAnimationState(AnimationClip newState)
+        public virtual void ChangeAnimationState(AnimationClip newState, bool playWithRandomOffset = false)
         {
             if (newState == null)
             {
@@ -37,8 +45,16 @@ namespace Meangpu.Util
             }
 
             if (!_canRecallCurrentAnimation && _nowState == newState.name) return;
-            if (_useCrossFade) _animator.CrossFadeInFixedTime(newState.name, _crossFadeTime);
-            else _animator.Play(newState.name);
+            if (_useCrossFade)
+            {
+                _animator.CrossFadeInFixedTime(newState.name, _crossFadeTime);
+            }
+            else
+            {
+                if (playWithRandomOffset) _animator.Play(newState.name, 0, Random.Range(0f, 1f));
+                else _animator.Play(newState.name);
+            }
+
             _nowState = newState.name;
         }
     }
