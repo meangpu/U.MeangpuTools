@@ -29,7 +29,7 @@ namespace Meangpu.Util
             _objectActiveState = state;
             BlinkAction(state);
             if (state) _onBlinkOffEvent?.Invoke();
-            else _onBlinkOffEvent?.Invoke();
+            else _onBlinkOnEvent?.Invoke();
         }
 
         public abstract void BlinkAction(bool nowState);
