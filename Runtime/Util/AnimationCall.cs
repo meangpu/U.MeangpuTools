@@ -30,7 +30,7 @@ namespace Meangpu.Util
             else
             {
                 if (playWithRandomOffset) _animator.Play(newState, 0, Random.Range(0f, 1f));
-                else _animator.Play(newState);
+                else _animator.Play(newState, 0, 0);
             }
 
             _nowState = newState;
@@ -52,7 +52,7 @@ namespace Meangpu.Util
             else
             {
                 if (playWithRandomOffset) _animator.Play(newState.name, 0, Random.Range(0f, 1f));
-                else _animator.Play(newState.name);
+                else _animator.Play(newState.name, 0, 0);
             }
 
             _nowState = newState.name;
