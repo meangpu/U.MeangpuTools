@@ -1,4 +1,5 @@
-using EasyButtons;
+using VInspector;
+using Meangpu.Util;
 using UnityEngine;
 
 namespace Meangpu
@@ -40,5 +41,8 @@ namespace Meangpu
         public Sprite Icon;
         public Sprite ScenePreviewImage;
         public bool IsDone;
+
+        [Button]
+        public void LoadThisScene() => SceneChangeManager.instance.LoadScene(this);
     }
 }
