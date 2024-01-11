@@ -5,7 +5,18 @@ namespace Meangpu.Util
 {
     public class ActionMeToolsCaller : MonoBehaviour
     {
-        [Button] public void CallOnPause() => ActionMeTools.OnPause?.Invoke();
-        [Button] public void CallOnUnPause() => ActionMeTools.OnUnPause?.Invoke();
+        [Button]
+        public void CallOnPause()
+        {
+            Debug.Log("call pause");
+            ActionMeTools.OnPause?.Invoke();
+        }
+
+        [Button]
+        public void CallOnUnPause()
+        {
+            Debug.Log("call unpause");
+            ActionMeTools.OnUnPause?.Invoke();
+        }
     }
 }

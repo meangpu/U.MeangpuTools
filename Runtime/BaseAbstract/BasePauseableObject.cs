@@ -4,25 +4,35 @@ using UnityEngine;
 
 namespace Meangpu
 {
-    public abstract class BasePauseableObject : MonoBehaviour, ICanPause
+    public abstract class BasePauseableObject : MonoBehaviour
     {
         [SerializeField] bool _isThisCanGetPause = true;
         [ReadOnly] public bool IsPausing;
 
-        void OnEnable() => ActionMeTools.OnPause += DoPause;
-        void OnDisable() => ActionMeTools.OnUnPause -= DoUnPause;
-
-        public void DoPause()
+        void OnEnable()
         {
+            ActionMeTools.OnPause += DoPause;
+            ActionMeTools.OnUnPause += DoUnPause;
+        }
+        void OnDisable()
+        {
+            ActionMeTools.OnPause -= DoPause;
+            ActionMeTools.OnUnPause -= DoUnPause;
+        }
+
+        void DoPause()
+        {
+            if (!_isThisCanGetPause) return;
             IsPausing = true;
-            enabled = false;
+            this.enabled = false;
             AfterPause();
         }
 
-        public void DoUnPause()
+        void DoUnPause()
         {
+            if (!_isThisCanGetPause) return;
             IsPausing = false;
-            enabled = true;
+            this.enabled = true;
             AfterUnPause();
         }
         protected virtual void AfterPause() { }
