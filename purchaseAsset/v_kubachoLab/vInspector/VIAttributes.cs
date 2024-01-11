@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-
+#if UNITY_EDITOR
+using static VInspector.Libs.VUtils;
+#endif
 
 
 namespace VInspector
@@ -79,7 +81,7 @@ namespace VInspector
         public object variableValue;
 
 #if UNITY_EDITOR
-        public bool Evaluate(object target) => target.GetType().GetField(variableName, (BindingFlags)62) is FieldInfo fi && object.Equals(fi.GetValue(target), variableValue);//
+        public bool Evaluate(object target) => target.GetMemberValue(variableName, false) is object curValue && curValue.Equals(variableValue);
 #endif
 
         public IfAttribute(string boolName) { this.variableName = boolName; this.variableValue = true; }
