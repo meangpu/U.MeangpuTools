@@ -125,6 +125,13 @@
       "description": "shader system",
       "url": "https://github.com/meangpu/U.MeShader.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.ui",
+      "version": "0.0.1",
+      "description": "ui that i didn't use",
+      "url": "https://github.com/meangpu/U.MeUIFramework.git",
+      "isSelectAtStart": false
     }
   ]
 }
