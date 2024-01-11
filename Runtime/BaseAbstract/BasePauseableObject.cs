@@ -1,4 +1,3 @@
-using Meangpu.Interface;
 using Meangpu.Util;
 using UnityEngine;
 
@@ -9,12 +8,13 @@ namespace Meangpu
         [SerializeField] bool _isThisCanGetPause = true;
         [ReadOnly] public bool IsPausing;
 
-        void OnEnable()
+        void Awake()
         {
             ActionMeTools.OnPause += DoPause;
             ActionMeTools.OnUnPause += DoUnPause;
         }
-        void OnDisable()
+
+        void OnDestroy()
         {
             ActionMeTools.OnPause -= DoPause;
             ActionMeTools.OnUnPause -= DoUnPause;
@@ -24,7 +24,7 @@ namespace Meangpu
         {
             if (!_isThisCanGetPause) return;
             IsPausing = true;
-            this.enabled = false;
+            enabled = false;
             AfterPause();
         }
 
@@ -32,7 +32,7 @@ namespace Meangpu
         {
             if (!_isThisCanGetPause) return;
             IsPausing = false;
-            this.enabled = true;
+            enabled = true;
             AfterUnPause();
         }
         protected virtual void AfterPause() { }

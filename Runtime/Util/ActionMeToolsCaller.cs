@@ -6,14 +6,14 @@ namespace Meangpu.Util
     public class ActionMeToolsCaller : MonoBehaviour
     {
         [Button]
-        public void CallOnPause()
+        public void Pause()
         {
             Debug.Log("call pause");
             ActionMeTools.OnPause?.Invoke();
         }
 
         [Button]
-        public void CallOnUnPause()
+        public void UnPause()
         {
             Debug.Log("call unpause");
             ActionMeTools.OnUnPause?.Invoke();
