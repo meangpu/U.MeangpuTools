@@ -6,7 +6,7 @@ namespace Meangpu
     public class DisplayGameVersionPanel : EditorWindow
     {
         private string versionName;
-        [MenuItem("MeangpuTools/GameVersionPanel")]
+        [MenuItem("MeangpuTools/EditorUtil/GameVersionPanel")]
         static void Init()
         {
             DisplayGameVersionPanel window = (DisplayGameVersionPanel)GetWindow(typeof(DisplayGameVersionPanel));

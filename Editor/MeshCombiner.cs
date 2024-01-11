@@ -7,7 +7,7 @@ namespace Meangpu
     {
         public Transform TransformToCombine;
 
-        [MenuItem("MeangpuTools/MeshCombine")]
+        [MenuItem("MeangpuTools/EditorUtil/MeshCombine")]
         public static void ShowWindow()
         {
             GetWindow<MeshCombiner>("MeshCombiner");
@@ -34,7 +34,7 @@ namespace Meangpu
                 return;
             }
 
-            // Drag this into parent game obj then run this function 
+            // Drag this into parent game obj then run this function
             Quaternion _oldRot = TransformToCombine.rotation;
             Vector3 _oldPos = TransformToCombine.position;
 

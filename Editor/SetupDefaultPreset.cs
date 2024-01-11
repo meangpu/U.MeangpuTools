@@ -10,7 +10,7 @@ namespace Meangpu
     {
         public static string FolderPath = "Assets/Libraries";
 
-        [MenuItem("MeangpuTools/Setup Preset")]
+        [MenuItem("MeangpuTools/EditorUtil/Setup Preset")]
         public static void ShowWindow() => GetWindow<SetupDefaultPreset>("Set Default preset");
 
         private void OnGUI()

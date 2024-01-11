@@ -8,7 +8,7 @@ namespace Meangpu
     {
         public string targetObjectName;
 
-        [MenuItem("MeangpuTools/DeleteGameObjectByName")]
+        [MenuItem("MeangpuTools/EditorUtil/DeleteGameObjectByName")]
         public static void ShowWindow() => GetWindow<DeleteByName>("DeleteGameObjectByName");
 
         private void OnGUI()

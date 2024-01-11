@@ -9,7 +9,7 @@ using Unity.EditorCoroutines.Editor;
 public class BuildMultiplePlatform : EditorWindow
 {
     // learn from https://www.youtube.com/watch?v=x566N_aEBeY
-    [MenuItem("MeangpuTools/BuildMultiplePlatformTools")]
+    [MenuItem("MeangpuTools/Build/BuildMultiplePlatformTools")]
     public static void OnShowTools()
     {
         EditorWindow.GetWindow<BuildMultiplePlatform>();

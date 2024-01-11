@@ -15,7 +15,7 @@ namespace Meangpu
     public class PackageImporter : EditorWindow
     {
         private static EditorWindow promptWindow;
-        private const string WindowPath = "MeangpuTools/";
+        private const string WindowPath = "MeangpuTools/EditorUtil";
         private const string WindowName = "Package Importer";
         private const string DataUri = "https://raw.githubusercontent.com/meangpu/U.MeangpuTools/main/Editor/PackageImport/mePackage.json";
         private const string titleLabel = "MEANGPU Packages To Import";
