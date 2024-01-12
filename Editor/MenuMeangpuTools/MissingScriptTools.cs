@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace MeangpuTools
+namespace Meangpu
 {
     public static class MissingScriptTools
     {
