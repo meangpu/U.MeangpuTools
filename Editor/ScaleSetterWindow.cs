@@ -7,10 +7,10 @@ namespace Meangpu
     public class ScaleSetterWindow : EditorWindow
     {
         // create for vr-movie scale text, because it ui with bad parent object, so need some helper class to fix font size
-        private Transform parentScaleRef;
-
-        public GameObject[] childObjects = { };
-        SerializedObject childSerializeObject;
+        private Transform ParentScaleRef;
+        public GameObject[] ChildObjects = { };
+        SerializedObject ChildSerializeObject;
+        public Vector3 ScaleToSet;
 
         [MenuItem("MeangpuTools/EditorUtil/ScaleSetter")]
         public static void ShowWindow()
@@ -21,39 +21,63 @@ namespace Meangpu
         private void OnEnable()
         {
             ScriptableObject target = this;
-            childSerializeObject = new SerializedObject(target);
+            ChildSerializeObject = new SerializedObject(target);
         }
 
         private void OnGUI()
         {
-            GUILayout.Label("Set Scale", EditorStyles.boldLabel);
-            parentScaleRef = EditorGUILayout.ObjectField("Parent Scale Ref", parentScaleRef, typeof(Transform), true) as Transform;
+            ParentScaleRef = EditorGUILayout.ObjectField("Parent Scale Ref", ParentScaleRef, typeof(Transform), true) as Transform;
+            ScaleToSet = EditorGUILayout.Vector3Field("ScaleToSet", ScaleToSet);
+
             EditorGUILayout.Space();
 
-            childSerializeObject.Update();
-            SerializedProperty childProperty = childSerializeObject.FindProperty("childObjects");
+            ChildSerializeObject.Update();
+            SerializedProperty childProperty = ChildSerializeObject.FindProperty("ChildObjects");
             EditorGUILayout.PropertyField(childProperty, true); // True means show children
-            childSerializeObject.ApplyModifiedProperties(); // Remember to apply modified properties
+            ChildSerializeObject.ApplyModifiedProperties(); // Remember to apply modified properties
 
-            if (GUILayout.Button("Set Scale"))
-            {
-                SetChildScale();
-            }
+            if (GUILayout.Button("Set Scale To Parent ref")) SetChildScale();
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("LoadParentToVector")) LoadParentScaleToVector3();
+            if (GUILayout.Button("SetChildToVector")) SetChildToVector3();
+            EditorGUILayout.EndHorizontal();
         }
 
         private void SetChildScale()
         {
-            if (parentScaleRef == null || childObjects == null)
+            if (ParentScaleRef == null || ChildObjects == null)
             {
                 Debug.LogError("Please set the parent scale reference and child objects.");
                 return;
             }
 
-            foreach (GameObject childObject in childObjects)
+            foreach (GameObject childObject in ChildObjects)
             {
                 Transform oldChildParent = childObject.transform.parent;
                 childObject.transform.SetParent(null, true);
-                childObject.transform.localScale = parentScaleRef.localScale;
+                childObject.transform.localScale = ParentScaleRef.localScale;
+                childObject.transform.SetParent(oldChildParent, true);
+            }
+            Debug.Log("Child scales have been set to the parent scale.");
+        }
+
+        void LoadParentScaleToVector3() => ScaleToSet = ParentScaleRef.localScale;
+        void SetChildToVector3()
+        {
+            if (ChildObjects == null)
+            {
+                Debug.LogError("child error");
+                return;
+            }
+
+            foreach (GameObject childObject in ChildObjects)
+            {
+                Transform oldChildParent = childObject.transform.parent;
+                childObject.transform.SetParent(null, true);
+                childObject.transform.localScale = ScaleToSet;
                 childObject.transform.SetParent(oldChildParent, true);
             }
             Debug.Log("Child scales have been set to the parent scale.");
