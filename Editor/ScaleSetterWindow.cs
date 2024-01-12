@@ -51,7 +51,10 @@ namespace Meangpu
 
             foreach (GameObject childObject in childObjects)
             {
+                Transform oldChildParent = childObject.transform.parent;
+                childObject.transform.SetParent(null, true);
                 childObject.transform.localScale = parentScaleRef.localScale;
+                childObject.transform.SetParent(oldChildParent, true);
             }
             Debug.Log("Child scales have been set to the parent scale.");
         }
