@@ -1,0 +1,16 @@
+{
+    "name": "WarpedImagination.AddOn",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0ea0b733d393e046bba9e6653199761"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

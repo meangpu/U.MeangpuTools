@@ -1,5 +1,5 @@
 ﻿//
-// Copyright (c) 2023 Warped Imagination. All rights reserved. 
+// Copyright (c) 2023 Warped Imagination. All rights reserved.
 //
 
 using System;
@@ -7,6 +7,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
+using Meangpu.Audio;
 
 namespace WarpedImagination.AudioPreviewTool
 {
@@ -20,91 +21,7 @@ namespace WarpedImagination.AudioPreviewTool
         static int? _lastPlayedAudioClipId = null;
 
         /// The code is split between Unity versions the reason is
-        /// Unity changed the names under the AudioUtil class 
-#if UNITY_2019
-
-        /// <summary>
-        /// Runs when someone double clicks on an audio file in the project window
-        /// </summary>
-        /// <param name="instanceId"></param>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        [OnOpenAsset]
-        public static bool OnOpenAssetCallback(int instanceId, int line)
-        {
-            // check that the tool is enabled under preferences
-            if (!AudioPreviewToolSettings.Enabled)
-                return false;
-
-            UnityEngine.Object obj = EditorUtility.InstanceIDToObject(instanceId);
-
-            if (obj is AudioClip audioClip)
-            {
-                if (IsClipPlaying(audioClip))
-                {
-                    StopAllClips();
-
-                    if (_lastPlayedAudioClipId.HasValue &&
-                        _lastPlayedAudioClipId.Value != instanceId)
-                    {
-                        PlayClip(audioClip, 0, false);
-                    }
-                }
-                else
-                {
-                    PlayClip(audioClip, 0, false);
-                }
-
-                _lastPlayedAudioClipId = instanceId;
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public static void PlayClip(AudioClip clip, int startSample, bool loop)
-        {
-            Assembly unityEditorAssembly = typeof(AudioImporter).Assembly;
-            Type audioUtilClass = unityEditorAssembly.GetType("UnityEditor.AudioUtil");
-            MethodInfo method = audioUtilClass.GetMethod(
-                "PlayClip",
-                BindingFlags.Static | BindingFlags.Public,
-                null,
-                new System.Type[] {
-                typeof(AudioClip),
-                typeof(Int32),
-                typeof(Boolean)
-                }, 
-                null );
-            method.Invoke( null, new object[] { clip, startSample, loop } );
-        }
-
-        public static bool IsClipPlaying(AudioClip clip)
-        {
-            Assembly unityEditorAssembly = typeof(AudioImporter).Assembly;
-            Type audioUtilClass = unityEditorAssembly.GetType("UnityEditor.AudioUtil");
-            MethodInfo method = audioUtilClass.GetMethod(
-                "IsClipPlaying",
-                BindingFlags.Static | BindingFlags.Public );
-
-            bool playing = (bool)method.Invoke( null, new object[] { clip });
-
-            return playing;
-        }
-
-        public static void StopAllClips()
-        {
-            Assembly unityEditorAssembly = typeof(AudioImporter).Assembly;
-            Type audioUtilClass = unityEditorAssembly.GetType("UnityEditor.AudioUtil");
-            MethodInfo method = audioUtilClass.GetMethod(
-                "StopAllClips",
-                BindingFlags.Static | BindingFlags.Public);
-
-            method.Invoke(null, null);
-        }
-
-#elif UNITY_2020_1_OR_NEWER
+        /// Unity changed the names under the AudioUtil class
 
         /// <summary>
         /// Runs when someone double clicks on an audio file in the project window
@@ -136,6 +53,28 @@ namespace WarpedImagination.AudioPreviewTool
                 else
                 {
                     PlayPreviewClip(audioClip);
+                }
+
+                _lastPlayedAudioClipId = instanceId;
+
+                return true;
+            }
+
+            if (obj is SOSound meSoSOund)
+            {
+                if (IsPreviewClipPlaying())
+                {
+                    StopAllPreviewClips();
+
+                    if (_lastPlayedAudioClipId.HasValue &&
+                        _lastPlayedAudioClipId.Value != instanceId)
+                    {
+                        meSoSOund.Play();
+                    }
+                }
+                else
+                {
+                    meSoSOund.Play();
                 }
 
                 _lastPlayedAudioClipId = instanceId;
@@ -183,8 +122,5 @@ namespace WarpedImagination.AudioPreviewTool
 
             methodInfo.Invoke(null, null);
         }
-
-#endif
-
     }
 }
