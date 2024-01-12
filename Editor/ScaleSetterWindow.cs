@@ -1,4 +1,6 @@
 using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 namespace Meangpu
@@ -57,14 +59,30 @@ namespace Meangpu
             foreach (GameObject childObject in ChildObjects)
             {
                 Transform oldChildParent = childObject.transform.parent;
+                Transform oldParentParent = ParentScaleRef.transform.parent;
+
                 childObject.transform.SetParent(null, true);
+                ParentScaleRef.transform.SetParent(null, true);
+
                 childObject.transform.localScale = ParentScaleRef.localScale;
+
                 childObject.transform.SetParent(oldChildParent, true);
+                ParentScaleRef.transform.SetParent(oldParentParent, true);
             }
             Debug.Log("Child scales have been set to the parent scale.");
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
 
-        void LoadParentScaleToVector3() => ScaleToSet = ParentScaleRef.localScale;
+        void LoadParentScaleToVector3()
+        {
+            Transform oldParentParent = ParentScaleRef.transform.parent;
+
+            ParentScaleRef.transform.SetParent(null, true);
+            ScaleToSet = ParentScaleRef.localScale;
+
+            ParentScaleRef.transform.SetParent(oldParentParent, true);
+        }
+
         void SetChildToVector3()
         {
             if (ChildObjects == null)
@@ -81,6 +99,7 @@ namespace Meangpu
                 childObject.transform.SetParent(oldChildParent, true);
             }
             Debug.Log("Child scales have been set to the parent scale.");
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
     }
 }
