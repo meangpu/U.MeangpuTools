@@ -4,6 +4,7 @@ using UnityEngine;
 
 // learn from part1: [Custom Attributes In Unity - YouTube](https://www.youtube.com/watch?v=M3tLr3EYIiE)
 // learn from part2: [One Unity Editor To Rule Them All - YouTube](https://www.youtube.com/watch?v=DztxQiMr4EU)
+// I stop it half ways cause it not working, so I comment it all out first
 namespace Meangpu
 {
     [CustomEditor(typeof(MonoBehaviour), editorForChildClasses: true)]
