@@ -1,5 +1,5 @@
 ﻿//
-// Copyright (c) 2023 Warped Imagination. All rights reserved. 
+// Copyright (c) 2023 Warped Imagination. All rights reserved.
 //
 
 using UnityEditor;
@@ -21,16 +21,16 @@ namespace WarpedImagination.AudioPreviewTool
         /// </summary>
         public static bool Enabled
         {
-            get 
+            get
             {
-                if(!_enabled.HasValue)
+                if (!_enabled.HasValue)
                     _enabled = EditorPrefs.GetBool(ENABLED_EDITOR_PREF, true);
                 return _enabled.Value;
             }
-            set 
+            set
             {
                 _enabled = value;
-                EditorPrefs.SetBool(ENABLED_EDITOR_PREF, _enabled.Value); 
+                EditorPrefs.SetBool(ENABLED_EDITOR_PREF, _enabled.Value);
             }
         }
     }

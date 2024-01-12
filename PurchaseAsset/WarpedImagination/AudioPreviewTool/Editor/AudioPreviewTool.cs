@@ -18,6 +18,7 @@ namespace WarpedImagination.AudioPreviewTool
     public static class AudioPreviewTool
     {
 
+
         static int? _lastPlayedAudioClipId = null;
 
         /// The code is split between Unity versions the reason is
@@ -69,12 +70,12 @@ namespace WarpedImagination.AudioPreviewTool
                     if (_lastPlayedAudioClipId.HasValue &&
                         _lastPlayedAudioClipId.Value != instanceId)
                     {
-                        meSoSOund.Play();
+                        PlayPreviewClip(meSoSOund.Clip);
                     }
                 }
                 else
                 {
-                    meSoSOund.Play();
+                    PlayPreviewClip(meSoSOund.Clip);
                 }
 
                 _lastPlayedAudioClipId = instanceId;
