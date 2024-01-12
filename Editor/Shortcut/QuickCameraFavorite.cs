@@ -1,81 +1,80 @@
-using UnityEditor;
-using UnityEditor.ShortcutManagement;
-using UnityEngine;
+// learn from [The QUICKEST window on Unity - YouTube](https://www.youtube.com/watch?v=tTf8UUOxRnc)
+// is create alt+b to quick select function
 
-namespace Meangpu
-{
-    // learn from [The QUICKEST window on Unity - YouTube](https://www.youtube.com/watch?v=tTf8UUOxRnc)
-    public class QuickCameraFavorite : EditorWindow
-    {
-        GUIContent[] _content = null;
-        GUIStyle _contentStyle = null;
-        bool _selectionMade = true;
-        int _selectionIndex = 0;
+// using UnityEditor;
+// using UnityEditor.ShortcutManagement;
+// using UnityEngine;
 
-        [Shortcut("QuickCameraFavorite", KeyCode.B, ShortcutModifiers.Alt)]
-        static void ShowSceneViewBookmarksPopUpWindow()
-        {
-            QuickCameraFavorite dialog = CreateWindow<QuickCameraFavorite>();
-            dialog.titleContent = new GUIContent("Quick Camera Favorite");
+// namespace Meangpu
+// {
+//     public class QuickAltAction : EditorWindow
+//     {
+//         GUIContent[] _content = null;
+//         GUIStyle _contentStyle = null;
+//         bool _selectionMade = true;
+//         int _selectionIndex = 0;
 
-            Vector2 screenSize = new(Screen.currentResolution.width, Screen.currentResolution.height);
-            Vector2 dialogSize = screenSize * .3f;
-            dialog.position = new((screenSize - dialogSize) * .5f, dialogSize);
+//         [Shortcut("QuickAltAction", KeyCode.B, ShortcutModifiers.Alt)]
+//         static void ShowSceneViewBookmarksPopUpWindow()
+//         {
+//             QuickAltAction dialog = CreateWindow<QuickAltAction>();
+//             dialog.titleContent = new GUIContent("QuickAltAction");
 
-            dialog.ShowModalUtility();
-        }
+//             Vector2 screenSize = new(Screen.currentResolution.width, Screen.currentResolution.height);
+//             Vector2 dialogSize = screenSize * .3f;
+//             dialog.position = new((screenSize - dialogSize) * .5f, dialogSize);
 
-        private void OnEnable()
-        {
-            _content = new GUIContent[5];
-            for (int i = 0, length = _content.Length; i < length; i++)
-            {
-                _content[i] = new($"Content {i}");
-            }
-        }
+//             dialog.ShowModalUtility();
+//         }
 
-        private void OnGUI()
-        {
-            if (Event.current != null && Event.current.modifiers == EventModifiers.Alt)
-            {
-                if (Event.current.keyCode == KeyCode.B && !_selectionMade)
-                {
-                    _selectionMade = true;
-                    _selectionIndex++;
-                    if (_selectionIndex >= _content.Length) _selectionIndex = 0;
+//         private void OnEnable()
+//         {
+//             _content = new GUIContent[5];
+//             for (int i = 0, length = _content.Length; i < length; i++)
+//             {
+//                 _content[i] = new($"Content {i}");
+//             }
+//         }
 
-                    Repaint();
-                }
+//         private void OnGUI()
+//         {
+//             if (Event.current != null && Event.current.modifiers == EventModifiers.Alt)
+//             {
+//                 if (Event.current.keyCode == KeyCode.B && !_selectionMade)
+//                 {
+//                     _selectionMade = true;
+//                     _selectionIndex++;
+//                     if (_selectionIndex >= _content.Length) _selectionIndex = 0;
 
-                if (Event.current.type == EventType.KeyUp)
-                {
-                    _selectionMade = false;
-                }
-            }
-            else
-            {
-                SelectContent(_selectionIndex);
-            }
+//                     Repaint();
+//                 }
 
-            if (_contentStyle == null)
-            {
-                _contentStyle = new GUIStyle(GUI.skin.button)
-                {
-                    fixedHeight = 128,
-                    fixedWidth = 128,
-                    fontSize = 14
-                };
-            }
+//                 if (Event.current.type == EventType.KeyUp)
+//                 {
+//                     _selectionMade = false;
+//                 }
+//             }
+//             else
+//             {
+//                 SelectContent(_selectionIndex);
+//             }
 
-            int selectionIndex = GUILayout.SelectionGrid(_selectionIndex, _content, _content.Length, _contentStyle);
-            if (selectionIndex != _selectionIndex) SelectContent(selectionIndex);
-        }
+//             _contentStyle ??= new GUIStyle(GUI.skin.button)
+//             {
+//                 fixedHeight = 128,
+//                 fixedWidth = 128,
+//                 fontSize = 14
+//             };
 
-        void SelectContent(int index)
-        {
-            Debug.Log(_content[index].text);
-            Close();
-            GUIUtility.ExitGUI();
-        }
-    }
-}
+//             int selectionIndex = GUILayout.SelectionGrid(_selectionIndex, _content, _content.Length, _contentStyle);
+//             if (selectionIndex != _selectionIndex) SelectContent(selectionIndex);
+//         }
+
+//         void SelectContent(int index)
+//         {
+//             Debug.Log(_content[index].text);
+//             Close();
+//             GUIUtility.ExitGUI();
+//         }
+//     }
+// }
