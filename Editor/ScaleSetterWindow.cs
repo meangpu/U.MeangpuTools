@@ -52,7 +52,7 @@ namespace Meangpu
         {
             if (ParentScaleRef == null || ChildObjects == null)
             {
-                Debug.LogError("Please set the parent scale reference and child objects.");
+                MeLog.LogError("Please set the parent scale reference and child objects.");
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace Meangpu
                 childObject.transform.SetParent(oldChildParent, true);
                 ParentScaleRef.transform.SetParent(oldParentParent, true);
             }
-            Debug.Log("Child scales have been set to the parent scale.");
+            MeLog.Log("Child scales have been set to the parent scale.");
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
 
@@ -87,7 +87,7 @@ namespace Meangpu
         {
             if (ChildObjects == null)
             {
-                Debug.LogError("child error");
+                MeLog.LogError("child error");
                 return;
             }
 
@@ -98,7 +98,7 @@ namespace Meangpu
                 childObject.transform.localScale = ScaleToSet;
                 childObject.transform.SetParent(oldChildParent, true);
             }
-            Debug.Log("Child scales have been set to the parent scale.");
+            MeLog.Log("Child scales have been set to the parent scale.");
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
     }
