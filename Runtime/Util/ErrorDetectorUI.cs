@@ -9,13 +9,15 @@ namespace Meangpu.Util
 {
     public class ErrorDetectorUI : MonoBehaviour
     {
+        [SerializeField] GameObject _errorParent;
         [SerializeField] TMP_Text _errorText;
         [SerializeField] Button _closeButton;
         [SerializeField] Button _copyToClipboardButton;
         [SerializeField] bool _ignoreSameError = true;
+        [SerializeField] float _smallFont = 25;
         List<string> _ignoreErrorStringList = new();
 
-        void OnEnable()
+        void Start()
         {
             Application.logMessageReceived += Application_logMessageReceived;
             Hide();
@@ -25,7 +27,7 @@ namespace Meangpu.Util
 
         private void Awake()
         {
-            _closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+            _closeButton.onClick.AddListener(() => Hide());
             _copyToClipboardButton.onClick.AddListener(() =>
             {
                 try
@@ -43,7 +45,7 @@ namespace Meangpu.Util
         {
             if (type == LogType.Error || type == LogType.Exception)
             {
-                string ErrorText = $"Error:{condition}\n{stackTrace}";
+                string ErrorText = $"Error:{condition}\n<size={_smallFont}>{stackTrace}</size>";
                 if (_ignoreSameError && _ignoreErrorStringList.Contains(ErrorText)) return;
 
                 _ignoreErrorStringList.Add(ErrorText);
@@ -52,7 +54,7 @@ namespace Meangpu.Util
             }
         }
 
-        void Hide() => gameObject.SetActive(false);
-        void Show() => gameObject.SetActive(true);
+        void Hide() => _errorParent.SetActive(false);
+        void Show() => _errorParent.SetActive(true);
     }
 }
