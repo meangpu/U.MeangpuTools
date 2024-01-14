@@ -3,6 +3,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VInspector;
 
 // from CodeMonkey [How to DETECT ERRORS in your game! - YouTube](https://www.youtube.com/watch?v=cos9FbXzdWI)
 namespace Meangpu.Util
@@ -15,7 +16,7 @@ namespace Meangpu.Util
         [SerializeField] Button _copyToClipboardButton;
         [SerializeField] bool _ignoreSameError = true;
         [SerializeField] float _smallFont = 25;
-        List<string> _ignoreErrorStringList = new();
+        [SerializeField] List<string> _ignoreErrorStringList = new();
 
         void Start()
         {
@@ -56,5 +57,7 @@ namespace Meangpu.Util
 
         void Hide() => _errorParent.SetActive(false);
         void Show() => _errorParent.SetActive(true);
+
+        [Button] void TestNullError() => Instantiate(null);
     }
 }
