@@ -6,6 +6,7 @@ namespace Meangpu.Util
     public class RotateCameraWithMouse : MonoBehaviour
     {
         [SerializeField] Camera _cam;
+        [SerializeField] Transform _camTransform;
 
         [SerializeField] Vector3 _offset = new(0, 0, -10);
         [SerializeField] Vector3 _scrollZoomSpeed = new(0, 0, 5);
@@ -25,6 +26,7 @@ namespace Meangpu.Util
         void Start()
         {
             if (_cam == null) _cam = Camera.main;
+            if (_camTransform == null) _camTransform = _cam.transform;
             SetCameraPosition();
         }
 
@@ -32,16 +34,9 @@ namespace Meangpu.Util
         {
             PanMouse();
             RotateAroundObj();
-            ZoomInOut();
 
             _offset.z = Mathf.Clamp(_offset.z, _clampZMin, _clampZMax);  // clamp z value
             SetCameraPosition();
-        }
-
-        private void ZoomInOut()
-        {
-            if (Input.mouseScrollDelta.y > 0) _offset += _scrollZoomSpeed;// mouse up
-            if (Input.mouseScrollDelta.y < 0) _offset -= _scrollZoomSpeed;// mouse down
         }
 
         private void RotateAroundObj()
@@ -54,9 +49,9 @@ namespace Meangpu.Util
             if (Input.GetKey(_rotateKey.KeyCode))
             {
                 Vector3 direction = _previousPosRotate - _cam.ScreenToViewportPoint(Input.mousePosition);
-                _cam.transform.position = new Vector3();
-                _cam.transform.Rotate(new Vector3(1, 0, 0), direction.y * 180);
-                _cam.transform.Rotate(new Vector3(0, 1, 0), -direction.x * 180, Space.World);
+                _camTransform.position = new Vector3();
+                _camTransform.Rotate(new Vector3(1, 0, 0), direction.y * 180);
+                _camTransform.Rotate(new Vector3(0, 1, 0), -direction.x * 180, Space.World);
                 _previousPosRotate = _cam.ScreenToViewportPoint(Input.mousePosition);
             }
         }
