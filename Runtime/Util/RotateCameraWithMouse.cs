@@ -6,6 +6,7 @@ namespace Meangpu.Util
     public class RotateCameraWithMouse : MonoBehaviour
     {
         [SerializeField] Camera _cam;
+
         [SerializeField] Vector3 _offset = new(0, 0, -10);
         [SerializeField] Vector3 _scrollZoomSpeed = new(0, 0, 5);
 
