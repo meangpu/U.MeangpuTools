@@ -3,7 +3,7 @@ using Meangpu.Util;
 
 namespace Meangpu.Util
 {
-    public class CameraRotation : MonoBehaviour
+    public class CameraRotationHaveTarget : MonoBehaviour
     {
         [SerializeField] Transform _cameraTransformTarget;
         [SerializeField] Transform _targetToRotateAround;
