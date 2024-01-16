@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Meangpu.Util
 {
-    public class MeRotateManager : MeSingleton<MeRotateManager>
+    public class MeRotateManager : BaseMeSingleton<MeRotateManager>
     {
         // learn this pattern from: [PERFECT Way to Rotate Coins | Unity Beginner Tutorial - YouTube](https://www.youtube.com/watch?v=pztDm7X5E9g)
         // use this to prevent singleton error [Some objects were not cleaned up when closing the scene - Questions & Answers - Unity Discussions](https://discussions.unity.com/t/some-objects-were-not-cleaned-up-when-closing-the-scene/177426)

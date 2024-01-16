@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Meangpu
 {
-    public class MeSingleton<T> : MonoBehaviour where T : Component
+    public abstract class BaseMeSingleton<T> : MonoBehaviour where T : Component
     {
         // prevent create another singleton when quit if it get called
         private static bool _applicationIsQuitting = false;
