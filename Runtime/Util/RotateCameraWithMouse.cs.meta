@@ -3,7 +3,10 @@ guid: fe6e8022747e9404aa2cc20278ab4c27
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _cam: {instanceID: 0}
+  - _rotateKey: {fileID: 11400000, guid: d9bb6c35eefafc340b8497b5e3b3ddb8, type: 2}
+  - _panKey: {fileID: 11400000, guid: 5888df178fbe8fe41a64632c73fb0fcd, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

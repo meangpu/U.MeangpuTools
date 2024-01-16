@@ -1,4 +1,5 @@
 using UnityEngine;
+using Meangpu;
 
 namespace Meangpu.Util
 {
@@ -7,8 +8,13 @@ namespace Meangpu.Util
         [SerializeField] Camera _cam;
         [SerializeField] Vector3 _offset = new(0, 0, -10);
         [SerializeField] Vector3 _scrollZoomSpeed = new(0, 0, 5);
+
         [SerializeField] float _clampZMin = -20;
         [SerializeField] float _clampZMax = 0;
+
+        [Header("Key")]
+        [SerializeField] SOMeKeyCode _rotateKey;
+        [SerializeField] SOMeKeyCode _panKey;
 
         Vector3 _previousPosRotate;
         Vector3 _lastMousePosPan;
@@ -39,12 +45,12 @@ namespace Meangpu.Util
 
         private void RotateAroundObj()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(_rotateKey.KeyCode))
             {
                 _previousPosRotate = _cam.ScreenToViewportPoint(Input.mousePosition);
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetKey(_rotateKey.KeyCode))
             {
                 Vector3 direction = _previousPosRotate - _cam.ScreenToViewportPoint(Input.mousePosition);
                 _cam.transform.position = new Vector3();
@@ -56,12 +62,12 @@ namespace Meangpu.Util
 
         private void PanMouse()
         {
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetKeyDown(_panKey.KeyCode))
             {
                 _lastMousePosPan = Input.mousePosition;
             }
 
-            if (Input.GetMouseButton(2))
+            if (Input.GetKey(_panKey.KeyCode))
             {
                 Vector3 _delta = Input.mousePosition - _lastMousePosPan;
                 _offset += new Vector3(-_delta.x * _panSpeed, -_delta.y * _panSpeed, 0);
