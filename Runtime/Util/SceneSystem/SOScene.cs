@@ -42,6 +42,15 @@ namespace Meangpu
         public Sprite ScenePreviewImage;
         public bool IsDone;
 
-        [Button] public virtual void LoadThisScene() => SceneChangeManager.instance.LoadScene(this);
+        [Button]
+        public virtual void LoadThisScene()
+        {
+            if (SceneChangeManager.instance == null)
+            {
+                Debug.LogError("Fail to find sceneChange instance");
+                return;
+            }
+            SceneChangeManager.instance.LoadScene(this);
+        }
     }
 }

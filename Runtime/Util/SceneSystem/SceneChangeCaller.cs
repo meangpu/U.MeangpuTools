@@ -5,7 +5,7 @@ namespace Meangpu.Util
 {
     public class SceneChangeCaller : MonoBehaviour
     {
-        [Expandable][SerializeField] SOScene _sceneToGo;
+        [Expandable] public SOScene SceneToGoData;
 
         [Button]
         public void LoadScene()
@@ -15,7 +15,7 @@ namespace Meangpu.Util
                 Debug.LogError("Fail to find sceneChange instance");
                 return;
             }
-            SceneChangeManager.instance.LoadScene(_sceneToGo);
+            SceneChangeManager.instance.LoadScene(SceneToGoData);
         }
     }
 }
