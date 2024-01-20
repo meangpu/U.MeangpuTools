@@ -54,10 +54,7 @@ namespace Meangpu.Util
 
                 _gridXNow++;
                 _nowOffset = new Vector3((_gridXNow * _gridXOffset) - removeX, (_gridYNow * _gridYOffset) - removeY, 0);
-                Debug.Log($"{item}");
-                Debug.Log($"{_nowOffset}");
                 item.localPosition = _nowOffset;
-
                 if (_gridXNow % _gridXCount == 0)
                 {
                     _gridXNow = 0;
