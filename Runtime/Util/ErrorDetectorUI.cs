@@ -58,6 +58,6 @@ namespace Meangpu.Util
         void Hide() => _errorParent.SetActive(false);
         void Show() => _errorParent.SetActive(true);
 
-        [Button] void TestNullError() => Instantiate(null);
+        [Button] public void TestNullError() => Instantiate(null);
     }
 }
