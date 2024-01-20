@@ -2,6 +2,7 @@ using Meangpu.Util;
 using UnityEngine;
 using VInspector;
 
+#if UNITY_EDITOR
 namespace Meangpu
 {
     [ExecuteInEditMode]
@@ -23,7 +24,6 @@ namespace Meangpu
 
         [Button] public void LoadAllScene() => _allScene = Resources.LoadAll<SOScene>("SOScene");
 
-#if UNITY_EDITOR
         [Button]
         public void EditorSpawnAllButtonScene()
         {
@@ -41,6 +41,6 @@ namespace Meangpu
             }
             UnityEditor.EditorUtility.SetDirty(this);
         }
-#endif
     }
 }
+#endif
