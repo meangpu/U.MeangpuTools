@@ -21,6 +21,7 @@ namespace Meangpu.Util
         {
             if (_doLoadAllTheTime)
             {
+                LoadChildTransform();
                 SpawnAllUIBtn();
             }
         }
@@ -55,8 +56,10 @@ namespace Meangpu.Util
                 }
 
                 _gridXNow++;
-
             }
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
     }
