@@ -3,6 +3,7 @@ using VInspector;
 
 namespace Meangpu.Util
 {
+    [ExecuteInEditMode]
     public class GridSetTransform : MonoBehaviour
     {
         [SerializeField] Transform[] transformToSet;
@@ -14,8 +15,15 @@ namespace Meangpu.Util
         [SerializeField] int _gridXCount = 3;
         [SerializeField] float _gridXOffset = .12f;
         [SerializeField] float _gridYOffset = 0.06f;
+        [SerializeField] bool _doLoadAllTheTime = true;
 
-        void Start() => SpawnAllUIBtn();
+        private void Start()
+        {
+            if (_doLoadAllTheTime)
+            {
+                SpawnAllUIBtn();
+            }
+        }
 
         [Button]
         public void LoadChildTransform()
