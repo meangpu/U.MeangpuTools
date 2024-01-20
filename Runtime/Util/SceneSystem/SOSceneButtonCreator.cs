@@ -4,11 +4,22 @@ using VInspector;
 
 namespace Meangpu
 {
+    [ExecuteInEditMode]
     public class SOSceneButtonCreator : MonoBehaviour
     {
         [SerializeField] Transform _parentTrans;
         [SerializeField] SetTmpText _scenePrefab;
         [SerializeField] SOScene[] _allScene;
+        [SerializeField] bool _doLoadAllTheTime = true;
+
+        private void Start()
+        {
+            if (_doLoadAllTheTime)
+            {
+                LoadAllScene();
+                EditorSpawnAllButtonScene();
+            }
+        }
 
         [Button] public void LoadAllScene() => _allScene = Resources.LoadAll<SOScene>("SOScene");
 
