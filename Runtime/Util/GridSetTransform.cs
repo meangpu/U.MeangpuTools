@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
 
@@ -6,7 +7,7 @@ namespace Meangpu.Util
     [ExecuteInEditMode]
     public class GridSetTransform : MonoBehaviour
     {
-        [SerializeField] Transform[] transformToSet;
+        [SerializeField] List<Transform> transformToSet;
         [SerializeField] Transform _parentTrans;
 
         [SerializeField] Vector3 _nowOffset = new();
@@ -30,7 +31,15 @@ namespace Meangpu.Util
         public void LoadChildTransform()
         {
             if (_parentTrans == null) _parentTrans = transform;
-            transformToSet = _parentTrans.GetComponentsInChildren<Transform>();
+            transformToSet = new();
+
+            foreach (Transform nowTrans in _parentTrans)
+            {
+                if (nowTrans.parent == _parentTrans)
+                {
+                    transformToSet.Add(nowTrans);
+                }
+            }
         }
 
         [Button]
@@ -39,7 +48,7 @@ namespace Meangpu.Util
             _gridXNow = 0;
             _gridYNow = 0;
 
-            int YCount = transformToSet.Length / _gridXCount;
+            int YCount = transformToSet.Count / _gridXCount;
             float removeX = _gridXOffset * (_gridXCount + 1) * 0.5f;
             float removeY = _gridYOffset * (YCount + 2) * 0.5f;
 
