@@ -1,5 +1,5 @@
 #if UNITY_EDITOR
-using EasyButtons;
+using VInspector;
 using UnityEngine;
 using UnityEditor;
 

@@ -1,6 +1,6 @@
 using System.Linq;
 using UnityEngine;
-using EasyButtons;
+using VInspector;
 using System.Collections.Generic;
 
 namespace Meangpu.Util.GameState

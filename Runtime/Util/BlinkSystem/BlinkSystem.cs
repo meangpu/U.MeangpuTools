@@ -1,4 +1,4 @@
-using EasyButtons;
+using VInspector;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;

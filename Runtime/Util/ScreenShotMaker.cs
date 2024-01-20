@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using EasyButtons;
+using VInspector;
 using UnityEngine;
 
 namespace Meangpu.Util
