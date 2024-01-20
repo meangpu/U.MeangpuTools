@@ -30,7 +30,7 @@ namespace Meangpu
 
                 nowObject.SetText(sceneName);
 
-                SceneChangeCaller ChangeScript = GetOrCreate.GetCreateComponent<SceneChangeCaller>(transform);
+                SceneChangeCaller ChangeScript = GetOrCreate.GetCreateComponent<SceneChangeCaller>(nowObject.transform);
                 ChangeScript.SceneToGoData = scene;
             }
         }

@@ -15,6 +15,12 @@ namespace Meangpu.Util
                 Debug.LogError("Fail to find sceneChange instance");
                 return;
             }
+
+            if (SceneToGoData == null)
+            {
+                Debug.LogError("No scene in caller script");
+                return;
+            }
             SceneChangeManager.instance.LoadScene(SceneToGoData);
         }
     }
