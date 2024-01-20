@@ -5,7 +5,7 @@ using VInspector;
 namespace Meangpu
 {
     [ExecuteInEditMode]
-    public class SOSceneButtonCreator : MonoBehaviour
+    public class SceneButtonChangeSpawner : MonoBehaviour
     {
         [SerializeField] Transform _parentTrans;
         [SerializeField] SceneChangeInfoHolder _scenePrefab;
