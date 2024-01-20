@@ -6,6 +6,8 @@ namespace Meangpu.Util
     public class GridSetTransform : MonoBehaviour
     {
         [SerializeField] Transform[] transformToSet;
+        [SerializeField] Transform _parentTrans;
+
         [SerializeField] Vector3 _nowOffset = new();
         int _gridXNow;
         int _gridYNow;
@@ -14,6 +16,13 @@ namespace Meangpu.Util
         [SerializeField] float _gridYOffset = 0.06f;
 
         void Start() => SpawnAllUIBtn();
+
+        [Button]
+        public void LoadChildTransform()
+        {
+            if (_parentTrans == null) _parentTrans = transform;
+            transformToSet = _parentTrans.GetComponentsInChildren<Transform>();
+        }
 
         [Button]
         public void SpawnAllUIBtn()
@@ -38,5 +47,6 @@ namespace Meangpu.Util
                 }
             }
         }
+
     }
 }
