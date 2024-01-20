@@ -32,19 +32,22 @@ namespace Meangpu.Util
 
             int YCount = transformToSet.Length / _gridXCount;
             float removeX = _gridXOffset * (_gridXCount + 1) * 0.5f;
-            float removeY = _gridYOffset * YCount * 0.5f;
+            float removeY = _gridYOffset * (YCount + 2) * 0.5f;
 
             _nowOffset = Vector3.zero;
             foreach (Transform item in transformToSet)
             {
-                _gridXNow++;
                 _nowOffset = new Vector3((_gridXNow * _gridXOffset) - removeX, (_gridYNow * _gridYOffset) - removeY, 0);
                 item.localPosition = _nowOffset;
+
                 if (_gridXNow % _gridXCount == 0)
                 {
                     _gridXNow = 0;
                     _gridYNow++;
                 }
+
+                _gridXNow++;
+
             }
         }
 
