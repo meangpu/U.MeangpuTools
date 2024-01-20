@@ -8,7 +8,7 @@ namespace Meangpu
     public class SOSceneButtonCreator : MonoBehaviour
     {
         [SerializeField] Transform _parentTrans;
-        [SerializeField] SetTmpText _scenePrefab;
+        [SerializeField] SceneChangeInfoHolder _scenePrefab;
         [SerializeField] SOScene[] _allScene;
         [SerializeField] bool _doLoadAllTheTime = true;
 
@@ -35,15 +35,11 @@ namespace Meangpu
             }
             foreach (SOScene scene in _allScene)
             {
-                SetTmpText nowObject = (SetTmpText)UnityEditor.PrefabUtility.InstantiatePrefab(_scenePrefab);
+                SceneChangeInfoHolder nowObject = (SceneChangeInfoHolder)UnityEditor.PrefabUtility.InstantiatePrefab(_scenePrefab);
                 nowObject.transform.SetParent(_parentTrans, false);
-                string sceneName = scene.SceneName == string.Empty ? scene.name : scene.SceneName;
-
-                nowObject.SetText(sceneName);
-
-                SceneChangeCaller ChangeScript = GetOrCreate.GetCreateComponent<SceneChangeCaller>(nowObject.transform);
-                ChangeScript.SceneToGoData = scene;
+                nowObject.SetSceneToNewData(scene);
             }
+            UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
     }
