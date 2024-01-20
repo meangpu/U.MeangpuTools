@@ -35,6 +35,7 @@ namespace Meangpu.Util
         {
             _data = newData;
             SetupVisual();
+            gameObject.name = newData.name;
         }
     }
 }
