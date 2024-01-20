@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VInspector;
 
@@ -7,7 +7,7 @@ namespace Meangpu.Util
     [ExecuteInEditMode]
     public class GridSetTransform : MonoBehaviour
     {
-        [SerializeField] List<Transform> transformToSet;
+        [SerializeField] Transform[] transformToSet;
         [SerializeField] Transform _parentTrans;
 
         [SerializeField] Vector3 _nowOffset = new();
@@ -23,7 +23,7 @@ namespace Meangpu.Util
             if (_doLoadAllTheTime)
             {
                 LoadChildTransform();
-                SpawnAllUIBtn();
+                SetAllTransPos();
             }
         }
 
@@ -31,31 +31,31 @@ namespace Meangpu.Util
         public void LoadChildTransform()
         {
             if (_parentTrans == null) _parentTrans = transform;
-            transformToSet = new();
 
-            foreach (Transform nowTrans in _parentTrans)
-            {
-                if (nowTrans.parent == _parentTrans)
-                {
-                    transformToSet.Add(nowTrans);
-                }
-            }
+            transformToSet = _parentTrans.GetComponentsInChildren<Transform>().Where(child => child.parent == _parentTrans && child != _parentTrans).ToArray();
         }
 
         [Button]
-        public void SpawnAllUIBtn()
+        public void SetAllTransPos()
         {
             _gridXNow = 0;
             _gridYNow = 0;
 
-            int YCount = transformToSet.Count / _gridXCount;
+            int YCount = transformToSet.Length / _gridXCount;
             float removeX = _gridXOffset * (_gridXCount + 1) * 0.5f;
-            float removeY = _gridYOffset * (YCount + 2) * 0.5f;
+            float removeY = _gridYOffset * (YCount - 1) * 0.5f;
+
+            Debug.Log($"{removeX} / {removeY}");
 
             _nowOffset = Vector3.zero;
+
             foreach (Transform item in transformToSet)
             {
+
+                _gridXNow++;
                 _nowOffset = new Vector3((_gridXNow * _gridXOffset) - removeX, (_gridYNow * _gridYOffset) - removeY, 0);
+                Debug.Log($"{item}");
+                Debug.Log($"{_nowOffset}");
                 item.localPosition = _nowOffset;
 
                 if (_gridXNow % _gridXCount == 0)
@@ -64,7 +64,6 @@ namespace Meangpu.Util
                     _gridYNow++;
                 }
 
-                _gridXNow++;
             }
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
