@@ -679,7 +679,7 @@ namespace VTabs
         static System.Type hierarchyType => typeof(Editor).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
 
 
-        const string version = "1.0.11";
+        const string version = "1.0.12";
 
     }
 }

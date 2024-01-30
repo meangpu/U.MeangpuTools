@@ -623,42 +623,48 @@ namespace VHierarchy
         {
             void loadData()
             {
-                void loadAtLastKnowPath()
-                {
-                    if (data) return;
+                data = AssetDatabase.LoadAssetAtPath<VHierarchyData>(EditorPrefs.GetString("vHierarchy-lastKnownDataPath-" + GetProjectId()));
 
-                    data = AssetDatabase.LoadAssetAtPath<VHierarchyData>(EditorPrefs.GetString("vHierarchy-lastKnownDataPath"));
 
-                }
-                void find()
-                {
-                    if (data) return;
+                if (data) return;
 
-                    data = AssetDatabase.FindAssets("t:VHierarchyData").Select(r => AssetDatabase.LoadAssetAtPath<VHierarchyData>(r.ToPath())).FirstOrDefault();
+                data = AssetDatabase.FindAssets("t:VHierarchyData").Select(guid => AssetDatabase.LoadAssetAtPath<VHierarchyData>(guid.ToPath())).FirstOrDefault();
 
-                }
-                void create()
-                {
-                    if (data) return;
 
-                    data = ScriptableObject.CreateInstance<VHierarchyData>();
-                    AssetDatabase.CreateAsset(data, GetScriptPath("vHierarchy").GetParentPath().CombinePath("vHierarchy Data.asset"));
+                if (!data) return;
 
-                }
-                void updateLastKnownPath()
-                {
-                    if (!data) return;
-
-                    EditorPrefs.SetString("vHierarchy-lastKnownDataPath", data.GetPath());
-
-                }
-
-                loadAtLastKnowPath();
-                find();
-                create();
-                updateLastKnownPath();
+                EditorPrefs.SetString("vHierarchy-lastKnownDataPath-" + GetProjectId(), data.GetPath());
 
             }
+            void createData()
+            {
+                if (data) return;
+
+                data = ScriptableObject.CreateInstance<VHierarchyData>();
+
+                AssetDatabase.CreateAsset(data, GetScriptPath("VHierarchy").GetParentPath().CombinePath("vHierarchy Data.asset"));
+
+            }
+            void loadDataDelayed()
+            {
+                if (data) return;
+
+                EditorApplication.delayCall += () => EditorApplication.delayCall += loadData;
+
+                // AssetDatabase isn't up to date at this point (it gets updated after InitializeOnLoadMethod)
+                // and if current AssetDatabase state doesn't contain the data - it won't be loaded during Init()
+                // so here we schedule an additional, delayed attempt to load the data
+                // this addresses reports of data loss when trying to load it on a new machine
+
+            }
+            void createDataDelayed()
+            {
+                if (data) return;
+
+                EditorApplication.delayCall += () => EditorApplication.delayCall += createData;
+
+            }
+
             void subscribe()
             {
                 EditorApplication.hierarchyWindowItemOnGUI -= RowGUI;
@@ -675,8 +681,13 @@ namespace VHierarchy
 
             }
 
+
             subscribe();
+
             loadData();
+            loadDataDelayed();
+            createDataDelayed();
+
             UpdateExpandedIdsList();
 
         }
@@ -709,7 +720,7 @@ namespace VHierarchy
 
 
 
-        public const string version = "1.0.19";
+        public const string version = "1.0.20";
 
     }
 }
