@@ -22,12 +22,22 @@ namespace Meangpu
         void CountAllChildPoly(GameObject g)
         {
             MeshFilter m = g.GetComponent<MeshFilter>();
+            SkinnedMeshRenderer skinMesh = g.GetComponent<SkinnedMeshRenderer>();
+
             if (m != null)
             {
                 vertexCount += m.sharedMesh.vertexCount;
                 triangleCount += m.sharedMesh.triangles.Length / 3;
                 subMeshCount += m.sharedMesh.subMeshCount;
             }
+
+            if (skinMesh != null)
+            {
+                vertexCount += skinMesh.sharedMesh.vertexCount;
+                triangleCount += skinMesh.sharedMesh.triangles.Length / 3;
+                subMeshCount += skinMesh.sharedMesh.subMeshCount;
+            }
+
             foreach (Transform child in g.transform)
             {
                 CountAllChildPoly(child.gameObject);
