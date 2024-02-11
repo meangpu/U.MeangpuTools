@@ -60,7 +60,13 @@ namespace SpatialSys.UnitySDK.Editor
 
         public override VisualElement CreatePanelContent()
         {
-            var visualTree = EditorUtility.LoadAssetFromPackagePath<VisualTreeAsset>("Editor/Spatial/SceneVitals/SceneVitals.uxml");
+            var visualTree = EditorUtility.LoadAssetFromPackagePath<VisualTreeAsset>("Editor/NotMyCode/Spatial/SceneVitals/SceneVitals.uxml");
+
+            if (visualTree == null) // this mean it in project file not as package
+            {
+                visualTree = AssetDatabase.LoadAssetAtPath("Assets/U.MeangpuTools/Editor/NotMyCode/Spatial/SceneVitals/SceneVitals.uxml", typeof(VisualTreeAsset)) as VisualTreeAsset;
+            }
+
             VisualElement element = visualTree.Instantiate();
             var root = new VisualElement() { name = "Scene Vitals" };
             root.Add(element);
