@@ -10,7 +10,7 @@ namespace SpatialSys.UnitySDK.Editor
     [InitializeOnLoad]
     public static class PackageManagerUtility
     {
-        public const string PACKAGE_NAME = "io.spatial.unitysdk";
+        public const string PACKAGE_NAME = "com.meangpu.tools";
         public const string PACKAGE_DIRECTORY_PATH = "Packages/" + PACKAGE_NAME;
 
         public static PackageInfo localPackageInfo => PackageInfo.FindForAssetPath(PACKAGE_DIRECTORY_PATH);
@@ -87,7 +87,8 @@ namespace SpatialSys.UnitySDK.Editor
 
             _updatePromise = new Promise<bool>();
             CheckForUpdate()
-                .Then(updateAvailable => {
+                .Then(updateAvailable =>
+                {
                     if (updateAvailable)
                     {
                         // Upgrade to latest version
