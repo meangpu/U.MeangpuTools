@@ -8,6 +8,7 @@ using UnityEditor;
 using System.Threading;
 using BuildReportTool;
 using BuildReportTool.Window;
+using System.IO;
 
 // can't put this in a namespace since older versions of Unity doesn't allow that
 public class BRT_BuildReportWindow : EditorWindow
@@ -33,22 +34,22 @@ public class BRT_BuildReportWindow : EditorWindow
 
 	public static readonly GUILayoutOption[] LayoutMinHeight30 =
 		{GUILayout.MinHeight(30), GUILayout.ExpandHeight(true)};
-	public static readonly GUILayoutOption[] LayoutHeight11 = {GUILayout.Height(11)};
-	public static readonly GUILayoutOption[] LayoutHeight18 = {GUILayout.Height(18)};
-	public static readonly GUILayoutOption[] LayoutHeight21 = {GUILayout.Height(21)};
-	public static readonly GUILayoutOption[] LayoutHeight25 = {GUILayout.Height(25)};
-	public static readonly GUILayoutOption[] LayoutMinWidth200 = {GUILayout.MinWidth(200)};
-	public static readonly GUILayoutOption[] LayoutPingButton = {GUILayout.Width(37)};
-	public static readonly GUILayoutOption[] LayoutIconWidth = {GUILayout.Width(ICON_WIDTH)};
-	public static readonly GUILayoutOption[] Layout20x16 = {GUILayout.Width(20), GUILayout.Height(16)};
-	public static readonly GUILayoutOption[] Layout20x25 = {GUILayout.Width(20), GUILayout.Height(25)};
-	public static readonly GUILayoutOption[] Layout20x30 = {GUILayout.Width(20), GUILayout.Height(30)};
-	public static readonly GUILayoutOption[] Layout28x30 = {GUILayout.Width(28), GUILayout.Height(30)};
-	public static readonly GUILayoutOption[] Layout100To400x30 = {GUILayout.MinWidth(100), GUILayout.MaxWidth(400), GUILayout.Height(30)};
-	public static readonly GUILayoutOption[] LayoutTo100x30 = {GUILayout.MaxWidth(100), GUILayout.Height(30)};
+	public static readonly GUILayoutOption[] LayoutHeight11 = { GUILayout.Height(11) };
+	public static readonly GUILayoutOption[] LayoutHeight18 = { GUILayout.Height(18) };
+	public static readonly GUILayoutOption[] LayoutHeight21 = { GUILayout.Height(21) };
+	public static readonly GUILayoutOption[] LayoutHeight25 = { GUILayout.Height(25) };
+	public static readonly GUILayoutOption[] LayoutMinWidth200 = { GUILayout.MinWidth(200) };
+	public static readonly GUILayoutOption[] LayoutPingButton = { GUILayout.Width(37) };
+	public static readonly GUILayoutOption[] LayoutIconWidth = { GUILayout.Width(ICON_WIDTH) };
+	public static readonly GUILayoutOption[] Layout20x16 = { GUILayout.Width(20), GUILayout.Height(16) };
+	public static readonly GUILayoutOption[] Layout20x25 = { GUILayout.Width(20), GUILayout.Height(25) };
+	public static readonly GUILayoutOption[] Layout20x30 = { GUILayout.Width(20), GUILayout.Height(30) };
+	public static readonly GUILayoutOption[] Layout28x30 = { GUILayout.Width(28), GUILayout.Height(30) };
+	public static readonly GUILayoutOption[] Layout100To400x30 = { GUILayout.MinWidth(100), GUILayout.MaxWidth(400), GUILayout.Height(30) };
+	public static readonly GUILayoutOption[] LayoutTo100x30 = { GUILayout.MaxWidth(100), GUILayout.Height(30) };
 
-	public static readonly GUILayoutOption[] Layout100x30 = {GUILayout.MinWidth(100), GUILayout.Height(30), GUILayout.ExpandWidth(true)};
-	public static readonly GUILayoutOption[] LayoutMaxWidth500 = {GUILayout.MaxWidth(500)};
+	public static readonly GUILayoutOption[] Layout100x30 = { GUILayout.MinWidth(100), GUILayout.Height(30), GUILayout.ExpandWidth(true) };
+	public static readonly GUILayoutOption[] LayoutMaxWidth500 = { GUILayout.MaxWidth(500) };
 
 	public const string STYLE_BREADCRUMB_LEFT = "GUIEditor.BreadcrumbLeft";
 	public const string STYLE_BREADCRUMB_MID = "GUIEditor.BreadcrumbMid";
@@ -155,8 +156,8 @@ public class BRT_BuildReportWindow : EditorWindow
 
 		// if Unity Editor has finished making a build and we are scheduled to create a Build Report...
 		if (BuildReportTool.Util.ShouldGetBuildReportNow &&
-		    !BuildReportTool.ReportGenerator.IsStillGettingValues &&
-		    !EditorApplication.isCompiling)
+			!BuildReportTool.ReportGenerator.IsStillGettingValues &&
+			!EditorApplication.isCompiling)
 		{
 			//Debug.Log("BuildReportWindow getting build info right after the build... " + System.DateTime.Now);
 			Refresh(true);
@@ -411,16 +412,16 @@ public class BRT_BuildReportWindow : EditorWindow
 				return InStreamingAssetsLabel;
 
 			case AssetInfoType.InAResourcesFolder:
-			{
-				if (HoveredAssetEndUsers.Count > 0)
 				{
-					return AResourcesAssetButAlsoUsedByLabel;
+					if (HoveredAssetEndUsers.Count > 0)
+					{
+						return AResourcesAssetButAlsoUsedByLabel;
+					}
+					else
+					{
+						return AResourcesAssetLabel;
+					}
 				}
-				else
-				{
-					return AResourcesAssetLabel;
-				}
-			}
 
 			case AssetInfoType.ASceneInBuild:
 				return SceneIsInBuildLabel;
@@ -675,8 +676,14 @@ public class BRT_BuildReportWindow : EditorWindow
 
 		// try default path
 		_usedSkin = AssetDatabase.LoadAssetAtPath(
-			            string.Format("{0}/GUI/{1}", BuildReportTool.Options.BUILD_REPORT_TOOL_DEFAULT_PATH, guiSkinToUse),
-			            typeof(GUISkin)) as GUISkin;
+						string.Format("{0}/GUI/{1}", BuildReportTool.Options.BUILD_REPORT_TOOL_DEFAULT_PATH, guiSkinToUse),
+						typeof(GUISkin)) as GUISkin;
+
+		if (_usedSkin == null)
+		{
+			string pathToLoad = "Packages/com.meangpu.tools/PurchaseAsset/BuildReport/GUI/BuildReportWindowDark.guiskin";
+			_usedSkin = AssetDatabase.LoadAssetAtPath(pathToLoad, typeof(GUISkin)) as GUISkin;
+		}
 
 		if (_usedSkin == null)
 		{
@@ -697,7 +704,7 @@ public class BRT_BuildReportWindow : EditorWindow
 				//Debug.Log(folderPath);
 
 				_usedSkin = AssetDatabase.LoadAssetAtPath(string.Format("Assets/{0}/GUI/{1}", folderPath, guiSkinToUse),
-					            typeof(GUISkin)) as GUISkin;
+								typeof(GUISkin)) as GUISkin;
 			}
 			else
 			{
@@ -920,14 +927,14 @@ public class BRT_BuildReportWindow : EditorWindow
 			// ----------------------------------------------------
 
 			if (leftCrumbToAssign != null || midCrumbToAssign != null ||
-			    reorderableListDragHandleToAssign != null ||
-			    reorderableListHeaderToAssign != null ||
-			    reorderableListFooterToAssign != null ||
-			    reorderableListBgToAssign != null ||
-			    reorderableListFooterButtonToAssign != null ||
-			    reorderableListElementToAssign != null ||
-			    reorderableListEmptyHeaderToAssign != null ||
-			    addLogMessageIcons)
+				reorderableListDragHandleToAssign != null ||
+				reorderableListHeaderToAssign != null ||
+				reorderableListFooterToAssign != null ||
+				reorderableListBgToAssign != null ||
+				reorderableListFooterButtonToAssign != null ||
+				reorderableListElementToAssign != null ||
+				reorderableListEmptyHeaderToAssign != null ||
+				addLogMessageIcons)
 			{
 				// append these styles to the GUISkin
 				// but since it's an array, we have to create a new array and place it there first
@@ -1265,7 +1272,7 @@ public class BRT_BuildReportWindow : EditorWindow
 		get
 		{
 			return _currentBuildReportFileLoadThread != null &&
-			       _currentBuildReportFileLoadThread.ThreadState == ThreadState.Running;
+				   _currentBuildReportFileLoadThread.ThreadState == ThreadState.Running;
 		}
 	}
 
@@ -1326,7 +1333,7 @@ public class BRT_BuildReportWindow : EditorWindow
 		else
 		{
 			if (_currentBuildReportFileLoadThread != null &&
-			    _currentBuildReportFileLoadThread.ThreadState == ThreadState.Running)
+				_currentBuildReportFileLoadThread.ThreadState == ThreadState.Running)
 			{
 				ForceStopFileLoadThread();
 			}
@@ -1401,14 +1408,14 @@ public class BRT_BuildReportWindow : EditorWindow
 		}
 
 		if (GUI.Button(new Rect(toolbarX, 5, 50, 40), _toolbarLabelLog, leftToolbarStyle) &&
-		    !LoadingValuesFromThread)
+			!LoadingValuesFromThread)
 		{
 			Refresh(false);
 		}
 
 		toolbarX += 50;
 		if (GUI.Button(new Rect(toolbarX, 5, 40, 40), _toolbarLabelOpen, midToolbarStyle) &&
-		    !LoadingValuesFromThread)
+			!LoadingValuesFromThread)
 		{
 			string filepath = EditorUtility.OpenFilePanel(
 				Labels.OPEN_SERIALIZED_BUILD_INFO_TITLE,
@@ -1421,7 +1428,7 @@ public class BRT_BuildReportWindow : EditorWindow
 		toolbarX += 40;
 
 		if (GUI.Button(new Rect(toolbarX, 5, 40, 40), _toolbarLabelSave, rightToolbarStyle) &&
-		    BuildReportTool.Util.BuildInfoHasContents(_buildInfo))
+			BuildReportTool.Util.BuildInfoHasContents(_buildInfo))
 		{
 			string filepath = EditorUtility.SaveFilePanel(
 				Labels.SAVE_MSG,
@@ -1563,7 +1570,7 @@ public class BRT_BuildReportWindow : EditorWindow
 
 
 		var mouseHasMoved = Mathf.Abs(Event.current.mousePosition.x - _lastMousePos.x) > 0 ||
-		                    Mathf.Abs(Event.current.mousePosition.y - _lastMousePos.y) > 0;
+							Mathf.Abs(Event.current.mousePosition.y - _lastMousePos.y) > 0;
 
 
 		// category buttons
@@ -1610,7 +1617,7 @@ public class BRT_BuildReportWindow : EditorWindow
 		}
 
 		if (!string.IsNullOrEmpty(_extraData.Contents) &&
-		    GUILayout.Toggle(IsInExtraDataCategory, "Extra Data", midTabStyle, LayoutExpandWidth))
+			GUILayout.Toggle(IsInExtraDataCategory, "Extra Data", midTabStyle, LayoutExpandWidth))
 		{
 			_selectedCategoryIdx = EXTRA_DATA_IDX;
 		}
@@ -1734,7 +1741,7 @@ public class BRT_BuildReportWindow : EditorWindow
 		get
 		{
 			return Mathf.Abs(Event.current.mousePosition.x - _lastMousePos.x) > 0 ||
-			       Mathf.Abs(Event.current.mousePosition.y - _lastMousePos.y) > 0;
+				   Mathf.Abs(Event.current.mousePosition.y - _lastMousePos.y) > 0;
 		}
 	}
 
@@ -1788,12 +1795,12 @@ public class BRT_BuildReportWindow : EditorWindow
 	{
 		Vector2 thumbnailSize;
 		thumbnailSize.x = ZoomedInThumbnails
-			                  ? BuildReportTool.Options.TooltipThumbnailZoomedInWidth
-			                  : BuildReportTool.Options.TooltipThumbnailWidth;
+							  ? BuildReportTool.Options.TooltipThumbnailZoomedInWidth
+							  : BuildReportTool.Options.TooltipThumbnailWidth;
 
 		thumbnailSize.y = ZoomedInThumbnails
-			                  ? BuildReportTool.Options.TooltipThumbnailZoomedInHeight
-			                  : BuildReportTool.Options.TooltipThumbnailHeight;
+							  ? BuildReportTool.Options.TooltipThumbnailZoomedInHeight
+							  : BuildReportTool.Options.TooltipThumbnailHeight;
 		return thumbnailSize;
 	}
 
@@ -1866,13 +1873,13 @@ public class BRT_BuildReportWindow : EditorWindow
 	public static void ProcessThumbnailControls()
 	{
 		if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.LeftAlt ||
-		                                                Event.current.keyCode == KeyCode.RightAlt))
+														Event.current.keyCode == KeyCode.RightAlt))
 		{
 			ShowThumbnailsWithAlphaBlend = !ShowThumbnailsWithAlphaBlend;
 		}
 
 		if ((Event.current.keyCode == KeyCode.LeftControl ||
-		     Event.current.keyCode == KeyCode.RightControl))
+			 Event.current.keyCode == KeyCode.RightControl))
 		{
 			if (Event.current.type == EventType.KeyDown)
 			{
