@@ -9,7 +9,6 @@ using Meangpu;
 namespace SpatialSys.UnitySDK.Editor
 {
     [Overlay(typeof(SceneView), "Scene Vitals", true)]
-    [Icon("./Icon/icon_sceneVitals.png")]
     public class SceneVitalsOverlay : Overlay, ITransientOverlay
     {
         private const string BASE_BLOCK_CLASS = "InfoBlock";
