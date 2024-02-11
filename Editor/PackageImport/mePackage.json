@@ -8,11 +8,18 @@
       "isSelectAtStart": true
     },
     {
+      "name": "com.meangpu.scene.vital",
+      "version": "0.0.1",
+      "description": "scene vital",
+      "url": "https://github.com/meangpu/U.MeSceneVital.git",
+      "isSelectAtStart": true
+    },
+    {
       "name": "com.madsbangh.easybuttons",
       "version": "1.4.0",
       "description": "Easy to use inspector button",
       "url": "https://github.com/madsbangh/EasyButtons.git#upm",
-      "isSelectAtStart": true
+      "isSelectAtStart": false
     },
     {
       "name": "com.yasirkula.assetusagedetector",
@@ -26,14 +33,14 @@
       "version": "2.0.8",
       "description": "waka time for time tracker",
       "url": "https://github.com/vladfaust/unity-wakatime.git#package",
-      "isSelectAtStart": true
+      "isSelectAtStart": false
     },
     {
       "name": "com.meangpu.tooltip",
       "version": "0.0.1",
       "description": "for game tooltips like, how to play",
       "url": "https://github.com/meangpu/U.MeTooltip.git",
-      "isSelectAtStart": true
+      "isSelectAtStart": false
     },
     {
       "name": "com.meangpu.scoreboard",
