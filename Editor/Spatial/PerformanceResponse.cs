@@ -50,7 +50,5 @@ namespace Meangpu
         public float sharedTexturePercent => (float)sharedTextureMB / MAX_SUGGESTED_SHARED_TEXTURE_MB;
         public float meshColliderVertPercent => (float)meshColliderVerts / MAX_SUGGESTED_COLLIDER_VERTS;
         public float audioPercent => (float)audioMB / MAX_SUGGESTED_AUDIO_MB;
-
-
     }
 }
