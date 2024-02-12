@@ -92,6 +92,10 @@ namespace VInspector
 
                 findMembersWithButtonAttributes(target.GetType());
 
+                foreach (var r in membersWithButtonAttributes.ToList())
+                    if (membersWithButtonAttributes.Where(rr => rr.Name == r.Name).Count() > 1)
+                        membersWithButtonAttributes.Remove(r);
+
                 foreach (var member in membersWithButtonAttributes)
                     createButton(member, member.GetCustomAttribute<ButtonAttribute>());
 
