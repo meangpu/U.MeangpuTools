@@ -66,7 +66,7 @@ namespace VInspector
                         var o = field.IsStatic ? null : target;
 
                         button.isPressed = () => (bool)field.GetValue(o);
-                        button.action = () => field.SetValue(o, !(bool)field.GetValue(o));
+                        button.action = (o) => field.SetValue(o, !(bool)field.GetValue(o));
                         button.name = buttonAttribute.name != "" ? buttonAttribute.name : field.Name.PrettifyVarName(false);
 
                     }
@@ -76,7 +76,7 @@ namespace VInspector
                         var o = method.IsStatic ? null : target;
 
                         button.isPressed = () => false;
-                        button.action = () => method.Invoke(o, null);
+                        button.action = (o) => method.Invoke(o, null);
                         button.name = buttonAttribute.name != "" ? buttonAttribute.name : method.Name.PrettifyVarName(false);
 
                     }
@@ -255,7 +255,7 @@ namespace VInspector
             public float size = 30;
             public float space = 0;
             public IfAttribute ifAttribute;
-            public System.Action action;
+            public System.Action<Object> action;
             public System.Func<bool> isPressed;
 
         }

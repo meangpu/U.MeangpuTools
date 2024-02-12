@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Reflection;
 using UnityEditor;
+using Type = System.Type;
 using Tab = VInspector.VInspectorData.Tab;
 using static VInspector.VInspectorData;
 using static VInspector.Libs.VUtils;
@@ -81,6 +82,9 @@ namespace VInspector
                 var drawingFoldoutPath = "";
                 var hide = false;
                 var disable = false;
+
+                var prevFieldDeclaringType = default(Type);
+
 
                 void ensureNeededTabsDrawn()
                 {
@@ -163,6 +167,14 @@ namespace VInspector
                         if (ifAttribute is ShowIfAttribute) hide = !ifAttribute.Evaluate(target);
                         if (ifAttribute is DisableIfAttribute) disable = ifAttribute.Evaluate(target);
                         if (ifAttribute is EnableIfAttribute) disable = !ifAttribute.Evaluate(target);
+
+
+                        var curFieldDeclaringType = fieldInfo.DeclaringType;
+
+                        if (prevFieldDeclaringType != null && prevFieldDeclaringType != curFieldDeclaringType)
+                            hide = disable = false;
+
+                        prevFieldDeclaringType = curFieldDeclaringType;
 
                     }
                     void tabs()
@@ -292,11 +304,14 @@ namespace VInspector
                     GUILayout.Space(button.space - 2);
 
                     GUI.backgroundColor = button.isPressed() ? pressedButtonCol : Color.white;
+
                     if (GUILayout.Button(button.name, GUILayout.Height(button.size)))
-                    {
-                        target.RecordUndo();
-                        button.action();
-                    }
+                        foreach (var target in targets)
+                        {
+                            target.RecordUndo();
+                            button.action(target);
+                        }
+
                     GUI.backgroundColor = Color.white;
 
 
@@ -398,7 +413,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.23";
+        const string version = "1.2.25";
 
     }
 }
