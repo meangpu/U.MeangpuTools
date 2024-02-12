@@ -57,13 +57,6 @@
       "isSelectAtStart": false
     },
     {
-      "name": "com.meangpu.clock",
-      "version": "0.0.1",
-      "description": "meangpu clock",
-      "url": "https://github.com/meangpu/U.MeClock.git",
-      "isSelectAtStart": false
-    },
-    {
       "name": "com.meangpu.cam_addon",
       "version": "0.0.1",
       "description": "meangpu camera with cinemachine addon",
