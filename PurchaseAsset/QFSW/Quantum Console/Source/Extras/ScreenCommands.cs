@@ -31,7 +31,7 @@ namespace QFSW.QC.Extras
             {
                 width = Screen.width,
                 height = Screen.height,
-                refreshRateRatio = Screen.currentResolution.refreshRateRatio
+                refreshRate = Screen.currentResolution.refreshRate
             };
 
             return resolution;
