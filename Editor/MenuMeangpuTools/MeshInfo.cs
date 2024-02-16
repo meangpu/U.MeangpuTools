@@ -24,7 +24,7 @@ namespace Meangpu
             MeshFilter m = g.GetComponent<MeshFilter>();
             SkinnedMeshRenderer skinMesh = g.GetComponent<SkinnedMeshRenderer>();
 
-            if (m != null)
+            if (m != null && m.sharedMesh != null)
             {
                 vertexCount += m.sharedMesh.vertexCount;
                 triangleCount += m.sharedMesh.triangles.Length / 3;
