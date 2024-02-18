@@ -21,17 +21,17 @@ namespace Meangpu
 
         void CountAllChildPoly(GameObject g)
         {
-            MeshFilter m = g.GetComponent<MeshFilter>();
-            SkinnedMeshRenderer skinMesh = g.GetComponent<SkinnedMeshRenderer>();
+            g.TryGetComponent(out MeshFilter MeshFilter);
+            g.TryGetComponent(out SkinnedMeshRenderer skinMesh);
 
-            if (m != null && m.sharedMesh != null)
+            if (MeshFilter != null && MeshFilter.sharedMesh != null)
             {
-                vertexCount += m.sharedMesh.vertexCount;
-                triangleCount += m.sharedMesh.triangles.Length / 3;
-                subMeshCount += m.sharedMesh.subMeshCount;
+                vertexCount += MeshFilter.sharedMesh.vertexCount;
+                triangleCount += MeshFilter.sharedMesh.triangles.Length / 3;
+                subMeshCount += MeshFilter.sharedMesh.subMeshCount;
             }
 
-            if (skinMesh != null && m.sharedMesh != null)
+            if (skinMesh != null && skinMesh.sharedMesh != null)
             {
                 vertexCount += skinMesh.sharedMesh.vertexCount;
                 triangleCount += skinMesh.sharedMesh.triangles.Length / 3;
