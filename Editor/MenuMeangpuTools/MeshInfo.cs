@@ -31,7 +31,7 @@ namespace Meangpu
                 subMeshCount += m.sharedMesh.subMeshCount;
             }
 
-            if (skinMesh != null)
+            if (skinMesh != null && m.sharedMesh != null)
             {
                 vertexCount += skinMesh.sharedMesh.vertexCount;
                 triangleCount += skinMesh.sharedMesh.triangles.Length / 3;
