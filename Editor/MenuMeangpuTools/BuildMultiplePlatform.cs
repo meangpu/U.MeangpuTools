@@ -11,7 +11,7 @@ namespace Meangpu
     public class BuildMultiplePlatform : EditorWindow
     {
         // learn from https://www.youtube.com/watch?v=x566N_aEBeY
-        [MenuItem("MeangpuTools/Build/BuildMultiplePlatformTools")]
+        [MenuItem("MeangpuTools/EditorUtil/Build/BuildMultiplePlatformTools")]
         public static void OnShowTools()
         {
             EditorWindow.GetWindow<BuildMultiplePlatform>();

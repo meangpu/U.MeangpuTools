@@ -15,7 +15,7 @@ namespace Meangpu
 {
     public static class FolderSetup
     {
-        [MenuItem("MeangpuTools/__DO_SETUP")]
+        [MenuItem("MeangpuTools/__DO_SETUP_ALL", priority = -89)]
         public static void MainInitLoop()
         {
             CreateDefaultFolders();

@@ -9,7 +9,7 @@ namespace Meangpu
         public static string FolderPath = "D:\\Github\\SPOLS_Web\\level";
         // public int[] buildList = { 4, 5, 6, 7, 8 };
 
-        [MenuItem("MeangpuTools/Build/BuildMultipleTime")]
+        [MenuItem("MeangpuTools/EditorUtil/Build/BuildMultipleTime")]
         public static void ShowWindow() => GetWindow<BuildMultipleTime>("BuildSetting");
 
         private void OnGUI()

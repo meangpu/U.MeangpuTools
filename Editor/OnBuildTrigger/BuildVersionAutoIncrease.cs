@@ -37,7 +37,7 @@ namespace Meangpu
             }
         }
 
-        [MenuItem("MeangpuTools/Setup/Reset Game Version")]
+        [MenuItem("MeangpuTools/Setup/Reset Game Version", priority = -88)]
         public static void SetFirstTimeFormat()
         {
             Debug.Log("Perform first time version set");

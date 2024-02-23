@@ -15,7 +15,7 @@ namespace Meangpu
     public class PackageImporter : EditorWindow
     {
         private static EditorWindow promptWindow;
-        private const string WindowPath = "MeangpuTools/EditorUtil/";
+        private const string WindowPath = "MeangpuTools/";
         private const string WindowName = "Package Importer";
         private const string DataUri = "https://raw.githubusercontent.com/meangpu/U.MeangpuTools/main/Editor/PackageImport/mePackage.json";
         private const string titleLabel = "MEANGPU Packages To Import";
@@ -351,7 +351,7 @@ namespace Meangpu
             DrawHorizontalLine(new Color(0f, 0f, 0f, 0.3f));
         }
 
-        [MenuItem(WindowPath + WindowName)]
+        [MenuItem(WindowPath + WindowName, priority = -90)]
         private static void ShowWindow()
         {
             windowAlreadyOpen = false;

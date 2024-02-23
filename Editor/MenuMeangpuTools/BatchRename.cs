@@ -24,7 +24,7 @@ namespace Meangpu
         /// </summary>
         public int Increment = 1;
 
-        [MenuItem("MeangpuTools/Edit/Batch Rename...")]
+        [MenuItem("MeangpuTools/EditorUtil/Batch Rename...")]
         static void CreateWizard()
         {
             ScriptableWizard.DisplayWizard("Batch Rename", typeof(BatchRename), "Rename");

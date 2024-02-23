@@ -6,7 +6,7 @@ namespace Meangpu
 {
     public class TriangleCountSorter : Editor
     {
-        [MenuItem("MeangpuTools/PolyCount Sorter")]
+        [MenuItem("MeangpuTools/PolyCount Sorter", priority = 9999)]
         public static void SortObjectsByTriangleCount()
         {
             MeshFilter[] meshFilters = FindObjectsOfType<MeshFilter>();
