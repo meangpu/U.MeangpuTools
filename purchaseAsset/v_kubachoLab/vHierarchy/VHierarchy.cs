@@ -780,6 +780,10 @@ namespace VHierarchy
 
                 curEvent.Use();
 
+                if (transformToolNeedsReset = Application.unityVersion.Contains("2022"))
+                    previousTransformTool = Tools.current;
+
+
                 if (hoveredGo.transform.childCount == 0) return;
 
                 SetExpandedWithAnimation(hoveredGo.GetInstanceID(), !expandedIds.Contains(hoveredGo.GetInstanceID()));
@@ -1069,7 +1073,7 @@ namespace VHierarchy
                     if (currentSceneGuid != originalSceneGuid) return;
 
 
-                    var curInstanceIdsHash = go.scene.GetHashCode();
+                    var curInstanceIdsHash = go.scene.GetRootGameObjects().FirstOrDefault()?.GetInstanceID() ?? 0;
                     var curGlobalIdsHash = sceneData.goDatas_byGlobalId.Keys.Aggregate(0, (hash, r) => hash ^= r.GetHashCode());
 
                     if (sceneIdMap.instanceIdsHash == curInstanceIdsHash && sceneIdMap.globalIdsHash == curGlobalIdsHash) return;
@@ -1285,43 +1289,6 @@ namespace VHierarchy
 
 
 
-        static void RemoveIdMapsForUnloadedScenes()
-        {
-            var scenes = Enumerable.Range(0, EditorSceneManager.sceneCount).Select(i => EditorSceneManager.GetSceneAt(i));
-
-
-            if (prevLoadedScenes.Any()) // avoid clearing all maps after domain reload
-                foreach (var scene in scenes)
-                    if (scene.isLoaded && !prevLoadedScenes.Contains(scene))
-                        cache.sceneIdMaps_bySceneGuid.Remove(scene.path.ToGuid());
-
-
-
-            prevLoadedScenes.Clear();
-
-            foreach (var scene in scenes)
-                if (scene.isLoaded)
-                    prevLoadedScenes.Add(scene);
-
-
-
-            EditorApplication.delayCall += RemoveIdMapsForUnloadedScenes;
-
-
-
-            // if an additive scene is unloaded but not removed (eg rightclick -> unload) - it will keep the same hash when reloaded
-            // and its objects will have new iids, so their SceneIdMap will become outdated
-            // but this map won't get updated in GetGoData because scene hash haven't changed
-            // this function removes outdated SceneIdMaps in such cases
-
-        }
-
-        static List<Scene> prevLoadedScenes = new List<Scene>();
-
-
-
-
-
 
 
         static Texture2D GetIcon_forVTabs(GameObject gameObject)
@@ -1374,6 +1341,27 @@ namespace VHierarchy
 
 
 
+        static void SetPreviousTransformTool()
+        {
+            if (!transformToolNeedsReset) return;
+
+            Tools.current = previousTransformTool;
+
+            transformToolNeedsReset = false;
+
+            // E shortcut changes transform tool in 2022
+            // here we undo this
+
+        }
+
+        static bool transformToolNeedsReset;
+        static Tool previousTransformTool;
+
+
+
+
+
+
 
 
 
@@ -1391,8 +1379,8 @@ namespace VHierarchy
                 EditorApplication.update -= RepaintOnAlt;
                 EditorApplication.update += RepaintOnAlt;
 
-                EditorApplication.delayCall -= RemoveIdMapsForUnloadedScenes;
-                EditorApplication.delayCall += RemoveIdMapsForUnloadedScenes;
+                EditorApplication.update -= SetPreviousTransformTool;
+                EditorApplication.update += SetPreviousTransformTool;
 
                 var globalEventHandler = typeof(EditorApplication).GetFieldValue<EditorApplication.CallbackFunction>("globalEventHandler");
                 typeof(EditorApplication).SetFieldValue("globalEventHandler", CheckShortcuts + (globalEventHandler - CheckShortcuts));
@@ -1721,7 +1709,7 @@ namespace VHierarchy
 
 
 
-        public const string version = "2.0.9";
+        public const string version = "2.0.11";
 
     }
 }
