@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Meangpu.Util
 {
-    public class TwoObjectDistanceDisplay : MonoBehaviour
+    public class DistanceBetweenTwoObjectDisplay : MonoBehaviour
     {
         [SerializeField] protected Transform _firstTarget;
         [SerializeField] protected Transform _secondTarget;
