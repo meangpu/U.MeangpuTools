@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using VInspector;
 
 namespace Meangpu.Util
 {
@@ -10,6 +11,9 @@ namespace Meangpu.Util
         [SerializeField] protected TMP_Text _distanceTxt;
         [SerializeField] protected float _scaleFactor = 1;
         protected float _nowDistance;
+        [SerializeField] protected bool _haveParentScaleFactor;
+        [ShowIf("_haveParentScaleFactor")]
+        [SerializeField] Transform _parentScale;
 
         public void ChangeFirstTarget(Transform newTrans) => _firstTarget = newTrans;
         public void ChangeSecondTarget(Transform newTrans) => _secondTarget = newTrans;
@@ -27,7 +31,12 @@ namespace Meangpu.Util
             };
         }
 
-        protected virtual void CalculateDistance() => _nowDistance = Vector3.Distance(_firstTarget.position, _secondTarget.position) * _scaleFactor;
+        protected virtual void CalculateDistance()
+        {
+            _nowDistance = Vector3.Distance(_firstTarget.position, _secondTarget.position) * _scaleFactor;
+            if (!_haveParentScaleFactor) return;
+            _nowDistance /= _parentScale.localScale.x;
+        }
 
         protected virtual void UpdateTextDistance()
         {
