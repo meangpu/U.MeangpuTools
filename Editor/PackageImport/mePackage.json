@@ -8,10 +8,10 @@
       "isSelectAtStart": true
     },
     {
-      "name": "com.meangpu.scene.vital",
+      "name": "com.meangpu.record.vid",
       "version": "0.0.1",
-      "description": "scene vital",
-      "url": "https://github.com/meangpu/U.MeSceneVital.git",
+      "description": "record video use recorder",
+      "url": "https://github.com/meangpu/U.MeRecordVid.git",
       "isSelectAtStart": true
     },
     {
@@ -48,6 +48,13 @@
       "description": "meangpu scoreboard",
       "url": "https://github.com/meangpu/U.MeScoreboard.git",
       "isSelectAtStart": false
+    },
+    {
+      "name": "com.meangpu.scene.vital",
+      "version": "0.0.1",
+      "description": "scene vital",
+      "url": "https://github.com/meangpu/U.MeSceneVital.git",
+      "isSelectAtStart": true
     },
     {
       "name": "com.meangpu.skyboxdaynight",
