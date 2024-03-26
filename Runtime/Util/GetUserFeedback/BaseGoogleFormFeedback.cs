@@ -11,13 +11,13 @@ namespace Meangpu.Util
     public abstract class BaseGoogleFormFeedback : MonoBehaviour
     {
         [Header("Copy This")]
-        [SerializeField] string CopyMe_formFieldURL = "formResponse";
-        [SerializeField] string CopyMe_formSubmitActionURL = "entry.";
+        [SerializeField] string CopyMe_formEntry = "entry.";
+        [SerializeField] string CopyMe_formActionResponse = "formResponse";
 
         [Header("Form setting")]
-        [Tooltip("in google form page do F12 'inspect' web search for 'formResponse'")]
-        [SerializeField] string _formFieldURL;
         [Tooltip("in google form page do F12 'inspect' web search for 'entry.' paste this as 'entry.122969'")]
+        [SerializeField] string _formEntryFieldID;
+        [Tooltip("in google form page do F12 'inspect' web search for 'formResponse'")]
         [SerializeField] string _formSubmitActionURL;
 
         [Header("Submit Event")]
@@ -54,7 +54,7 @@ namespace Meangpu.Util
 
         IEnumerator PostUserFeedback(string text)
         {
-            if (string.IsNullOrWhiteSpace(_formSubmitActionURL) || string.IsNullOrWhiteSpace(_formFieldURL))
+            if (string.IsNullOrWhiteSpace(_formSubmitActionURL) || string.IsNullOrWhiteSpace(_formEntryFieldID))
             {
                 Debug.Log($"<color=red>User form URL is null!</color>");
                 yield break;
@@ -66,10 +66,10 @@ namespace Meangpu.Util
             }
 
             WWWForm form = new();
-            form.AddField(_formFieldURL, text);
+            form.AddField(_formEntryFieldID, text);
             UnityWebRequest submitReq = UnityWebRequest.Post(_formSubmitActionURL, form);
             yield return submitReq.SendWebRequest();
-            Debug.Log($"add this '{text}' to google form at '{_formFieldURL}'");
+            Debug.Log($"add this '{text}' to google form at '{_formEntryFieldID}'");
 
             _afterSubmitEvent?.Invoke();
         }

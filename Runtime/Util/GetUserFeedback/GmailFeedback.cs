@@ -19,6 +19,5 @@ namespace Meangpu.Util
             string body = $"<{feedbackWord}>";
             OpenLinkURL.OpenLink($"mailto:{_emailToReceiveFeedback}?subject={subject}&body={body}");
         }
-
     }
 }
