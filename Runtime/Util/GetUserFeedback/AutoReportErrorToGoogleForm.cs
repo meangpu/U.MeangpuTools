@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
-using VInspector;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
 namespace Meangpu.Util
 {
-    public class AutoSentErrorToGoogleForm : MonoBehaviour
+    public class AutoReportErrorToGoogleForm : MonoBehaviour
     {
         [Header("Copy This")]
         [SerializeField] string CopyMe_formFieldURL = "formResponse";
