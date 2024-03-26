@@ -31,7 +31,7 @@ namespace Meangpu.Util
         {
             if (type == LogType.Error || type == LogType.Exception)
             {
-                string ErrorText = $"AutoReportError:{condition}\n{stackTrace}";
+                string ErrorText = $"AutoReportError\n\n{condition}\n\n{stackTrace}";
                 if (_ignoreSameError && _ignoreErrorStringList.Contains(ErrorText)) return;
                 _ignoreErrorStringList.Add(ErrorText);
 
@@ -62,7 +62,7 @@ namespace Meangpu.Util
             form.AddField(_formFieldURL, text);
             UnityWebRequest submitReq = UnityWebRequest.Post(_formSubmitActionURL, form);
             yield return submitReq.SendWebRequest();
-            Debug.Log($"add this '{text}' to google form at '{_formFieldURL}'");
+            Debug.Log($"AutoReport '{text}' Is Sent To '{_formFieldURL}'");
 
             _afterErrorSubmitEvent?.Invoke();
         }
