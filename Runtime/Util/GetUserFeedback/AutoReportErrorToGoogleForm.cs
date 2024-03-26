@@ -3,14 +3,15 @@ using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace Meangpu.Util
 {
     public class AutoReportErrorToGoogleForm : MonoBehaviour
     {
         [Header("Copy This")]
-        [SerializeField] string CopyMe_formFieldURL = "formResponse";
-        [SerializeField] string CopyMe_formSubmitActionURL = "entry.";
+        public string CopyMe_formFieldURL = "formResponse";
+        public string CopyMe_formSubmitActionURL = "entry.";
 
         [Header("Form setting")]
         [Tooltip("in google form page do F12 'inspect' web search for 'entry.' paste this as 'entry.122969'")]
@@ -30,7 +31,8 @@ namespace Meangpu.Util
         {
             if (type == LogType.Error || type == LogType.Exception)
             {
-                string ErrorText = $"AutoReportError\n\n{condition}\n\n{stackTrace}";
+                string ErrorText = $"AutoReportError\nErrorAtSceneName: {SceneManager.GetActiveScene().name}\n{condition}\n{stackTrace}";
+
                 if (_ignoreSameError && _ignoreErrorStringList.Contains(ErrorText)) return;
                 _ignoreErrorStringList.Add(ErrorText);
 
