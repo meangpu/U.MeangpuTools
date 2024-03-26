@@ -11,8 +11,8 @@ namespace Meangpu.Util
     public abstract class BaseGoogleFormFeedback : MonoBehaviour
     {
         [Header("Copy This")]
-        [SerializeField] string CopyMe_formEntry = "entry.";
-        [SerializeField] string CopyMe_formActionResponse = "formResponse";
+        public string CopyMe_formEntry = "entry.";
+        public string CopyMe_formActionResponse = "formResponse";
 
         [Header("Form setting")]
         [Tooltip("in google form page do F12 'inspect' web search for 'entry.' paste this as 'entry.122969'")]

@@ -31,7 +31,7 @@ namespace Meangpu.Util
         {
             if (type == LogType.Error || type == LogType.Exception)
             {
-                string ErrorText = $"AutoReportError\nErrorAtSceneName: {SceneManager.GetActiveScene().name}\n\n{condition}\n\n{stackTrace}";
+                string ErrorText = $"AutoReportError\n\nDeviceData: {DeviceData.GetDeviceData()}\n\nErrorAtScene: {SceneManager.GetActiveScene().name}\n\n{condition}\n\n{stackTrace}";
 
                 if (_ignoreSameError && _ignoreErrorStringList.Contains(ErrorText)) return;
                 _ignoreErrorStringList.Add(ErrorText);
