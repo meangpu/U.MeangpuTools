@@ -76,7 +76,7 @@ namespace Framework
 					get
 					{
 						return _currentPlayModeState;
-					}		
+					}
 				}
 
 				internal static List<SavedObject> SavedObjects
@@ -159,9 +159,9 @@ namespace Framework
 						{
 							RegisterSavedObject(component);
 						}
-						
+
 						UnityPlayModeSaverWindow.Open(false);
-					}	
+					}
 				}
 
 				[MenuItem(kSaveComponentSnapshotMenuString, false, kSaveComponentMenuPriority)]
@@ -202,7 +202,7 @@ namespace Framework
 					{
 						UnregisterObject(component);
 						UnityPlayModeSaverWindow.Open(false);
-					}	
+					}
 				}
 
 				[MenuItem(kRevertComponentMenuString, true)]
@@ -230,7 +230,7 @@ namespace Framework
 						}
 
 						UnityPlayModeSaverWindow.Open(false);
-					}	
+					}
 				}
 
 				[MenuItem(kSaveGameObjectSnapshotMenuString, false, kSaveGameObjectMenuPriority)]
@@ -263,7 +263,7 @@ namespace Framework
 							if (!IsObjectRegistered(go, out _))
 								return true;
 						}
-					}					
+					}
 
 					return false;
 				}
@@ -582,7 +582,7 @@ namespace Framework
 					{
 						//First check object is already saved
 						int saveObjIndex = GetSavedSceneObjectIndex(identifier, scenePath);
-						
+
 						if (saveObjIndex != -1)
 						{
 							//If so delete the origanal saved object (save in heirachy instead)
@@ -613,7 +613,7 @@ namespace Framework
 					EditorPrefs.SetString(editorPrefKey + kEditorPrefsObjectScene, scenePath);
 					EditorPrefs.SetInt(editorPrefKey + kEditorPrefsObjectSceneId, identifier);
 					EditorPrefs.SetBool(editorPrefKey + kEditorPrefsObjectDeleted, true);
-					
+
 					return editorPrefKey;
 				}
 
@@ -872,7 +872,7 @@ namespace Framework
 						{
 							if (unityType)
 							{
-								//Only store the object if the reference is within the same scene 
+								//Only store the object if the reference is within the same scene
 								Scene objScne = GetObjectScene(obj);
 
 								if (objScne.IsValid() && objScne == GetObjectScene(propertry.objectReferenceValue))
@@ -1111,10 +1111,10 @@ namespace Framework
 
 						if (isPartOfCurrentPrefabHieracy)
 							EditorPrefs.SetInt(editorPrefKey + "." + Convert.ToString(childObjectIndex) + kEditorPrefsRuntimeObjectPrefabObjIndex, GetPrefabComponentIndex(parentPrefab, components[i]));
-					
+
 						childObjectIndex++;
 					}
-					
+
 					foreach (Transform child in gameObject.transform)
 					{
 						bool isPartOfCurrentPrefabHieracy = parentPrefab != null && PrefabUtility.GetNearestPrefabInstanceRoot(child.gameObject) == parentPrefab;
@@ -1213,7 +1213,7 @@ namespace Framework
 
 					List<Object> restoredObjects = new List<Object>();
 					List<RestoredObjectData> restoredObjectsData = new List<RestoredObjectData>();
-					
+
 					for (int i = 0; i < numSavedObjects; i++)
 					{
 						string editorPrefKey = kEditorPrefsKey + Convert.ToString(i);
@@ -1251,7 +1251,7 @@ namespace Framework
 									{
 										restoredObjects.Add(obj);
 										restoredObjectsData.Add(CreateSceneObjectRestoredData(editorPrefKey, obj, sceneStr));
-										
+
 										//If its a game object also restore any saved child objects
 										if (obj is GameObject gameObject)
 										{
@@ -1432,7 +1432,7 @@ namespace Framework
 							DirtyCanvasRenderers(data._object);
 
 							EditorUtility.SetDirty(data._object);
-						}					
+						}
 					}
 				}
 
@@ -1507,7 +1507,7 @@ namespace Framework
 						if (childrenData.TryGetValue(child.gameObject, out RestoredObjectData restoredObjectData))
 						{
 							restoredObjectsData.Add(restoredObjectData);
-							
+
 							RestoreChildSavedObject(child.gameObject, sceneStr, childrenData, ref restoredObjects, ref restoredObjectsData);
 						}
 						//If don't have saved data for the child GameObject then delete it
@@ -1748,7 +1748,7 @@ namespace Framework
 								obj = gameObject.AddComponent(objType);
 							}
 						}
-						else if(objType == typeof(GameObject))
+						else if (objType == typeof(GameObject))
 						{
 							GameObject childGameObject = null;
 
@@ -1784,7 +1784,7 @@ namespace Framework
 						}
 
 						restoredObjectsData.Add(CreateRuntimeObjectRestoredData(childeditorPrefKey, obj, runtimeObjectRoot, sceneStr));
-						
+
 						DeleteObjectEditorPrefs(childeditorPrefKey);
 
 						childIndex++;
@@ -1813,7 +1813,7 @@ namespace Framework
 
 					int children = EditorPrefs.GetInt(editorPrefKey + kEditorPrefsSceneObjectChildren, 0);
 
-					for (int i=0; i<children; i++)
+					for (int i = 0; i < children; i++)
 					{
 						DeleteObjectEditorPrefs(editorPrefKey + '.' + i);
 					}
@@ -1827,7 +1827,7 @@ namespace Framework
 				#region Scene Prefab Instances
 				private static void CacheScenePrefabs()
 				{
-					for (int i=0; i<SceneManager.sceneCount; i++)
+					for (int i = 0; i < SceneManager.sceneCount; i++)
 					{
 						Scene scene = SceneManager.GetSceneAt(i);
 
@@ -1903,13 +1903,13 @@ namespace Framework
 						{
 							return false;
 						}
-						
+
 						return scene.IsValid();
 					}
-					
+
 					return false;
 				}
-				
+
 				private static Scene GetObjectScene(Object obj)
 				{
 					Component component = obj as Component;
@@ -1925,7 +1925,7 @@ namespace Framework
 						if (gameObject != null)
 							return gameObject.scene;
 					}
-					
+
 					return new Scene();
 				}
 
@@ -1948,7 +1948,7 @@ namespace Framework
 				private static string GetObjectPath(Object obj)
 				{
 					GameObject gameObject;
-					
+
 					if (obj is GameObject gameObj)
 					{
 						gameObject = gameObj;
@@ -2020,7 +2020,7 @@ namespace Framework
 						return Type.GetType(typeStr);
 					}
 				}
-				
+
 				private static int GetPrefabChildIndex(GameObject prefabRoot, GameObject gameObject)
 				{
 					int index = 0;
@@ -2105,10 +2105,10 @@ namespace Framework
 								}
 
 								count++;
-							}				
+							}
 						}
 					}
-					
+
 					return null;
 				}
 
