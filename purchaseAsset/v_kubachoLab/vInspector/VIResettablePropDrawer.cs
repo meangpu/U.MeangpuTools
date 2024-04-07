@@ -48,6 +48,8 @@ namespace VInspector
                     if (parent is MonoBehaviour)
 #if UNITY_2023_2_OR_NEWER
                     {
+                        if(Application.isPlaying) return; // to prevent Awake calls on playmode enter
+
                         var go = EditorUtility.CreateGameObjectWithHideFlags("Dummy object for fetching default variable values for vInspector's resettable variables feature", HideFlags.HideAndDontSave, parent.GetType());
                         try { parentsWithDefaultValues[parent.GetType()] = go.GetComponent(parent.GetType()); }
                         finally { Object.DestroyImmediate(go); }

@@ -12,14 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9752b0c8e144801967e6897679604b, type: 3}
   m_Name: vHierarchy Data
   m_EditorClassIdentifier: 
-  sceneDatas_byGuid:
-    keys:
-    - fc06167e799b992439f50327168e3da8
-    - d58103500bc77d0438e9b91c760be664
-    values:
-    - goDatas_byGlobalId:
-        keys: []
-        values: []
-    - goDatas_byGlobalId:
-        keys: []
-        values: []
+  sceneDatasByGuid:
+    keys: []
+    values: []

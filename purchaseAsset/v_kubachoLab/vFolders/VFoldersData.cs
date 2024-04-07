@@ -17,73 +17,48 @@ namespace VFolders
 {
     public class VFoldersData : ScriptableObject
     {
-        public SerializableDictionary<string, FolderData> folderDatas_byGuid = new SerializableDictionary<string, FolderData>();
+        public SerializeableDicitonary<string, FolderData> folderDatasByGuid = new SerializeableDicitonary<string, FolderData>();
 
         [System.Serializable]
         public class FolderData
         {
-            public int colorIndex;
-            public string iconNameOrGuid = "";
+            public string guid;
 
-        }
+            public Color color => VFoldersIconEditor.GetColor(iColor);
+            public int iColor;
 
-
-
-
-        [CustomEditor(typeof(VFoldersData))]
-        class Editor : UnityEditor.Editor
-        {
-            public override void OnInspectorGUI()
+            public string icon
             {
-                var style = EditorStyles.label;
-                style.wordWrap = true;
-
-
-                void normal()
+                get
                 {
-                    if (storeDataInMetaFiles) return;
+                    var icon = VFoldersMenuItems.customIconsEnabled ? customIcon : "";
 
-                    SetGUIEnabled(false);
-                    BeginIndent(0);
+                    if (icon == "")
+                        icon = VFoldersMenuItems.autoIconsEnabled ? autoIcon : "";
 
-                    Space(10);
-                    EditorGUILayout.LabelField("This file contains data about which icons and colors are assigned to folders", style);
+                    if (icon == "none")
+                        icon = "";
 
-                    Space(6);
-                    GUILayout.Label("If there are multiple people working on the project, you might want to store this data in .meta files of folders to avoid merge conflicts. To do that, click the ... button at the top right corner and click 'Store data in .meta files of folders' ", style);
+                    return icon;
 
-                    EndIndent(10);
-                    ResetGUIEnabled();
                 }
-                void meta()
+                set
                 {
-                    if (!storeDataInMetaFiles) return;
+                    if (value == autoIcon && VFoldersMenuItems.autoIconsEnabled)
+                        customIcon = "";
+                    else if (value == "")
+                        customIcon = "none";
+                    else
+                        customIcon = value;
 
-                    SetGUIEnabled(false);
-                    BeginIndent(0);
-
-                    Space(10);
-                    EditorGUILayout.LabelField("vFolders currently stores data in .meta files of folders", style);
-
-                    Space(6);
-                    GUILayout.Label("If you want this data to be stored in this file, click the ... button at the top right corner and click 'Store data in .meta files' ", style);
-
-                    EndIndent(10);
-                    ResetGUIEnabled();
                 }
-
-                normal();
-                meta();
-
-
             }
+            public string autoIcon = "";
+            public string customIcon = "";
+            public bool autoIconDirty = true;
+
+            public FolderData(string guid) => this.guid = guid;
         }
-
-        public static bool storeDataInMetaFiles { get => EditorPrefs.GetBool("vFolders-storeDataInMetaFilesEnabled", false); set => EditorPrefs.SetBool("vFolders-storeDataInMetaFilesEnabled", value); }
-
-        [ContextMenu("Store data in .meta files of folders")]
-        public void MigrateDataBetweenMetaFilesAndSO() => storeDataInMetaFiles = !storeDataInMetaFiles; // todo
-
 
     }
 }

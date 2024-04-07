@@ -112,9 +112,11 @@ namespace VFavorites
                 {
                     var rect = footerRect.SetWidth(30).MoveX(5).MoveY(.5f).SetHeightFromMid(14);
 
-                    GUI.color = guidsForUndoStack.Any() ? Greyscale(1, .75f) : Greyscale(1, .4f);
+                    SetGUIColor(guidsForUndoStack.Any() ? Greyscale(1, .75f) : Greyscale(1, .4f));
+
                     GUI.Label(rect, EditorGUIUtility.IconContent("Animation.PrevKey@2x"));
-                    GUI.color = Color.white;
+
+                    ResetGUIColor();
 
                     if (rect.IsHovered() && e.mouseUp())
                     {
@@ -202,9 +204,11 @@ namespace VFavorites
                         var cNorm = Greyscale(.45f);
                         var cHovered = EditorGUIUtility.isProSkin ? Greyscale(.8f) : cNorm;
 
-                        GUI.color = crossHovered ? cHovered : cNorm;
+                        SetGUIColor(crossHovered ? cHovered : cNorm);
+
                         GUI.Label(rect, EditorGUIUtility.IconContent("CrossIcon"));
-                        GUI.color = Color.white;
+
+                        ResetGUIColor();
 
                         if (crossHovered)
                             mousePressed = false;
@@ -544,7 +548,7 @@ namespace VFavorites
         }
 
 
-        public const string version = "1.0.9";
+        public const string version = "1.0.10";
 
     }
 }

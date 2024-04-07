@@ -193,8 +193,8 @@ namespace VInspector
                         var foldoutAttribute = fieldInfo.GetCustomAttribute<FoldoutAttribute>();
                         var endFoldoutAttribute = fieldInfo.GetCustomAttribute<EndFoldoutAttribute>();
                         var newFoldoutPath = drawingFoldoutPath;
-                        if (foldoutAttribute != null) newFoldoutPath = foldoutAttribute.name;
                         if (endFoldoutAttribute != null) newFoldoutPath = "";
+                        if (foldoutAttribute != null) newFoldoutPath = foldoutAttribute.name;
 
                         var drawingPathSplit = drawingFoldoutPath.Split('/').Where(r => r != "").ToArray();
                         var newPathSplit = newFoldoutPath.Split('/').Where(r => r != "").ToArray();
@@ -413,7 +413,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.25";
+        const string version = "1.2.28";
 
     }
 }

@@ -122,7 +122,6 @@ namespace VFavorites.Libs
 
         #endregion
 
-
         #region Paths
 
         public static string ParentPath(this string path) => path.Substring(0, path.LastIndexOf('/'));
@@ -327,6 +326,27 @@ namespace VFavorites.Libs
         public static bool holdingAlt => ePresent && (e.alt);
         public static bool holdingCmd => ePresent && (e.command || e.control);
         public static bool holdingShift => ePresent && (e.shift);
+
+
+        public static void SetGUIColor(Color c)
+        {
+            if (!_guiColorModified)
+                _defaultGuiColor = GUI.color;
+
+            _guiColorModified = true;
+
+            GUI.color = _defaultGuiColor * c;
+
+        }
+        public static void ResetGUIColor()
+        {
+            GUI.color = _guiColorModified ? _defaultGuiColor : Color.white;
+
+            _guiColorModified = false;
+
+        }
+        static bool _guiColorModified;
+        static Color _defaultGuiColor;
 
 
 

@@ -20,16 +20,21 @@ namespace VInspector
         public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
         {
             var variants = ((VariantsAttribute)attribute).variants;
-            var curVal = prop.stringValue;
+
 
             EditorGUI.BeginProperty(rect, label, prop);
 
-            var i = EditorGUI.IntPopup(rect, label.text, variants.ToList().IndexOf(curVal), variants, Enumerable.Range(0, variants.Length).ToArray());
-            if (i == -1) i = 0;
+            var iCur = prop.hasMultipleDifferentValues ? -1 : variants.ToList().IndexOf(prop.stringValue);
 
-            prop.stringValue = variants[i];
+            var iNew = EditorGUI.IntPopup(rect, label.text, iCur, variants, Enumerable.Range(0, variants.Length).ToArray());
+
+            if (iNew != -1)
+                prop.stringValue = variants[iNew];
+            else if (!prop.hasMultipleDifferentValues)
+                prop.stringValue = variants[0];
 
             EditorGUI.EndProperty();
+
         }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb9c12a8c6c949f7af83a3d238359d0, type: 3}
   m_Name: vFolders Data
   m_EditorClassIdentifier: 
-  folderDatas_byGuid:
+  folderDatasByGuid:
     keys: []
     values: []
