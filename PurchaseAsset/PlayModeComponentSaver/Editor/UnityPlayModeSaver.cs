@@ -485,11 +485,14 @@ namespace Framework
 				{
 					SceneView.RepaintAll();
 
-					Type inspectorWindowType = Type.GetType("UnityEditor.InspectorWindow, UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-					if (inspectorWindowType != null)
-					{
-						EditorWindow.GetWindow(inspectorWindowType).Repaint();
-					}
+					// meangpu:: this 2 lines cause inspector popup when play test at full_screen
+					// Type inspectorWindowType = Type.GetType("UnityEditor.InspectorWindow, UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+					// if (inspectorWindowType != null)
+					// {
+					// 	EditorWindow.GetWindow(inspectorWindowType).Repaint();
+					// }
+					// meangpu:: END
+
 
 					Type gameViewType = Type.GetType("UnityEditor.GameView, UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
 
