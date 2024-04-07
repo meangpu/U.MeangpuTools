@@ -1,11 +1,6 @@
 fileFormatVersion: 2
 guid: 1f060c334b3d05440ad379311f082349
-importerOverride:
-  nativeImporterType: -2
-  scriptedImporterType:
-    serializedVersion: 2
-    Hash: d53ca297fb8e7ea31d64b12a57aef201
-PackageManifestImporter:
+TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
