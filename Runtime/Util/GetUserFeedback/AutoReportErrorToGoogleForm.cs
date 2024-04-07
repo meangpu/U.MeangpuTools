@@ -23,12 +23,21 @@ namespace Meangpu.Util
 
         [SerializeField] bool _ignoreSameError = true;
         [SerializeField] List<string> _ignoreErrorStringList = new();
+        [SerializeField] bool _disableSendFormInUnityEditor = true;
 
         void OnEnable() => Application.logMessageReceived += Application_logMessageReceived;
         void OnDisable() => Application.logMessageReceived -= Application_logMessageReceived;
 
         void Application_logMessageReceived(string condition, string stackTrace, LogType type)
         {
+
+#if UNITY_EDITOR
+            if (_disableSendFormInUnityEditor)
+            {
+                return;
+            }
+#endif
+
             if (type == LogType.Error || type == LogType.Exception)
             {
                 string ErrorText = $"AutoReportError\n\nDeviceData: {DeviceData.GetDeviceData()}\n\nErrorAtScene: {SceneManager.GetActiveScene().name}\n\n{condition}\n\n{stackTrace}";
