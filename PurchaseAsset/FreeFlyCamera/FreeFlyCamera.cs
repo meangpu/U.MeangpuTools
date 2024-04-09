@@ -153,7 +153,7 @@ public class FreeFlyCamera : MonoBehaviour
         // Translation
         if (_enableTranslation)
         {
-            transform.Translate(Vector3.forward * Input.mouseScrollDelta.y * Time.deltaTime * _translationSpeed);
+            transform.Translate(_translationSpeed * Input.mouseScrollDelta.y * Time.deltaTime * Vector3.forward);
         }
 
         // Movement
@@ -186,7 +186,7 @@ public class FreeFlyCamera : MonoBehaviour
             // Calc acceleration
             CalculateCurrentIncrease(deltaPosition != Vector3.zero);
 
-            transform.position += deltaPosition * currentSpeed * _currentIncrease;
+            transform.position += _currentIncrease * currentSpeed * deltaPosition;
         }
 
         // Rotation
