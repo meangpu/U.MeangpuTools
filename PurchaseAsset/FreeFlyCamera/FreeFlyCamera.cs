@@ -206,11 +206,12 @@ public class FreeFlyCamera : MonoBehaviour
             );
         }
 
-        // Return to init position
-        if (Input.GetKeyDown(_initPositionButton))
-        {
-            transform.position = _initPosition;
-            transform.eulerAngles = _initRotation;
-        }
+        if (Input.GetKeyDown(_initPositionButton)) ResetToInitPosition();
+    }
+
+    public void ResetToInitPosition()
+    {
+        transform.position = _initPosition;
+        transform.eulerAngles = _initRotation;
     }
 }
