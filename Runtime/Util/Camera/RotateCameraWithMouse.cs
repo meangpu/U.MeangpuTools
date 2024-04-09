@@ -1,5 +1,4 @@
 using UnityEngine;
-using Meangpu;
 using VInspector;
 using UnityEngine.UI;
 
@@ -21,7 +20,7 @@ namespace Meangpu.Util
 
         [SerializeField] bool _canScrollToZoom;
         [ShowIf("_canScrollToZoom")]
-        [SerializeField] Vector3 _scrollZoomSpeed = new(0, 0, 5);
+        [SerializeField] float _scrollZoomSpeed = 2;
         [MinMaxSlider(-99999f, 99909f, "_maxZoom", "ZoomClamp")]
         [SerializeField] float _minZoom = 0.8f;
         [HideInInspector]
@@ -70,8 +69,8 @@ namespace Meangpu.Util
 
         private void ZoomInOut()
         {
-            if (Input.mouseScrollDelta.y > 0) _offset += _scrollZoomSpeed;// mouse up
-            if (Input.mouseScrollDelta.y < 0) _offset -= _scrollZoomSpeed;// mouse down
+            if (Input.mouseScrollDelta.y > 0) _offset.z += _scrollZoomSpeed;// mouse up
+            if (Input.mouseScrollDelta.y < 0) _offset.z -= _scrollZoomSpeed;// mouse down
 
             _offset.z = Mathf.Clamp(_offset.z, _minZoom, _maxZoom);
             if (_useZoomSlider && _slider != null) _slider.value = _offset.z;

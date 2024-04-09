@@ -11,14 +11,17 @@ namespace Meangpu.Util
         [SerializeField]
         Vector2 _clampMinMax = new(-3, -.6f);
 
-        [SerializeField] bool _isUseMouseSlider;
+        [SerializeField] bool _isUseMouseSlider = true;
+
         [ShowIf("_isUseMouseSlider")]
         [SerializeField] float _scrollZoomSpeed = 0;
         [EndIf()]
+
         [SerializeField] float _scrollSmoothDelta = 10f;
         [SerializeField] float _startOffset = .3f;
 
         [SerializeField] bool _isUsingSlider;
+
         [ShowIf("_isUsingSlider")]
         [SerializeField] Slider _sliderValue;
 
