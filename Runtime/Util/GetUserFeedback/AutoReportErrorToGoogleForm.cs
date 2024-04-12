@@ -20,10 +20,16 @@ namespace Meangpu.Util
         [SerializeField] string _formSubmitActionURL;
 
         [SerializeField] UnityEvent _afterErrorSubmitEvent;
+        [SerializeField] UnityEvent _OnFoundErrorEvent;
 
         [SerializeField] bool _ignoreSameError = true;
         [SerializeField] List<string> _ignoreErrorStringList = new();
         [SerializeField] bool _disableSendFormInUnityEditor = true;
+
+        [SerializeField] bool _doAutoSentToForm = true;
+
+        string _errorText;
+        public string LastErrorText => _errorText;
 
         void OnEnable() => Application.logMessageReceived += Application_logMessageReceived;
         void OnDisable() => Application.logMessageReceived -= Application_logMessageReceived;
@@ -37,17 +43,22 @@ namespace Meangpu.Util
                 return;
             }
 #endif
-
             if (type == LogType.Error || type == LogType.Exception)
             {
-                string ErrorText = $"AutoReportError\n\nDeviceData: {DeviceData.GetDeviceData()}\n\nErrorAtScene: {SceneManager.GetActiveScene().name}\n\n{condition}\n\n{stackTrace}";
+                _errorText = $"AutoReportError\n\nDeviceData: {DeviceData.GetDeviceData()}\n\nErrorAtScene: {SceneManager.GetActiveScene().name}\n\n{condition}\n\n{stackTrace}";
+                if (_ignoreSameError && _ignoreErrorStringList.Contains(_errorText)) return;
+                _ignoreErrorStringList.Add(_errorText);
 
-                if (_ignoreSameError && _ignoreErrorStringList.Contains(ErrorText)) return;
-                _ignoreErrorStringList.Add(ErrorText);
+                _OnFoundErrorEvent?.Invoke();
 
-                SubmitUserFeedbackToForm(ErrorText);
+                if (_doAutoSentToForm)
+                {
+                    SubmitUserFeedbackToForm(_errorText);
+                }
             }
         }
+
+        public void UploadToFormWithLastErrorText() => SubmitUserFeedbackToForm(_errorText);
 
         private void SubmitUserFeedbackToForm(string wordToSubmit)
         {
