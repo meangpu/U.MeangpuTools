@@ -25,7 +25,6 @@ namespace Meangpu
                         property.vector3Value = Vector3.one;
                         property.serializedObject.ApplyModifiedProperties();
                     });
-
                     break;
                 case SerializedPropertyType.Vector2:
                     menu.AddItem(new GUIContent("Zero"), false, () =>
@@ -40,7 +39,6 @@ namespace Meangpu
                         property.serializedObject.ApplyModifiedProperties();
                     });
                     break;
-
                 case SerializedPropertyType.Quaternion:
                     menu.AddItem(new GUIContent("RESET_ZERO"), false, () =>
                     {
@@ -48,15 +46,9 @@ namespace Meangpu
                         property.serializedObject.ApplyModifiedProperties();
                     });
                     break;
-
                 default:
                     return;
-
-
             }
-
-
-
         }
     }
 }
