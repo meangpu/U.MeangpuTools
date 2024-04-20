@@ -75,13 +75,15 @@ namespace SuperUnityBuild.BuildTool
 
                 SerializedProperty buildOptions = property.FindPropertyRelative("buildOptions");
 
-                bool enableHeadlessMode = ((BuildOptions)buildOptions.intValue & BuildOptions.EnableHeadlessMode) == BuildOptions.EnableHeadlessMode;
+                bool enableHeadlessMode = ((StandaloneBuildSubtarget)buildOptions.intValue & StandaloneBuildSubtarget.Server) == StandaloneBuildSubtarget.Server;
+
                 bool developmentBuild = ((BuildOptions)buildOptions.intValue & BuildOptions.Development) == BuildOptions.Development;
                 bool allowDebugging = ((BuildOptions)buildOptions.intValue & BuildOptions.AllowDebugging) == BuildOptions.AllowDebugging;
 
                 enableHeadlessMode = EditorGUILayout.ToggleLeft(" Server Build", enableHeadlessMode);
-                if (enableHeadlessMode) buildOptions.intValue |= (int)BuildOptions.EnableHeadlessMode;
-                else buildOptions.intValue &= ~(int)BuildOptions.EnableHeadlessMode;
+
+                if (enableHeadlessMode) buildOptions.intValue |= (int)StandaloneBuildSubtarget.Server;
+                else buildOptions.intValue &= ~(int)StandaloneBuildSubtarget.Server;
 
                 developmentBuild = EditorGUILayout.ToggleLeft(" Development Build", developmentBuild);
                 if (developmentBuild) buildOptions.intValue |= (int)BuildOptions.Development;
