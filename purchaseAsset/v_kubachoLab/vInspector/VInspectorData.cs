@@ -248,7 +248,6 @@ namespace VInspector
         public bool isIntact => buttons != null && rootTab?.subtabs != null && rootFoldout?.subfoldouts != null;
 
 
-        public static Dictionary<Object, VInspectorData> datasByTarget = new Dictionary<Object, VInspectorData>();
 
 
         [System.Serializable]

@@ -179,8 +179,8 @@ namespace VInspector
                     {
                         var tabAttribute = fieldInfo.GetCustomAttribute<TabAttribute>();
                         var endTabAttribute = fieldInfo.GetCustomAttribute<EndTabAttribute>();
-                        if (tabAttribute != null) { drawingTabPath = tabAttribute.name; drawingFoldoutPath = ""; hide = disable = false; }
                         if (endTabAttribute != null) { drawingTabPath = ""; drawingFoldoutPath = ""; hide = disable = false; }
+                        if (tabAttribute != null) { drawingTabPath = tabAttribute.name; drawingFoldoutPath = ""; hide = disable = false; }
 
 
                         ensureNeededTabsDrawn();
@@ -225,13 +225,19 @@ namespace VInspector
 
 
 
-
                     findFieldInfo();
 
                     if (fieldInfo == null) return;
                     if (fieldInfo.FieldType == typeof(VInspectorData)) return;
-                    if (fieldInfo.GetCustomAttribute<ButtonAttribute>() != null) return;
 
+
+
+
+                    ifs();
+
+                    if (hide) return;
+
+                    GUI.enabled = !disable;
 
 
 
@@ -251,14 +257,7 @@ namespace VInspector
 
 
 
-                    ifs();
-
-                    if (hide) return;
-
-                    GUI.enabled = !disable;
-
-
-
+                    if (fieldInfo.GetCustomAttribute<ButtonAttribute>() != null) return;
 
                     updateIndentLevel(drawingFoldoutPath);
 
@@ -352,20 +351,72 @@ namespace VInspector
         {
             var serializedDataField = target.GetType().GetFields(maxBindingFlags).FirstOrDefault(r => r.FieldType == typeof(VInspectorData));
 
-            if (datasByTarget.ContainsKey(target) && datasByTarget[target] != null)
-                data = datasByTarget[target];
-            else
-                data = datasByTarget[target] = (VInspectorData)(serializedDataField?.GetValue(target)) ?? ScriptableObject.CreateInstance<VInspectorData>();
+            void getCached()
+            {
+                if (!VInspectorCache.instance.datas_byTarget.ContainsKey(target)) return;
 
-            serializedDataField?.SetValue(target, data);
+                VInspectorCache.EnsureDataIsAlive(target);
+
+                data = VInspectorCache.instance.datas_byTarget[target];
+
+            }
+            void getSerialized()
+            {
+                if (data) return;
+                if (serializedDataField == null) return;
+
+                data = serializedDataField.GetValue(target) as VInspectorData;
+
+            }
+            void createNew()
+            {
+                if (data) return;
+
+                data = ScriptableObject.CreateInstance<VInspectorData>();
+
+            }
+
+            void markTargetDirty()
+            {
+                if (!PrefabUtility.IsPartOfPrefabInstance(target)) return;
+                if (serializedDataField == null) return;
+                if (serializedDataField.GetValue(target) != null) return;
+
+                target.Dirty();
+
+                // serialized data field field won't be marked as prefab override without marking taget dirty for some reason
+                // fixes data not getting serialized on prefab instances
+
+            }
+
+            void cache()
+            {
+                VInspectorCache.instance.datas_byTarget[target] = data;
+            }
+            void serialize()
+            {
+                if (serializedDataField == null) return;
+
+                serializedDataField.SetValue(target, data);
+
+            }
+
+
+            getCached();
+            getSerialized();
+            createNew();
+
+            markTargetDirty();
+
+            cache();
+            serialize();
 
             data.Setup(target);
             data.Dirty();
 
         }
 
-
-
+        //
 
         void CheckScriptMissing()
         {
@@ -411,7 +462,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.28";
+        const string version = "1.2.30";
 
     }
 }
