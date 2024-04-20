@@ -24,7 +24,10 @@ namespace Meangpu.Util
 
         [SerializeField] bool _ignoreSameError = true;
         [SerializeField] List<string> _ignoreErrorStringList = new();
+
+#if UNITY_EDITOR
         [SerializeField] bool _disableSendFormInUnityEditor = true;
+#endif
 
         [SerializeField] bool _doAutoSentToForm = true;
 
