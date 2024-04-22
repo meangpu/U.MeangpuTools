@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Ryan;
 using UnityEngine;
@@ -7,15 +8,21 @@ namespace Meangpu
     public class TimeScaleSetter : BaseMeSingleton<TimeScaleSetter>
     {
         [SerializeField] FloatReference _timeScale;
-
         Sequence _sequence;
-
         bool _isSlowing;
         public bool IsSlowing => _isSlowing;
+        public static Action<bool> OnTimeIsSlowStateChange;
 
         private void Update() => UpdateTimeScale();
 
         public void ResetTimeScale() => SetTimeScale(1);
+
+        public void UpdateIsSlowState(bool newState)
+        {
+            if (newState == _isSlowing) return;
+            _isSlowing = newState;
+            OnTimeIsSlowStateChange?.Invoke(_isSlowing);
+        }
 
         private void UpdateTimeScale()
         {
@@ -27,14 +34,14 @@ namespace Meangpu
         {
             _timeScale.Variable.SetValue(newValue);
             _sequence.Kill();
-            _isSlowing = false;
+            UpdateIsSlowState(false);
             UpdateTimeScale();
         }
 
         public void SlowTimeForSecond(float timeScale = .1f, float duration = 1f)
         {
             if (_isSlowing) return;
-            _isSlowing = true;
+            UpdateIsSlowState(true);
 
             _sequence.Kill();
 
@@ -43,7 +50,7 @@ namespace Meangpu
 
             _sequence.Append(DOTween.To(() => _timeScale, x => _timeScale.Variable.SetValue(x), 1, duration).SetEase(Ease.InQuad).SetUpdate(true));
 
-            _sequence.OnComplete(() => _isSlowing = false);
+            _sequence.OnComplete(() => UpdateIsSlowState(true));
         }
     }
 }
