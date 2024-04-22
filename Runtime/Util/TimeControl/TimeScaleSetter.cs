@@ -14,6 +14,8 @@ namespace Meangpu
         public static Action<bool> OnTimeIsSlowStateChange;
 
         [SerializeField] bool _resetTimeScaleOnStart = true;
+        [SerializeField] Ease _easeInSlowMotionType;
+        [SerializeField] Ease _easeOutSlowMotionType;
 
         void Start()
         {
@@ -45,19 +47,22 @@ namespace Meangpu
             UpdateTimeScale();
         }
 
-        public void SlowTimeForSecond(float timeScale = .1f, float duration = 1f)
+        public void SlowTimeForSecond(float targetTimeScale = .001f, float slowDurationSecond = 4, float durationFadeInSlow = 1f, float durationFadeOutOfSlow = 1f)
         {
             if (_isSlowing) return;
             UpdateIsSlowState(true);
 
             _sequence.Kill();
 
-            _timeScale.Variable.SetValue(timeScale);
-            _sequence = DOTween.Sequence();
+            _sequence = DOTween.Sequence().SetUpdate(true);
 
-            _sequence.Append(DOTween.To(() => _timeScale, x => _timeScale.Variable.SetValue(x), 1, duration).SetEase(Ease.InQuad).SetUpdate(true));
+            _sequence.Append(DOTween.To(() => _timeScale.Value, x => _timeScale.Variable.SetValue(x), targetTimeScale, durationFadeInSlow).SetEase(_easeInSlowMotionType));
 
-            _sequence.OnComplete(() => UpdateIsSlowState(true));
+            _sequence.AppendInterval(slowDurationSecond);
+
+            _sequence.Append(DOTween.To(() => _timeScale.Value, x => _timeScale.Variable.SetValue(x), 1, durationFadeOutOfSlow).SetEase(_easeOutSlowMotionType));
+
+            _sequence.OnComplete(() => UpdateIsSlowState(false));
         }
     }
 }
