@@ -13,6 +13,13 @@ namespace Meangpu
         public bool IsSlowing => _isSlowing;
         public static Action<bool> OnTimeIsSlowStateChange;
 
+        [SerializeField] bool _resetTimeScaleOnStart = true;
+
+        void Start()
+        {
+            if (_resetTimeScaleOnStart) ResetTimeScale();
+        }
+
         private void Update() => UpdateTimeScale();
 
         public void ResetTimeScale() => SetTimeScale(1);
