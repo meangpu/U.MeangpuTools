@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Meangpu
 {
-    public class TimeScaleBySOFloat : MonoBehaviour
+    public class TimeScaleSetter : BaseMeSingleton<TimeScaleSetter>
     {
         [SerializeField] FloatReference _timeScale;
 
