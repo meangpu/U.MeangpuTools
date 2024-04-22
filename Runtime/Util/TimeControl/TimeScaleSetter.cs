@@ -43,17 +43,15 @@ namespace Meangpu
         {
             _timeScale.Variable.SetValue(newValue);
             _sequence.Kill();
-            UpdateIsSlowState(false);
             UpdateTimeScale();
         }
 
-        public void SlowTimeForSecond(float targetTimeScale = .001f, float slowDurationSecond = 4, float durationFadeInSlow = 1f, float durationFadeOutOfSlow = 1f)
+        public void SlowTimeForSecond(float targetTimeScale = 0, float slowDurationSecond = 4, float durationFadeInSlow = 1f, float durationFadeOutOfSlow = 1f)
         {
             if (_isSlowing) return;
             UpdateIsSlowState(true);
 
             _sequence.Kill();
-
             _sequence = DOTween.Sequence().SetUpdate(true);
 
             _sequence.Append(DOTween.To(() => _timeScale.Value, x => _timeScale.Variable.SetValue(x), targetTimeScale, durationFadeInSlow).SetEase(_easeInSlowMotionType));
@@ -64,5 +62,29 @@ namespace Meangpu
 
             _sequence.OnComplete(() => UpdateIsSlowState(false));
         }
+
+        public void SetTimeToSlow(float targetTimeScale = 0, float durationFadeInSlow = 1f)
+        {
+            if (_isSlowing) return;
+            UpdateIsSlowState(true);
+
+            _sequence.Kill();
+            _sequence = DOTween.Sequence().SetUpdate(true);
+
+            _sequence.Append(DOTween.To(() => _timeScale.Value, x => _timeScale.Variable.SetValue(x), targetTimeScale, durationFadeInSlow).SetEase(_easeInSlowMotionType));
+        }
+
+        public void SetTimeToNotSlow(float durationFadeOutSlow = 1f)
+        {
+            if (!_isSlowing) return;
+            UpdateIsSlowState(false);
+
+            _sequence.Kill();
+            _sequence = DOTween.Sequence().SetUpdate(true);
+
+            _sequence.Append(DOTween.To(() => _timeScale.Value, x => _timeScale.Variable.SetValue(x), 1, durationFadeOutSlow).SetEase(_easeInSlowMotionType));
+        }
+
+
     }
 }
