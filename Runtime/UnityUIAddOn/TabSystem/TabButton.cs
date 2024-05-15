@@ -22,6 +22,7 @@ namespace Meangpu
         }
 
         public void SetBackground(Sprite newImage) => _background.sprite = newImage;
+        public void SetColor(Color newColor) => _background.color = newColor;
 
         public void OnPointerClick(PointerEventData eventData) => _tabGroup.OnTabSelect(this);
         public void OnPointerEnter(PointerEventData eventData) => _tabGroup.OnTabEnter(this);

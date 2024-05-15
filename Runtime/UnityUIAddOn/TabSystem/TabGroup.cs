@@ -8,9 +8,17 @@ namespace Meangpu
     {
         // learn from [Creating a Custom Tab System in Unity - YouTube](https://www.youtube.com/watch?v=211t6r12XPQ&t=298s)
         List<TabButton> _tabButtons;
+
+        [Header("sprite")]
         [SerializeField] Sprite _tabIdle;
         [SerializeField] Sprite _tabHover;
         [SerializeField] Sprite _tabActive;
+
+        [Header("color")]
+        [SerializeField] Color _tabIdleColor;
+        [SerializeField] Color _tabHoverColor;
+        [SerializeField] Color _tabActiveColor;
+
         TabButton _selectedTab;
         [Header("parent of page")]
         [Header("audio")]
@@ -32,6 +40,7 @@ namespace Meangpu
             {
                 _hoverSound?.PlayOneShot();
                 button.SetBackground(_tabHover);
+                button.SetColor(_tabHoverColor);
             }
         }
 
@@ -52,6 +61,7 @@ namespace Meangpu
             _selectedTab.Select();
             _clickSound?.PlayOneShot();
             button.SetBackground(_tabActive);
+            button.SetColor(_tabActiveColor);
 
             int tabIndex = button.transform.GetSiblingIndex();
             foreach (Transform child in _parentPageTransform) child.gameObject.SetActive(false);
@@ -65,6 +75,7 @@ namespace Meangpu
             {
                 if (_selectedTab != null && button == _selectedTab) { continue; }
                 button.SetBackground(_tabIdle);
+                button.SetColor(_tabIdleColor);
             }
         }
 
