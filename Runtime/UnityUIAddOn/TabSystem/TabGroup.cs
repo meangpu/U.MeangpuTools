@@ -15,15 +15,15 @@ namespace Meangpu
         [SerializeField] Sprite _tabActive;
 
         [Header("color")]
-        [SerializeField] Color _tabIdleColor;
-        [SerializeField] Color _tabHoverColor;
-        [SerializeField] Color _tabActiveColor;
+        [SerializeField] Color _tabIdleColor = Color.white;
+        [SerializeField] Color _tabHoverColor = Color.white;
+        [SerializeField] Color _tabActiveColor = Color.white;
 
         TabButton _selectedTab;
-        [Header("parent of page")]
         [Header("audio")]
         [SerializeField] SOSound _hoverSound;
         [SerializeField] SOSound _clickSound;
+        [Header("parent of page")]
         [Tooltip("need to have same child count as tab button")]
         [SerializeField] Transform _parentPageTransform;
 
