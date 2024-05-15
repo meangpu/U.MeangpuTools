@@ -1,0 +1,16 @@
+{
+    "name": "Meangpu.TabSystem",
+    "rootNamespace": "",
+    "references": [
+        "Meangpu.Audio"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
