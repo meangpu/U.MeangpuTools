@@ -18,7 +18,7 @@ namespace Meangpu
         void Start()
         {
             _background = GetComponent<Image>();
-            _tabGroup.Subscribe(this);
+            _tabGroup.InitSubscribe(this);
         }
 
         public void SetBackground(Sprite newImage) => _background.sprite = newImage;

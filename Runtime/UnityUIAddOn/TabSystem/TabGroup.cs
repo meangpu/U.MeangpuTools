@@ -30,13 +30,15 @@ namespace Meangpu
         void Start()
         {
             _selectedTab = null;
-            ResetTab();
         }
 
-        public void Subscribe(TabButton button)
+        public void InitSubscribe(TabButton button)
         {
             if (_tabButtons == null) _tabButtons = new List<TabButton>();
             _tabButtons.Add(button);
+
+            button.SetBackground(_tabIdle);
+            button.SetColor(_tabIdleColor);
         }
 
         public void OnTabEnter(TabButton button)
