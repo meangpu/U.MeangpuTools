@@ -27,6 +27,12 @@ namespace Meangpu
         [Tooltip("need to have same child count as tab button")]
         [SerializeField] Transform _parentPageTransform;
 
+        void Start()
+        {
+            _selectedTab = null;
+            ResetTab();
+        }
+
         public void Subscribe(TabButton button)
         {
             if (_tabButtons == null) _tabButtons = new List<TabButton>();
@@ -54,6 +60,7 @@ namespace Meangpu
             if (_selectedTab != null)
             {
                 _selectedTab.DeSelect();
+                _selectedTab = null;
             }
             ResetTab();
 
