@@ -9,27 +9,30 @@ namespace Meangpu
         // learn from [Creating a Custom Tab System in Unity - YouTube](https://www.youtube.com/watch?v=211t6r12XPQ&t=298s)
         List<TabButton> _tabButtons;
 
-        [Header("sprite")]
+        [SerializeField] TabButton _defaultTab;
+
+        [Header("Sprite")]
         [SerializeField] Sprite _tabIdle;
         [SerializeField] Sprite _tabHover;
         [SerializeField] Sprite _tabActive;
 
-        [Header("color")]
+        [Header("Color")]
         [SerializeField] Color _tabIdleColor = Color.white;
         [SerializeField] Color _tabHoverColor = Color.white;
         [SerializeField] Color _tabActiveColor = Color.white;
 
         TabButton _selectedTab;
-        [Header("audio")]
+        [Header("Audio")]
         [SerializeField] SOSound _hoverSound;
         [SerializeField] SOSound _clickSound;
-        [Header("parent of page")]
+        [Header("Parent of page")]
         [Tooltip("need to have same child count as tab button")]
         [SerializeField] Transform _parentPageTransform;
 
         void Start()
         {
             _selectedTab = null;
+            if (_defaultTab != null) OnTabSelect(_defaultTab);
         }
 
         public void InitSubscribe(TabButton button)

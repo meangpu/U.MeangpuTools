@@ -15,7 +15,7 @@ namespace Meangpu
         [SerializeField] UnityEvent _onTabSelected;
         [SerializeField] UnityEvent _onTabDeSelected;
 
-        void Start()
+        void Awake()
         {
             _background = GetComponent<Image>();
             _tabGroup.InitSubscribe(this);
