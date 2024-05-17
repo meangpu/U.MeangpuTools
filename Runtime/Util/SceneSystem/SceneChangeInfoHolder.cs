@@ -12,7 +12,7 @@ namespace Meangpu.Util
         [Button]
         public void LoadScene()
         {
-            if (SceneChangeManager.instance == null)
+            if (SceneChangeManager.Instance == null)
             {
                 Debug.LogError("Fail to find sceneChange instance");
                 return;
@@ -22,7 +22,7 @@ namespace Meangpu.Util
                 Debug.LogError("No scene in caller script");
                 return;
             }
-            SceneChangeManager.instance.LoadScene(_data);
+            SceneChangeManager.Instance.LoadScene(_data);
         }
 
         public virtual void SetupVisual()

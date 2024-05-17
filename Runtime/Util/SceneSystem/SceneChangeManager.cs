@@ -5,18 +5,9 @@ using System.Collections;
 
 namespace Meangpu.Util
 {
-    public class SceneChangeManager : MonoBehaviour
+    public class SceneChangeManager : BaseMeSingleton<SceneChangeManager>
     {
         // put this inside System prefab like audio manager
-
-        public static SceneChangeManager instance;
-
-        private void Awake()
-        {
-            if (instance == null) instance = this;
-            else Destroy(gameObject);
-        }
-
         private bool _loading;
         public Action<string> WhenLoadingScene = delegate { };
         public static Action<string> WhenSceneLoaded;
@@ -55,6 +46,18 @@ namespace Meangpu.Util
             while (!asyncLoad.isDone) yield return null;
             WhenSceneLoaded?.Invoke(sceneName);
             _loading = false;
+        }
+
+        public void LoadSceneAdditive(SOScene sceneToLoad)
+        {
+            if (SceneManager.GetSceneByName(sceneToLoad.SCENE_ID).isLoaded) return;
+            SceneManager.LoadSceneAsync(sceneToLoad.SCENE_ID, LoadSceneMode.Additive);
+        }
+
+        public void UnloadScene(SOScene sceneToUnLoad)
+        {
+            if (!SceneManager.GetSceneByName(sceneToUnLoad.SCENE_ID).isLoaded) return;
+            SceneManager.UnloadSceneAsync(sceneToUnLoad.SCENE_ID);
         }
     }
 }

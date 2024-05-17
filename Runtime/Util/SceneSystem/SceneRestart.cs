@@ -5,6 +5,6 @@ namespace Meangpu.Util
 {
     public class SceneRestart : MonoBehaviour
     {
-        [Button] public void RestartThisScene() => SceneChangeManager.instance.RestartThisScene();
+        [Button] public void RestartThisScene() => SceneChangeManager.Instance.RestartThisScene();
     }
 }
