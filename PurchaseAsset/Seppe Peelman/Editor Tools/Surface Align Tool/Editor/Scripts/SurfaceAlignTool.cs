@@ -35,6 +35,7 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
         private const int IGNORE_RAYCAST_LAYER = 2;
 
 
+
         void OnEnable()
         {
             _iconContent = new GUIContent()
@@ -50,6 +51,7 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
 #else
             UnityEditor.EditorTools.EditorTools.activeToolChanged += ToolManager_activeToolChanged;
 #endif
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
 
             EnableSettingsWindow();
 
@@ -64,6 +66,7 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
 #else
             UnityEditor.EditorTools.EditorTools.activeToolChanged -= ToolManager_activeToolChanged;
 #endif
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
         }
 
         private void ToolManager_activeToolChanged()
@@ -82,6 +85,19 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
                 DestroyImmediate(_activeTransformCollider.gameObject);
                 ResetLayer();
                 _activeTransform = null;
+                Physics.SyncTransforms();
+            }
+        }
+
+        private void OnPlayModeStateChanged(PlayModeStateChange playModeState)
+        {
+            if(playModeState == PlayModeStateChange.ExitingEditMode)
+            {
+                if (_activeTransformCollider) { _activeTransformCollider.enabled = false; }
+            }
+            else if (playModeState == PlayModeStateChange.EnteredEditMode)
+            {
+                if (_activeTransformCollider) { _activeTransformCollider.enabled = true; }
             }
         }
 
@@ -106,7 +122,10 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
                 _activeTransform = transform;
 
                 if (_activeTransform == null) { return; }
-
+                if (_activeTransformCollider != null)
+                {
+                    DestroyImmediate(_activeTransformCollider.gameObject);
+                }
                 GameObject tempColliderObject = new GameObject("SurfaceAlignTool_Temp_Collider");
                 tempColliderObject.transform.localScale = Vector3.one;
                 tempColliderObject.transform.SetParent(_activeTransform);
@@ -117,6 +136,7 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
                 _activeTransformCollider = tempColliderObject.AddComponent<SphereCollider>();
                 _activeTransformCollider.center = Vector3.zero;
                 _activeTransformCollider.radius = _settings.SnapRadius;
+                _activeTransformCollider.isTrigger = true;
 
                 _activeTransformChildren.Clear();
                 FillActiveTransformChildrenListRecursive(_activeTransform);
@@ -133,14 +153,19 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
                     _activeTransformCollider.radius += largestExtent;
                 }
 
-                Physics.autoSyncTransforms = true;
+                Physics.SyncTransforms();
             }
         }
 
         public override void OnToolGUI(EditorWindow window)
         {
             //If we're not in the scene view, exit.
-            if (!(window is SceneView)) { return; }
+            if (!(window is SceneView)) 
+            {
+                DestroyCollider();
+                ResetLayer();
+                return; 
+            }
 
             //If we're not the active tool, exit.
 #if UNITY_2020_2_OR_NEWER
@@ -311,7 +336,6 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
                 }
             }
 
-
             // Apply transform changes
             if (EditorGUI.EndChangeCheck())
             {
@@ -319,9 +343,11 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
 
                 _activeTransform.position = targetPosition;
                 _activeTransform.rotation = targetRotation;
-
-                window.Repaint();
             }
+
+            Physics.SyncTransforms();
+
+            window.Repaint();
         }
 
         private Vector3 GetCurrentMousePositionInScene(ref Vector3 normal)
@@ -489,7 +515,7 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
                 if (_activeTransformCollider)
                 {
                     _activeTransformCollider.gameObject.hideFlags = HideFlags.HideAndDontSave;
-                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                    if (!Application.isPlaying) { EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene()); }
                 }
             }
         }
@@ -521,7 +547,7 @@ namespace SeppePeelman.EditorTools.SurfaceAlignTool
         private void ApplyRandomRotation()
         {
             _activeTransform.RotateAround(_activeTransform.position, GetUpAxis(), UnityEngine.Random.Range(-180, 180));
-            
+            Physics.SyncTransforms();
         }
 
         private void EnableSettingsWindow()
