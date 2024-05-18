@@ -18,6 +18,11 @@ namespace Meangpu
 
         private void Awake() => _defaultTransform = transform.localScale;
 
+        private void OnDisable()
+        {
+            DOTween.KillAll();
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             _clickSound?.PlayOneShot();
