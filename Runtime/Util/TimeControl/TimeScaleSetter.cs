@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Ryan;
 using UnityEngine;
+using VInspector;
 
 namespace Meangpu
 {
@@ -24,7 +25,8 @@ namespace Meangpu
 
         private void Update() => UpdateTimeScale();
 
-        public void ResetTimeScale() => SetTimeScale(1);
+        [Button] public void ResetTimeScale() => SetTimeScale(1);
+        [Button] public void StopTimeImmediately() => SetTimeScale(0);
 
         public void UpdateIsSlowState(bool newState)
         {
