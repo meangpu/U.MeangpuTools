@@ -26,19 +26,19 @@ namespace Meangpu
         public void OnPointerClick(PointerEventData eventData)
         {
             _clickSound?.PlayOneShot();
-            transform.DOScale(_defaultTransform, _animationTime).SetEase(_easeType);
+            transform.DOScale(_defaultTransform, _animationTime).SetEase(_easeType).SetUpdate(true);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             _hoverSound?.PlayOneShot();
-            transform.DOScale(_hoverTransform, _animationTime).SetEase(_easeType);
+            transform.DOScale(_hoverTransform, _animationTime).SetEase(_easeType).SetUpdate(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             _exitSound?.PlayOneShot();
-            transform.DOScale(_defaultTransform, _animationTime).SetEase(_easeType);
+            transform.DOScale(_defaultTransform, _animationTime).SetEase(_easeType).SetUpdate(true);
         }
     }
 }
