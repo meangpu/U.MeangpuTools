@@ -9,10 +9,12 @@ namespace Meangpu
     {
 #if UNITY_EDITOR
         public UnityEditor.SceneAsset SceneData;
+        public SceneReference SceneRefData;
+
         private void OnValidate()
         {
-            if (SceneData == null) return;
-            SCENE_ID = SceneData.name;
+            if (SceneRefData == null) return;
+            SCENE_ID = SceneRefData.ScenePath;
             UnityEditor.EditorUtility.SetDirty(this);
         }
 
@@ -30,8 +32,8 @@ namespace Meangpu
             UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
-        [ReadOnly]
-        public string SCENE_ID;
+
+        [ReadOnly] public string SCENE_ID;
 
         public string SceneName;
         [TextArea]
