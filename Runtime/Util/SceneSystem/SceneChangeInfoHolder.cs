@@ -27,7 +27,7 @@ namespace Meangpu.Util
 
         public virtual void SetupVisual()
         {
-            string sceneName = _data.SceneName == string.Empty ? _data.name : _data.SceneName;
+            string sceneName = _data.SceneNameDisplay == string.Empty ? _data.name : _data.SceneNameDisplay;
             _sceneNameText.SetText(sceneName);
         }
 

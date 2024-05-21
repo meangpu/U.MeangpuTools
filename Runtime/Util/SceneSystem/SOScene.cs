@@ -34,7 +34,7 @@ namespace Meangpu
 
         [ReadOnly] public string SCENE_ID;
 
-        public string SceneName;
+        public string SceneNameDisplay;
         [TextArea]
         public string SceneDescriptionShort;
         [TextArea]
