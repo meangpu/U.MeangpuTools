@@ -13,6 +13,7 @@ namespace Meangpu
         private void OnValidate()
         {
             if (SceneRefData == null) return;
+            if (SceneRefData.GetSceneName == null) return;
             SCENE_ID = SceneRefData.GetSceneName;
             UnityEditor.EditorUtility.SetDirty(this);
         }
