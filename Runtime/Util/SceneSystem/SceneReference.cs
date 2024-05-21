@@ -45,8 +45,8 @@ public class SceneReference : ISerializationCallbackReceiver
             return sceneAsset is SceneAsset;
         }
     }
-#endif
     public string GetSceneName => sceneAsset.name;
+#endif
 
     // This should only ever be set during serialization/deserialization!
     [SerializeField]
