@@ -178,7 +178,7 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
         {
             // Here we add the foldout using a single line height, the label and change
             // the value of property.isExpanded
-            property.isExpanded = EditorGUI.Foldout(new Rect(position.x, position.y, position.width, lineHeight), property.isExpanded, label);
+            property.isExpanded = true;
 
             // Now you want to draw the content only if you unfold this property
             if (property.isExpanded)
