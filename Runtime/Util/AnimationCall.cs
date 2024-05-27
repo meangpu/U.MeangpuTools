@@ -21,7 +21,6 @@ namespace Meangpu.Util
                 Debug.Log("newState is null, cannot change state", gameObject);
                 return;
             }
-
             if (!_canRecallCurrentAnimation && _nowState == newState) return;
             if (_useCrossFade)
             {
@@ -43,19 +42,7 @@ namespace Meangpu.Util
                 Debug.Log("AnimationClip is null, cannot change state", gameObject);
                 return;
             }
-
-            if (!_canRecallCurrentAnimation && _nowState == newState.name) return;
-            if (_useCrossFade)
-            {
-                _animator.CrossFadeInFixedTime(newState.name, _crossFadeTime);
-            }
-            else
-            {
-                if (playWithRandomOffset) _animator.Play(newState.name, 0, Random.Range(0f, 1f));
-                else _animator.Play(newState.name, 0, 0);
-            }
-
-            _nowState = newState.name;
+            ChangeAnimationState(newState.name, playWithRandomOffset);
         }
     }
 }
