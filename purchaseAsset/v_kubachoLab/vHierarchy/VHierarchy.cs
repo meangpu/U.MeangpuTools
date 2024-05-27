@@ -116,7 +116,7 @@ namespace VHierarchy
                 var showDefaultIcon = !showCustomIcon && (isRowBeingRenamed || (!VHierarchyMenu.minimalModeEnabled || (PrefabUtility.IsAddedGameObjectOverride(go) && PrefabUtility.IsPartOfPrefabInstance(go))));
 
                 var makeTriangleBrighter = showBackgroundColor && goData.colorIndex > VHierarchyPalette.greyColorsCount && isDarkTheme;
-                var makeNameBrighter = showBackgroundColor && goData.colorIndex > VHierarchyPalette.greyColorsCount && isDarkTheme && go.activeInHierarchy;
+                var makeNameBrighter = showBackgroundColor && goData.colorIndex > VHierarchyPalette.greyColorsCount && isDarkTheme;
 
                 Color defaultBackground;
 
@@ -208,8 +208,8 @@ namespace VHierarchy
 
 
 
-                    leftGradientRect.Draw(color.SetAlpha((flatness - .1f) / .9f));
-                    leftGradientRect.DrawCurtainLeft(color);
+                    leftGradientRect.AddWidth(1).Draw(color.SetAlpha((flatness - .1f) / .9f));
+                    leftGradientRect.AddWidth(1).DrawCurtainLeft(color);
 
                     flatColorRect.AddWidth(1).Draw(color);
 
@@ -253,7 +253,7 @@ namespace VHierarchy
                         else
                             nameRect = nameRect.Move(-1, -1.5f);
 
-                    if (makeNameBrighter)
+                    if (makeNameBrighter && go.activeInHierarchy)
                         nameRect = nameRect.MoveX(-2).MoveY(-.5f);
 
 
@@ -262,13 +262,13 @@ namespace VHierarchy
                         (go.activeInHierarchy ? "PR PrefabLabel" : "PR DisabledPrefabLabel") :
                         (go.activeInHierarchy ? "TV Line" : "PR DisabledLabel");
 
-                    if (makeNameBrighter)
+                    if (makeNameBrighter && go.activeInHierarchy)
                         styleName = "WhiteLabel";
 
 
 
                     if (makeNameBrighter)
-                        SetGUIColor(Greyscale(isRowSelected ? 1 : .9f));
+                        SetGUIColor(Greyscale(!go.activeInHierarchy ? 1.4f : isRowSelected ? 1 : .9f));
 
                     GUI.skin.GetStyle(styleName).Draw(nameRect, go.name, false, false, isRowSelected, hierarchyWindow == EditorWindow.focusedWindow);
 
@@ -1789,7 +1789,7 @@ namespace VHierarchy
 
 
 
-        public const string version = "2.0.14";
+        public const string version = "2.0.15";
 
     }
 }
