@@ -243,7 +243,7 @@ namespace VInspector
 
                     tabs();
 
-                    if (!selectedTabPath.StartsWith(drawingTabPath)) return;
+                    if (selectedTabPath != drawingTabPath && !selectedTabPath.StartsWith(drawingTabPath + "/")) return;
 
                     noVariablesShown = false;
 
@@ -378,6 +378,7 @@ namespace VInspector
 
             void markTargetDirty()
             {
+                if (!target) return;
                 if (!PrefabUtility.IsPartOfPrefabInstance(target)) return;
                 if (serializedDataField == null) return;
                 if (serializedDataField.GetValue(target) != null) return;
@@ -462,7 +463,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.30";
+        const string version = "1.2.31";
 
     }
 }

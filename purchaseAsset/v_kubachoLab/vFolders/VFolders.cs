@@ -1971,12 +1971,31 @@ namespace VFolders
                 catch { }
 
             }
+            void fixIconNamesForUnity6()
+            {
+                if (!Application.unityVersion.Contains("6000")) return;
+                if (EditorPrefs.GetBool("vFolders-iconNamesForUnity6Fixed-" + GetProjectId(), false)) return;
+                if (!palette) return;
+                if (!data) return;
+
+                foreach (var iconRow in palette.iconRows)
+                    if (iconRow.builtinIcons.Contains("PhysicMaterial Icon"))
+                        iconRow.builtinIcons[iconRow.builtinIcons.IndexOf("PhysicMaterial Icon")] = "PhysicsMaterial Icon";
+
+                foreach (var folderData in data.folderDatas_byGuid.Values)
+                    if (folderData.iconNameOrGuid == "PhysicMaterial Icon")
+                        folderData.iconNameOrGuid = "PhysicsMaterial Icon";
+
+                EditorPrefs.SetBool("vFolders-iconNamesForUnity6Fixed-" + GetProjectId(), true);
+
+            }
 
             subscribe();
             loadData();
             loadPalette();
             loadDataAndPaletteDelayed();
             migrateDataFromV1();
+            fixIconNamesForUnity6();
 
         }
 
@@ -2000,7 +2019,7 @@ namespace VFolders
 
 
 
-        const string version = "2.0.8";
+        const string version = "2.0.9";
 
     }
 }
