@@ -44,17 +44,25 @@ namespace Meangpu
         public Sprite ScenePreviewImage;
         public bool IsDone;
 
-        public bool IsUseFeelLoadScene;
+        [Header("Scene Loading Method")]
+        public bool UseFeelLoadScene;
 
         [Button]
         public virtual void LoadThisScene()
         {
-            if (SceneChangeManager.Instance == null)
+            if (UseFeelLoadScene)
             {
-                Debug.LogError("Fail to find sceneChange instance");
-                return;
+                ActionSceneLoad.OnLoadSceneFeel?.Invoke(SCENE_ID);
             }
-            SceneChangeManager.Instance.LoadScene(this);
+            else
+            {
+                if (SceneChangeManager.Instance == null)
+                {
+                    Debug.LogError("Fail to find sceneChange instance");
+                    return;
+                }
+                SceneChangeManager.Instance.LoadScene(this);
+            }
         }
 
         [Button]
