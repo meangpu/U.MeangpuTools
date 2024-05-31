@@ -44,6 +44,8 @@ namespace Meangpu
         public Sprite ScenePreviewImage;
         public bool IsDone;
 
+        public bool IsUseFeelLoadScene;
+
         [Button]
         public virtual void LoadThisScene()
         {

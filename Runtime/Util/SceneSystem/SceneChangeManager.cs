@@ -25,14 +25,7 @@ namespace Meangpu.Util
             else WhenLoadingScene.Invoke(sceneName);
         }
 
-        public void LoadScene(SOScene sceneObj)
-        {
-            if (_loading) return;
-            _loading = true;
-            _waitingCount = WhenLoadingScene.GetInvocationList().Length - 1;
-            if (_waitingCount == 0) HandleReadyToLoad(sceneObj.SCENE_ID);
-            else WhenLoadingScene.Invoke(sceneObj.SCENE_ID);
-        }
+        public void LoadScene(SOScene sceneObj) => LoadScene(sceneObj.SCENE_ID);
 
         public void HandleReadyToLoad(string sceneName)
         {
