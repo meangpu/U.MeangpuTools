@@ -46,6 +46,7 @@ namespace Meangpu
 
         [Header("Scene Loading Method")]
         public bool UseFeelLoadScene;
+        // use action to load feel scene
 
         [Button]
         public virtual void LoadThisScene()
