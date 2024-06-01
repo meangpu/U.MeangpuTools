@@ -13,8 +13,8 @@ namespace Meangpu.Util
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (IsNoNeedToChange()) return;
             ChangeTextToName();
+            if (IsNoNeedToChange()) return;
             UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
@@ -22,9 +22,15 @@ namespace Meangpu.Util
         [Button]
         public void ChangeTextToName()
         {
+            Init();
             if (IsNoNeedToChange()) return;
             _text.text = _targetObject.name;
             gameObject.name = _targetObject.name;
+        }
+
+        void Init()
+        {
+            if (_text == null) _text = GetComponent<TMP_Text>();
         }
 
         bool IsNoNeedToChange()
