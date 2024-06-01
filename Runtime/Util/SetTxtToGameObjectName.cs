@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using VInspector;
 
 namespace Meangpu.Util
 {
@@ -12,14 +13,25 @@ namespace Meangpu.Util
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            _text = GetComponent<TMP_Text>();
-            if (_targetObject == null || _text == null) return;
-            if (_text.text == _targetObject.name && gameObject.name == _targetObject.name) return;
-            _text.text = _targetObject.name;
-            gameObject.name = _targetObject.name;
-
+            if (IsNoNeedToChange()) return;
+            ChangeTextToName();
             UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
+
+        [Button]
+        public void ChangeTextToName()
+        {
+            if (IsNoNeedToChange()) return;
+            _text.text = _targetObject.name;
+            gameObject.name = _targetObject.name;
+        }
+
+        bool IsNoNeedToChange()
+        {
+            if (_targetObject == null || _text == null) return true;
+            if (_text.text == _targetObject.name && gameObject.name == _targetObject.name) return true;
+            return false;
+        }
     }
 }
