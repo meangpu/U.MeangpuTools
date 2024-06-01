@@ -9,14 +9,22 @@ namespace Meangpu.Util
         [Button]
         public void LoadThisScriptURL()
         {
-            if (string.IsNullOrEmpty(_linkToGo)) return;
+            if (string.IsNullOrEmpty(_linkToGo))
+            {
+                Debug.Log("Null URL string");
+                return;
+            }
             OpenLinkURL.OpenLink(_linkToGo);
         }
 
         [Button]
         public void LoadURL(string url)
         {
-            if (string.IsNullOrEmpty(_linkToGo)) return;
+            if (string.IsNullOrEmpty(_linkToGo))
+            {
+                Debug.Log("Null URL string");
+                return;
+            }
             OpenLinkURL.OpenLink(url);
         }
     }
