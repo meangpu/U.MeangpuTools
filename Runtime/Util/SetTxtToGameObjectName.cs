@@ -30,7 +30,7 @@ namespace Meangpu.Util
         bool IsNoNeedToChange()
         {
             if (_targetObject == null || _text == null) return true;
-            if (_text.text == _targetObject.name && gameObject.name == _targetObject.name) return true;
+            if (_text.text == _targetObject.name) return true;
             return false;
         }
     }
