@@ -21,7 +21,7 @@ namespace Meangpu.Util
 
         public void LoadScene(string sceneName)
         {
-            if (SceneManager.GetActiveScene().name == sceneName) return;
+            if (SceneManager.GetActiveScene().name == sceneName && _preventLoadSameScene) return;
             LoadSceneAsyncOperation(sceneName);
         }
         public void LoadScene(SOScene sceneObj) => LoadScene(sceneObj.SCENE_ID);
