@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
+using VInspector;
 
 namespace Meangpu.Util
 {
@@ -12,11 +13,20 @@ namespace Meangpu.Util
         public Action<string> WhenLoadingScene = delegate { };
         public static Action<string> WhenSceneLoaded;
         private int _waitingCount;
+        public bool _preventLoadSameScene = true;
 
-        public void RestartThisScene() => LoadScene(SceneManager.GetActiveScene().name);
+        [Button]
+        public void RestartThisScene() => LoadSceneAsyncOperation(SceneManager.GetActiveScene().name);
         public void QuitGame() => Application.Quit();
 
         public void LoadScene(string sceneName)
+        {
+            if (SceneManager.GetActiveScene().name == sceneName) return;
+            LoadSceneAsyncOperation(sceneName);
+        }
+        public void LoadScene(SOScene sceneObj) => LoadScene(sceneObj.SCENE_ID);
+
+        void LoadSceneAsyncOperation(string sceneName)
         {
             if (_loading) return;
             _loading = true;
@@ -24,8 +34,6 @@ namespace Meangpu.Util
             if (_waitingCount == 0) HandleReadyToLoad(sceneName);
             else WhenLoadingScene.Invoke(sceneName);
         }
-
-        public void LoadScene(SOScene sceneObj) => LoadScene(sceneObj.SCENE_ID);
 
         public void HandleReadyToLoad(string sceneName)
         {
