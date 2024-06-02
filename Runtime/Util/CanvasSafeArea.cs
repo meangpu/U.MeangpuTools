@@ -20,13 +20,15 @@ namespace Meangpu.Util
         private Canvas canvas;
         private RectTransform safeAreaTransform;
 
+        [Header("Create gameobject SafeArea below canvas")]
+        [SerializeField] string safeAreaName = "SafeArea";
         void Awake()
         {
             if (!helpers.Contains(this))
                 helpers.Add(this);
 
             canvas = GetComponent<Canvas>();
-            safeAreaTransform = transform.Find("SafeArea") as RectTransform;
+            safeAreaTransform = transform.Find(safeAreaName) as RectTransform;
 
             if (!screenChangeVarsInitialized)
             {
