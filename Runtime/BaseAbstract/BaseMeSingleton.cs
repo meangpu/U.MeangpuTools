@@ -4,7 +4,7 @@ namespace Meangpu
 {
     public abstract class BaseMeSingleton<T> : MonoBehaviour where T : Component
     {
-        public static T _instance;
+        public static T _instance { get; private set; }
         public static T Instance
         {
             get
