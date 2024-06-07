@@ -36,9 +36,6 @@ namespace Unified.UniversalBlur.Runtime
 
         public Material PassMaterial => _material;
 
-        // Hidden by scope because of incorrect behaviour in the editor
-        private bool disableInSceneView = true;
-
         private Material _material;
         private UniversalBlurPass _fullScreenPass;
         private bool _injectedBeforeTransparents;
