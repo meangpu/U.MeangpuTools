@@ -4,6 +4,7 @@ namespace Meangpu.Util
 {
     public class Billboard : MonoBehaviour
     {
+        // update version from CodeMonkey tutorial https://www.youtube.com/watch?v=AmGSEH7QcDg&t=35849s
         private enum Mode
         {
             LookAt,
