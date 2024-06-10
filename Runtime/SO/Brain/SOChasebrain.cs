@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Meangpu.Brain
 {
-    [CreateAssetMenu(menuName = "Brain/SOChaseBrain")]
+    [CreateAssetMenu(menuName = "Meangpu/SOChaseBrain")]
     public class SOChaseBrain : Brain
     {
         public string TargetTag = "Player";
