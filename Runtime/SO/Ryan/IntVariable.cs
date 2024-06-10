@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace Ryan
+namespace Meangpu
 {
     [CreateAssetMenu]
     public class IntVariable : ScriptableObject

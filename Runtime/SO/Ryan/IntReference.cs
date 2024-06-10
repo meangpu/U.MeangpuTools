@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Ryan
+namespace Meangpu
 {
     [Serializable]
     public class IntReference

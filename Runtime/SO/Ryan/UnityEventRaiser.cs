@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Ryan
+namespace Meangpu
 {
     public class UnityEventRaiser : MonoBehaviour
     {
