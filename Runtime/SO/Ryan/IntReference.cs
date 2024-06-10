@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------------
 // Unite 2017 - Game Architecture with Scriptable Objects
-// 
+//
 // Author: Ryan Hipple
 // Date:   10/04/17
 // ----------------------------------------------------------------------------
@@ -12,16 +12,13 @@ namespace Meangpu
     [Serializable]
     public class IntReference
     {
-        public bool UseConstant = true;
+        public bool UseConstant = false;
         public int ConstantValue;
         public IntVariable Variable;
-
-        public IntReference()
-        { }
-
+        public IntReference() { }
         public IntReference(int value)
         {
-            UseConstant = true;
+            UseConstant = false;
             ConstantValue = value;
         }
 
@@ -30,9 +27,6 @@ namespace Meangpu
             get { return UseConstant ? ConstantValue : Variable.Value; }
         }
 
-        public static implicit operator int(IntReference reference)
-        {
-            return reference.Value;
-        }
+        public static implicit operator int(IntReference reference) => reference.Value;
     }
 }

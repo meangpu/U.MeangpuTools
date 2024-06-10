@@ -6,13 +6,13 @@ namespace Meangpu
     [Serializable]
     public class Vector2Reference
     {
-        public bool UseConstant = true;
+        public bool UseConstant = false;
         public Vector2 ConstantValue;
         public Vector2Variable Variable;
         public Vector2Reference() { }
         public Vector2Reference(Vector2 value)
         {
-            UseConstant = true;
+            UseConstant = false;
             ConstantValue = value;
         }
         public Vector2 Value
