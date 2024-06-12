@@ -13,7 +13,7 @@ namespace Meangpu.Util
     /// picking the binding which to rebind.
     /// </summary>
     [CustomEditor(typeof(RebindActionUI))]
-    public class RebindActionUIEditor : UnityEditor.Editor
+    public class RebindActionUIEditor : Editor
     {
         protected void OnEnable()
         {
