@@ -1,6 +1,5 @@
 using System;
-
-namespace UnityEngine.InputSystem.Samples.RebindUI
+namespace Meangpu.Util
 {
     public static class ActionRebindKey
     {

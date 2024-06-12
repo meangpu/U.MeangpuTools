@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 // meangpu:: use example template combine with [Complete and Persistent Control Rebinding with the New Input System - Unity Tutorial - YouTube](https://www.youtube.com/watch?v=csqVa2Vimao) this video to modify this
-namespace UnityEngine.InputSystem.Samples.RebindUI
+namespace Meangpu.Util
 {
     /// <summary>
     /// A reusable component with a self-contained UI for rebinding a single action.
