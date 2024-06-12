@@ -1,12 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using TMPro;
-
-////TODO: localization support
-
-////TODO: deal with composites that have parts bound in different control schemes
 
 // meangpu:: use example template combine with [Complete and Persistent Control Rebinding with the New Input System - Unity Tutorial - YouTube](https://www.youtube.com/watch?v=csqVa2Vimao) this video to modify this
 namespace UnityEngine.InputSystem.Samples.RebindUI
@@ -346,7 +341,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 }
                 if (binding.effectivePath == newBinding.effectivePath)
                 {
-                    Debug.Log("duplicate binding found" + newBinding.effectivePath);
+                    string message = $"\"{binding.ToDisplayString()}\" is already bound to {binding.action}";
+                    LogDuplicateMessage(message);
+
                     return true;
                 }
             }
@@ -356,7 +353,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 {
                     if (action.bindings[i].effectivePath == newBinding.effectivePath)
                     {
-                        Debug.Log("duplicate binding found" + newBinding.effectivePath);
+                        string message = $"\"{action.bindings[i].ToDisplayString()}\" is already bound to {action.bindings[i].action}";
+                        LogDuplicateMessage(message);
                         return true;
                     }
                 }
@@ -364,6 +362,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             return false;
         }
 
+        private static void LogDuplicateMessage(string message)
+        {
+            Debug.Log(message);
+            ActionRebindKey.OnDuplicateBinding?.Invoke(message);
+        }
 
         protected void OnEnable()
         {
@@ -468,8 +471,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             UpdateActionLabel();
             UpdateBindingDisplay();
         }
-
 #endif
+
         private void Start()
         {
             UpdateActionLabel();
@@ -485,14 +488,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
-        [Serializable]
-        public class UpdateBindingUIEvent : UnityEvent<RebindActionUI, string, string, string>
-        {
-        }
-
-        [Serializable]
-        public class InteractiveRebindEvent : UnityEvent<RebindActionUI, InputActionRebindingExtensions.RebindingOperation>
-        {
-        }
+        [Serializable] public class UpdateBindingUIEvent : UnityEvent<RebindActionUI, string, string, string> { }
+        [Serializable] public class InteractiveRebindEvent : UnityEvent<RebindActionUI, InputActionRebindingExtensions.RebindingOperation> { }
     }
 }
