@@ -295,6 +295,7 @@ namespace Meangpu.Util
                         }
                         UpdateBindingDisplay();
                         CleanUp();
+                        ActionRebindKey.OnSuccessRebind?.Invoke();
 
                         // If there's more composite parts we should bind, initiate a rebind
                         // for the next part.
@@ -343,7 +344,7 @@ namespace Meangpu.Util
                 }
                 if (binding.effectivePath == newBinding.effectivePath)
                 {
-                    string message = $"\"{binding.ToDisplayString()}\" is already bound to {binding.action}";
+                    string message = $"<style=H3>\"{binding.ToDisplayString()}\"</style> is already bound to <style=H3>\"{binding.action}\"</style>";
                     LogDuplicateMessage(message);
 
                     return true;
@@ -355,7 +356,7 @@ namespace Meangpu.Util
                 {
                     if (action.bindings[i].effectivePath == newBinding.effectivePath)
                     {
-                        string message = $"\"{action.bindings[i].ToDisplayString()}\" is already bound to {action.bindings[i].action}";
+                        string message = $"<style=H3>\"{action.bindings[i].ToDisplayString()}\"</style> is already bound to <style=H3>\"{action.bindings[i].action}\"</style>";
                         LogDuplicateMessage(message);
                         return true;
                     }

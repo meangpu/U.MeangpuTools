@@ -4,5 +4,6 @@ namespace Meangpu.Util
     public static class ActionRebindKey
     {
         public static Action<string> OnDuplicateBinding;
+        public static Action OnSuccessRebind;
     }
 }
