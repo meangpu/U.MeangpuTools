@@ -1,16 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ResetAllBinding : MonoBehaviour
+namespace Meangpu.Util
 {
-    [SerializeField] InputActionAsset _inputAsset;
-
-    public void ResetAllKeyBinding()
+    public class ResetAllBinding : MonoBehaviour
     {
-        foreach (InputActionMap map in _inputAsset.actionMaps)
+        [SerializeField] InputActionAsset _inputAsset;
+
+        public void ResetAllKeyBinding()
         {
-            map.RemoveAllBindingOverrides();
+            foreach (InputActionMap map in _inputAsset.actionMaps)
+            {
+                map.RemoveAllBindingOverrides();
+            }
+            PlayerPrefs.DeleteKey("rebinds");
         }
-        PlayerPrefs.DeleteKey("rebinds");
     }
 }
+
