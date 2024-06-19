@@ -5,6 +5,7 @@ using VInspector;
 
 namespace Meangpu.Util
 {
+    // from [Clear Unity Console from Script - Unity C# Tutorial - YouTube](https://www.youtube.com/watch?v=MrS7tHMuBHk)
     public class ClearEditorConsoleLog : MonoBehaviour
     {
         [Button]
