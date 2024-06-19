@@ -8,12 +8,13 @@ namespace Meangpu
     public class RequireAttributeDrawer : PropertyDrawer
     {
         readonly Color _errorColor = new(1, .2f, .2f, .1f);
+        float _lineHeight = 1.2f;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             if (IsFieldEmpty(property))
             {
-                float height = EditorGUIUtility.singleLineHeight * 2f;
+                float height = EditorGUIUtility.singleLineHeight * _lineHeight;
                 height += base.GetPropertyHeight(property, label);
                 return height;
             }
@@ -33,14 +34,14 @@ namespace Meangpu
 
             if (IsFieldEmpty(property))
             {
-                position.height = EditorGUIUtility.singleLineHeight * 2f;
+                position.height = EditorGUIUtility.singleLineHeight * _lineHeight;
                 position.height += base.GetPropertyHeight(property, label);
 
                 EditorGUI.HelpBox(position, "Require", MessageType.Error);
                 EditorGUI.DrawRect(position, _errorColor);
 
                 position.height = base.GetPropertyHeight(property, label);
-                position.y += EditorGUIUtility.singleLineHeight * 2f;
+                position.y += EditorGUIUtility.singleLineHeight * _lineHeight;
             }
             EditorGUI.PropertyField(position, property, label);
         }
