@@ -203,6 +203,8 @@ namespace VInspector
 
                         drawingFoldoutPath = string.Join("/", drawingPathSplit.Take(sharedLength));
 
+                        data.rootFoldout.expanded = true;
+
                         for (int i = sharedLength; i < newPathSplit.Length; i++)
                         {
                             if (!data.rootFoldout.IsSubfoldoutContentVisible(drawingFoldoutPath)) break;
@@ -463,7 +465,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.31";
+        const string version = "1.2.32";
 
     }
 }

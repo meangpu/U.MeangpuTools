@@ -466,7 +466,7 @@ namespace VInspector
 
 
 
-        const string version = "1.2.30";
+        const string version = "1.2.32";
 
     }
 }
