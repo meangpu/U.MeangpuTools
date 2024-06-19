@@ -11,8 +11,8 @@ MonoImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 263643
-  packageName: vFavorites 2
-  packageVersion: 2.0.6
-  assetPath: Assets/U.MeangpuTools/PurchaseAsset/v_kubachoLab/vFavorites/VFavoritesLibs.cs
-  uploadId: 669966
+  productId: 246055
+  packageName: vFavorites
+  packageVersion: 1.0.9
+  assetPath: Assets/vFavorites/VFavoritesLibs.cs
+  uploadId: 652172
