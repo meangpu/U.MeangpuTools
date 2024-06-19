@@ -457,7 +457,7 @@ namespace VRuler
             {
                 if (objectsForScaleMaterial != null) return;
 
-                objectsForScaleMaterial = new Material(GraphicsSettings.defaultRenderPipeline == null ? Shader.Find("Standard") : UnityEngine.Rendering.GraphicsSettings.renderPipelineAsset.defaultShader);
+                objectsForScaleMaterial = new Material(GraphicsSettings.defaultRenderPipeline == null ? Shader.Find("Standard") : UnityEngine.Rendering.GraphicsSettings.defaultRenderPipeline.defaultShader);
 
             }
 

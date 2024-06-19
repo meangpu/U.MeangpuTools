@@ -39,7 +39,7 @@ namespace Meangpu.Util
         public void DoResetVelocity()
         {
             if (!_resetVelocityOnReset || _rb == null) return;
-            _rb.velocity = Vector3.zero;
+            _rb.linearVelocity = Vector3.zero;
         }
     }
 }
