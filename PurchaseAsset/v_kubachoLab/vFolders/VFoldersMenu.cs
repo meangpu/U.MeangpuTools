@@ -102,8 +102,8 @@ namespace VFolders
 
 
 
-        [MenuItem(dir + "Check out vFavorites 2", false, 1003)]
-        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/263643?aid=1100lGLBn&pubref=checkoutvfav");
+        [MenuItem(dir + "Check out vInspector 2", false, 1003)]
+        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/252297?aid=1100lGLBn&pubref=checkoutvfav");
 
         // [MenuItem(dir + "Get more Editor Enhancers/Get vHierarchy 2", false, 1003)]
         // static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/251320?aid=1100lGLBn&pubref=menucheckout");

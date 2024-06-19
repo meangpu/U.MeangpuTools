@@ -2019,7 +2019,7 @@ namespace VFolders
 
 
 
-        const string version = "2.0.9";
+        const string version = "2.0.10";
 
     }
 }
