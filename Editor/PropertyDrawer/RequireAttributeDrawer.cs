@@ -8,7 +8,7 @@ namespace Meangpu
     public class RequireAttributeDrawer : PropertyDrawer
     {
         readonly Color _errorColor = new(1, .2f, .2f, .1f);
-        float _lineHeight = 1.2f;
+        float _lineHeight = 2f;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
