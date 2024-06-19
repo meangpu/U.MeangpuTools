@@ -18,17 +18,14 @@ namespace Meangpu.Util
         private static Rect lastSafeArea = Rect.zero;
 
         private Canvas canvas;
-        private RectTransform safeAreaTransform;
-
-        [Header("Create gameobject SafeArea below canvas")]
-        [SerializeField] string safeAreaName = "SafeArea";
+        [Header("Create gameobject SafeArea below canvas, all thing include in it will be on safe area")]
+        [SerializeField] private RectTransform safeAreaTransform;
         void Awake()
         {
             if (!helpers.Contains(this))
                 helpers.Add(this);
 
             canvas = GetComponent<Canvas>();
-            safeAreaTransform = transform.Find(safeAreaName) as RectTransform;
 
             if (!screenChangeVarsInitialized)
             {
