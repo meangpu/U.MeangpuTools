@@ -190,8 +190,10 @@ namespace VTabs
             }
             void dragndrop()
             {
+                var uncaughtDragPerform = lastKnownDraggedObject != null && !DragAndDrop.objectReferences.Any() && curEvent.isMouseEnterWindow && Application.platform == RuntimePlatform.LinuxEditor;
+
                 if (!VTabsMenu.dragndropEnabled) return;
-                if (lastEvent.type != EventType.DragUpdated && lastEvent.type != EventType.DragPerform) return;
+                if (lastEvent.type != EventType.DragUpdated && lastEvent.type != EventType.DragPerform && !uncaughtDragPerform) return;
                 if (!(EditorWindow.mouseOverWindow is EditorWindow hoveredWindow)) return;
                 if (!hoveredWindow.position.SetPos(0, 0).SetHeight(hoveredWindow.GetType() == t_SceneHierarchyWindow ? 5 : 40).Contains(lastEvent.mousePosition)) return;
 
@@ -204,7 +206,7 @@ namespace VTabs
                 }
 
 
-                if (lastEvent.type != EventType.DragPerform) return;
+                if (lastEvent.type != EventType.DragPerform && !uncaughtDragPerform) return;
                 if (!lastKnownDraggedObject) return;
                 if (!lastKnownHoveredWindow) return;
                 if (lastDragndropPosition == curEvent.mousePosition) return;
@@ -218,6 +220,9 @@ namespace VTabs
 
                 lastDragndropPosition = curEvent.mousePosition;
                 lastDragndropTime = System.DateTime.UtcNow;
+
+                lastKnownDraggedObject = null;
+                lastKnownHoveredWindow = null;
 
             }
 
@@ -1802,7 +1807,7 @@ namespace VTabs
 
 
 
-        const string version = "2.0.11";
+        const string version = "2.0.13";
 
     }
 }

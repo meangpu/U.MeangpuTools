@@ -1336,6 +1336,10 @@ namespace VHierarchy
             return iconNameOrPath;
 
         }
+        static string GetIconName_forVInspector(GameObject gameObject)
+        {
+            return GetIconName_forVFavorites(gameObject);
+        }
 
 
 
@@ -1789,7 +1793,7 @@ namespace VHierarchy
 
 
 
-        public const string version = "2.0.15";
+        public const string version = "2.0.16";
 
     }
 }

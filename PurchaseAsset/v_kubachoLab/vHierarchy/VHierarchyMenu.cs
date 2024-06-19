@@ -114,13 +114,16 @@ namespace VHierarchy
         [MenuItem(dir + "Join our Discord", false, 1002)]
         static void dadasdsas() => Application.OpenURL("https://discord.gg/4dG9KsbspG");
 
-        [MenuItem(dir + "Deals ending soon/Get vFolders 2 at 50% off", false, 1003)]
-        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/263644?aid=1100lGLBn&pubref=deal50menu");
+        [MenuItem(dir + "Deals ending soon/Get vInspector 2 at 50% off", false, 1003)]
+        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/252297?aid=1100lGLBn&pubref=deal50menu");
 
-        [MenuItem(dir + "Deals ending soon/Get vTabs 2 at 50% off", false, 1004)]
+        [MenuItem(dir + "Deals ending soon/Get vFolders 2 at 50% off", false, 1004)]
+        static void dadadssadasdsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/263644?aid=1100lGLBn&pubref=deal50menu");
+
+        [MenuItem(dir + "Deals ending soon/Get vTabs 2 at 50% off", false, 1005)]
         static void dadadadsssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/263645?aid=1100lGLBn&pubref=deal50menu");
 
-        [MenuItem(dir + "Deals ending soon/Get vFavorites 2 at 50% off", false, 1005)]
+        [MenuItem(dir + "Deals ending soon/Get vFavorites 2 at 50% off", false, 1006)]
         static void dadadadsssadsadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/263643?aid=1100lGLBn&pubref=deal50menu");
 
 
